@@ -1,16 +1,9 @@
-import type { BoxProps } from "@radix-ui/themes";
 import { Text } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
 
-// Helper component for story cells
-const Cell = ({ children, ...props }: BoxProps) => (
-	<Box p="4" style={{ background: "var(--gray-a3)" }} {...props}>
-		<Text>{children}</Text>
-	</Box>
-);
+import { Cell, makeCells } from "./helpers";
 
 const meta: Meta<typeof Flex> = {
 	title: "Layout/Flex",
@@ -138,10 +131,7 @@ export const Justify: Story = {
 export const Wrap: Story = {
 	render: () => (
 		<Flex gap="3" wrap="wrap" style={{ width: 300 }}>
-			{Array.from({ length: 6 }, (_, i) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: static list
-				<Cell key={i + 1}>Item {i + 1}</Cell>
-			))}
+			{makeCells(6)}
 		</Flex>
 	),
 };

@@ -28,6 +28,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup",
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
@@ -43,6 +45,7 @@
     "@radix-ui/themes": "^3.3.0"
   },
   "devDependencies": {
+		"@biomejs/biome": "^2.4.9",
     "@storybook/addon-essentials": "^8.6.18",
     "@storybook/blocks": "^8.6.18",
     "@storybook/react": "^8.6.18",

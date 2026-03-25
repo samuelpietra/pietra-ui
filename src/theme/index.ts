@@ -1,1 +1,1 @@
-export { ThemeProvider, type PietraThemeProviderProps } from "./ThemeProvider";
+export { type PietraThemeProviderProps, ThemeProvider } from "./ThemeProvider";

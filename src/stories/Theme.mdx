@@ -1,0 +1,35 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as ButtonStories from './Button.stories';
+
+<Meta title="Theme/Overview" />
+
+# ThemeProvider
+
+**Pietra UI** ships a `ThemeProvider` that wraps [Radix Themes](https://www.radix-ui.com) with opinionated defaults.
+
+## Usage
+
+```tsx
+import { ThemeProvider, Button, Text } from "pietra-ui";
+import "pietra-ui/styles.css";
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Text size="5" weight="bold">Hello Pietra</Text>
+      <Button>Click me</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+## Overriding defaults
+
+Consumer props override the **Pietra UI** defaults:
+
+```tsx
+<ThemeProvider accentColor="blue" radius="full">
+  <Button>Blue rounded button</Button>
+</ThemeProvider>
+```

@@ -155,7 +155,9 @@ export const Loading: Story = {
 export const AsChild: Story = {
 	render: () => (
 		<Button asChild>
-			<a href="https://example.com">Link Button</a>
+			<a href="https://example.com" target="_blank" rel="noopener">
+				Link Button
+			</a>
 		</Button>
 	),
 };

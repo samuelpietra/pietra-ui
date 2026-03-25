@@ -6,6 +6,9 @@
     "name": "Samuel Pietra",
     "email": "samuelpietra@outlook.com"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

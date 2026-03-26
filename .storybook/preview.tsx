@@ -59,6 +59,12 @@ const preview: Preview = {
         type: "dynamic",
       },
     },
+    options: {
+      storySort: {
+        method: "alphabetical",
+        order: ["Theme", "Layout", "Typography", "Components"],
+      },
+    },
   },
 };
 

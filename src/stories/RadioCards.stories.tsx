@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, RadioCards, Text } from "@/components";
 
+import { SAMPLE_COLORS, SIZES } from "./fixtures";
+
 const meta: Meta<typeof RadioCards.Root> = {
 	title: "Components/RadioCards",
 	component: RadioCards.Root,
@@ -40,8 +42,6 @@ export const Default: Story = {
 		</RadioCards.Root>
 	),
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (
@@ -86,8 +86,6 @@ export const Variant: Story = {
 		</Flex>
 	),
 };
-
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
 
 export const Color: Story = {
 	render: () => (

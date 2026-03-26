@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, Grid, Radio, Text } from "@/components";
 
+import { SAMPLE_COLORS, SIZES } from "./fixtures";
+
 const meta: Meta<typeof Radio> = {
 	title: "Components/Radio",
 	component: Radio,
@@ -32,8 +34,6 @@ export const Default: Story = {
 	),
 };
 
-const SIZES = ["1", "2", "3"] as const;
-
 export const Size: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
@@ -55,8 +55,6 @@ export const Variant: Story = {
 		</Flex>
 	),
 };
-
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
 
 export const Color: Story = {
 	render: () => (

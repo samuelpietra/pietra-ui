@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar, Flex, Grid, Text } from "@/components";
 
 import frenchieYellow from "./assets/frenchie-yellow.png";
+import { RADII, SAMPLE_COLORS } from "./fixtures";
 
 const meta: Meta<typeof Avatar> = {
 	title: "Components/Avatar",
@@ -47,8 +48,6 @@ export const Variant: Story = {
 	),
 };
 
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
-
 export const Color: Story = {
 	render: () => (
 		<Flex gap="3">
@@ -71,8 +70,6 @@ export const HighContrast: Story = {
 		</Grid>
 	),
 };
-
-const RADII = ["none", "small", "medium", "large", "full"] as const;
 
 export const Radius: Story = {
 	render: () => (

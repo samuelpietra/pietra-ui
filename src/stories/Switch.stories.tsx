@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, Grid, Switch, Text } from "@/components";
 
+import { RADII, SAMPLE_COLORS, SIZES } from "./fixtures";
+
 const meta: Meta<typeof Switch> = {
 	title: "Components/Switch",
 	component: Switch,
@@ -21,8 +23,6 @@ export const Default: Story = {
 		</Text>
 	),
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (
@@ -49,8 +49,6 @@ export const Variant: Story = {
 	),
 };
 
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
-
 export const Color: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
@@ -73,8 +71,6 @@ export const HighContrast: Story = {
 		</Grid>
 	),
 };
-
-const RADII = ["none", "small", "medium", "large", "full"] as const;
 
 export const Radius: Story = {
 	render: () => (

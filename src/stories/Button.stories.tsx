@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button, Flex, Spinner } from "@/components";
 
+import { SIZES } from "./fixtures";
+
 const meta: Meta<typeof Button> = {
 	title: "Components/Button",
 	component: Button,
@@ -16,8 +18,6 @@ export const Default: Story = {
 		children: "Button",
 	},
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (

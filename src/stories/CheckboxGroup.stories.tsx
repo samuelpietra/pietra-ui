@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { CheckboxGroup, Flex, Text } from "@/components";
 
+import { SAMPLE_COLORS, SIZES } from "./fixtures";
+
 const meta: Meta<typeof CheckboxGroup.Root> = {
 	title: "Components/CheckboxGroup",
 	component: CheckboxGroup.Root,
@@ -19,8 +21,6 @@ export const Default: Story = {
 		</CheckboxGroup.Root>
 	),
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (
@@ -59,8 +59,6 @@ export const Variant: Story = {
 		</Flex>
 	),
 };
-
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
 
 export const Color: Story = {
 	render: () => (

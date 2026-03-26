@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Checkbox, Flex, Grid, Text } from "@/components";
 
+import { SAMPLE_COLORS, SIZES } from "./fixtures";
+
 const meta: Meta<typeof Checkbox> = {
 	title: "Components/Checkbox",
 	component: Checkbox,
@@ -14,8 +16,6 @@ type Story = StoryObj<typeof Checkbox>;
 export const Default: Story = {
 	render: () => <Checkbox defaultChecked />,
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (
@@ -41,8 +41,6 @@ export const Variant: Story = {
 		</Flex>
 	),
 };
-
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
 
 export const Color: Story = {
 	render: () => (

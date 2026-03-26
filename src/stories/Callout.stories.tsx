@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Callout, Flex } from "@/components";
 
+import { SIZES } from "./fixtures";
+
 const meta: Meta<typeof Callout.Root> = {
 	title: "Components/Callout",
 	component: Callout.Root,
@@ -23,8 +25,6 @@ export const Default: Story = {
 		</Callout.Root>
 	),
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (

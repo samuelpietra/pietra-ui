@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Badge, Flex } from "@/components";
 
+import { RADII, SIZES } from "./fixtures";
+
 const meta: Meta<typeof Badge> = {
 	title: "Components/Badge",
 	component: Badge,
@@ -19,8 +21,6 @@ export const Default: Story = {
 		</Flex>
 	),
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (
@@ -76,8 +76,6 @@ export const HighContrast: Story = {
 		</Flex>
 	),
 };
-
-const RADII = ["none", "small", "medium", "large", "full"] as const;
 
 export const Radius: Story = {
 	render: () => (

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button, Flex, Spinner, Switch } from "@/components";
 
+import { SIZES } from "./fixtures";
+
 const meta: Meta<typeof Spinner> = {
 	title: "Components/Spinner",
 	component: Spinner,
@@ -13,8 +15,6 @@ type Story = StoryObj<typeof Spinner>;
 export const Default: Story = {
 	render: () => <Spinner />,
 };
-
-const SIZES = ["1", "2", "3"] as const;
 
 export const Size: Story = {
 	render: () => (

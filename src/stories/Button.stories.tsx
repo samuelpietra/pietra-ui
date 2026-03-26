@@ -2,8 +2,7 @@ import { BellRing, BookmarkIcon, ThumbsUp } from "lucide-react";
 import { Spinner } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button } from "@/components/Button";
-import { Flex } from "@/components/Flex";
+import { Button, Flex } from "@/components";
 
 const meta: Meta<typeof Button> = {
 	title: "Components/Button",

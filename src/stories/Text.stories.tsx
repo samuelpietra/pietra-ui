@@ -1,8 +1,7 @@
 import { Checkbox, Code, Em, Kbd, Link } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Flex } from "@/components/Flex";
-import { Text } from "@/components/Text";
+import { Flex, Text } from "@/components";
 
 const meta: Meta<typeof Text> = {
 	title: "Typography/Text",

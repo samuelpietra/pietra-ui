@@ -2,10 +2,7 @@ import { Fragment } from "react";
 import { PawPrint } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Avatar } from "@/components/Avatar";
-import { Flex } from "@/components/Flex";
-import { Grid } from "@/components/Grid";
-import { Text } from "@/components/Text";
+import { Avatar, Flex, Grid, Text } from "@/components";
 
 import frenchieYellow from "./assets/frenchie-yellow.png";
 

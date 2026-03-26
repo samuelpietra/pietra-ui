@@ -1,5 +1,4 @@
-import { Box, type BoxProps } from "@/components/Box";
-import { Text } from "@/components/Text";
+import { Box, type BoxProps, Text } from "@/components";
 
 export function Cell({ children, ...props }: BoxProps) {
 	return (

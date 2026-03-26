@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Flex } from "@/components/Flex";
-import { Grid } from "@/components/Grid";
-import { Text } from "@/components/Text";
+import { Flex, Grid, Text } from "@/components";
 
 import { Cell, makeCells } from "./helpers";
 

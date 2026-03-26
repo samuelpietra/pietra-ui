@@ -16,4 +16,9 @@ export {
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
 export { Radio, type RadioProps } from "./Radio";
+export {
+	RadioGroup,
+	type RadioGroupItemProps,
+	type RadioGroupRootProps,
+} from "./RadioGroup";
 export { Text, type TextProps } from "./Text";

@@ -95,6 +95,7 @@ export const Truncate: Story = {
 			p="3"
 			overflow="auto"
 			width="300px"
+			tabIndex={0}
 			style={{
 				border: "1px dotted var(--gray-a7)",
 				resize: "horizontal",
@@ -117,6 +118,7 @@ export const Wrap: Story = {
 						p="3"
 						overflow="auto"
 						width="300px"
+						tabIndex={0}
 						style={{
 							border: "1px dotted var(--gray-a7)",
 							resize: "horizontal",
@@ -163,6 +165,7 @@ export const AsElement: Story = {
 				p="3"
 				overflow="auto"
 				width="500px"
+				tabIndex={0}
 				style={{
 					border: "1px dotted var(--gray-a7)",
 				}}
@@ -178,6 +181,7 @@ export const AsElement: Story = {
 				p="3"
 				overflow="auto"
 				width="500px"
+				tabIndex={0}
 				style={{
 					border: "1px dotted var(--gray-a7)",
 				}}

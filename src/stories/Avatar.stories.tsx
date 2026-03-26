@@ -18,7 +18,7 @@ type Story = StoryObj<typeof Avatar>;
 export const Default: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
-			<Avatar src={frenchieYellow} fallback="SP" />
+			<Avatar src={frenchieYellow} alt="French bulldog" fallback="SP" />
 			<Avatar fallback="SP" />
 		</Flex>
 	),
@@ -31,7 +31,12 @@ export const Size: Story = {
 		<Flex gap="3" align="center">
 			{SIZES.map((size) => (
 				<Flex key={size} direction="column" gap="1" align="center">
-					<Avatar src={frenchieYellow} size={size} fallback={size} />
+					<Avatar
+						src={frenchieYellow}
+						alt="French bulldog"
+						size={size}
+						fallback={size}
+					/>
 					<Text size="2">{size}</Text>
 				</Flex>
 			))}

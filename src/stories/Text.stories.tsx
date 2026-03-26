@@ -1,6 +1,7 @@
-import { Checkbox, Code, Em, Flex, Kbd, Link } from "@radix-ui/themes";
+import { Checkbox, Code, Em, Kbd, Link } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Flex } from "@/components/Flex";
 import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Text> = {

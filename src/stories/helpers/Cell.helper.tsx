@@ -1,7 +1,5 @@
-import type { BoxProps } from "@radix-ui/themes";
-import { Text } from "@radix-ui/themes";
-
-import { Box } from "@/components/Box";
+import { Box, type BoxProps } from "@/components/Box";
+import { Text } from "@/components/Text";
 
 export function Cell({ children, ...props }: BoxProps) {
 	return (

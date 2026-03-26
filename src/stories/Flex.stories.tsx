@@ -1,7 +1,7 @@
-import { Text } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex } from "@/components/Flex";
+import { Text } from "@/components/Text";
 
 import { Cell, makeCells } from "./helpers";
 

@@ -1,7 +1,7 @@
-import { Text } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Box } from "@/components/Box";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Box> = {
 	title: "Layout/Box",

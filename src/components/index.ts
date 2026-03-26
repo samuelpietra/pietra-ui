@@ -50,5 +50,6 @@ export {
 	type RadioGroupItemProps,
 	type RadioGroupRootProps,
 } from "./RadioGroup";
+export { Spinner, type SpinnerProps } from "./Spinner";
 export { Switch, type SwitchProps } from "./Switch";
 export { Text, type TextProps } from "./Text";

@@ -39,6 +39,7 @@ export {
 } from "./DropdownMenu";
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
+export { Link, type LinkProps } from "./Link";
 export { Radio, type RadioProps } from "./Radio";
 export {
 	RadioCards,

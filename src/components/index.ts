@@ -20,6 +20,23 @@ export {
 	type CheckboxGroupItemProps,
 	type CheckboxGroupRootProps,
 } from "./CheckboxGroup";
+export {
+	DropdownMenu,
+	type DropdownMenuCheckboxItemProps,
+	type DropdownMenuContentProps,
+	type DropdownMenuGroupProps,
+	type DropdownMenuItemProps,
+	type DropdownMenuLabelProps,
+	type DropdownMenuRadioGroupProps,
+	type DropdownMenuRadioItemProps,
+	type DropdownMenuRootProps,
+	type DropdownMenuSeparatorProps,
+	type DropdownMenuSubContentProps,
+	type DropdownMenuSubProps,
+	type DropdownMenuSubTriggerProps,
+	type DropdownMenuTriggerIconProps,
+	type DropdownMenuTriggerProps,
+} from "./DropdownMenu";
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
 export { Radio, type RadioProps } from "./Radio";

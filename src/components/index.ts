@@ -15,4 +15,5 @@ export {
 } from "./CheckboxGroup";
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
+export { Radio, type RadioProps } from "./Radio";
 export { Text, type TextProps } from "./Text";

@@ -6,7 +6,7 @@ export type DropdownMenuTriggerIconProps = ComponentPropsWithoutRef<
 >;
 
 export const DropdownMenuTriggerIcon = forwardRef<
-	HTMLSpanElement,
+	SVGSVGElement,
 	DropdownMenuTriggerIconProps
 >((props, ref) => {
 	return <RadixDropdownMenu.TriggerIcon ref={ref} {...props} />;

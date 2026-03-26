@@ -54,6 +54,11 @@ const preview: Preview = {
   ],
   parameters: {
     layout: "padded",
+    docs: {
+      source: {
+        type: "dynamic",
+      },
+    },
   },
 };
 

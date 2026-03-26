@@ -26,4 +26,5 @@ export {
 	type RadioGroupItemProps,
 	type RadioGroupRootProps,
 } from "./RadioGroup";
+export { Switch, type SwitchProps } from "./Switch";
 export { Text, type TextProps } from "./Text";

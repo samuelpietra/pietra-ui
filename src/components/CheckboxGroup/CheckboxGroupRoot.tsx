@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { CheckboxGroup as RadixCheckboxGroup } from "@radix-ui/themes";
 
-export type CheckboxGroupRootProps = React.ComponentPropsWithoutRef<
+export type CheckboxGroupRootProps = ComponentPropsWithoutRef<
 	typeof RadixCheckboxGroup.Root
 >;
 

@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { Callout as RadixCallout } from "@radix-ui/themes";
 
-export type CalloutIconProps = React.ComponentPropsWithoutRef<
+export type CalloutIconProps = ComponentPropsWithoutRef<
 	typeof RadixCallout.Icon
 >;
 

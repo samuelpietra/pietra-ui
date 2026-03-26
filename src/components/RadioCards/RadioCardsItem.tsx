@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { RadioCards as RadixRadioCards } from "@radix-ui/themes";
 
-export type RadioCardsItemProps = React.ComponentPropsWithoutRef<
+export type RadioCardsItemProps = ComponentPropsWithoutRef<
 	typeof RadixRadioCards.Item
 >;
 

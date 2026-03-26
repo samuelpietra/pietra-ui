@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { DropdownMenu as RadixDropdownMenu } from "@radix-ui/themes";
 
-export type DropdownMenuSubContentProps = React.ComponentPropsWithoutRef<
+export type DropdownMenuSubContentProps = ComponentPropsWithoutRef<
 	typeof RadixDropdownMenu.SubContent
 >;
 

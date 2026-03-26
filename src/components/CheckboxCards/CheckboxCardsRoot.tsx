@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { CheckboxCards as RadixCheckboxCards } from "@radix-ui/themes";
 
-export type CheckboxCardsRootProps = React.ComponentPropsWithoutRef<
+export type CheckboxCardsRootProps = ComponentPropsWithoutRef<
 	typeof RadixCheckboxCards.Root
 >;
 

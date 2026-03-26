@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
 import { RadioGroup as RadixRadioGroup } from "@radix-ui/themes";
 
-export type RadioGroupItemProps = React.ComponentPropsWithoutRef<
+export type RadioGroupItemProps = ComponentPropsWithoutRef<
 	typeof RadixRadioGroup.Item
 >;
 

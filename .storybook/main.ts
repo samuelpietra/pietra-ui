@@ -7,7 +7,7 @@ const config: StorybookConfig = {
     "../src/stories/**/*.stories.@(ts|tsx)",
     "../src/stories/**/*.mdx"
   ],
-  addons: ["@storybook/addon-essentials"],
+  addons: ["@storybook/addon-essentials", "@storybook/addon-a11y"],
   docs: {
     autodocs: true,
   },

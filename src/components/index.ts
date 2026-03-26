@@ -2,6 +2,12 @@ export { Avatar, type AvatarProps } from "./Avatar";
 export { Badge, type BadgeProps } from "./Badge";
 export { Box, type BoxProps } from "./Box";
 export { Button, type ButtonProps } from "./Button";
+export {
+	Callout,
+	type CalloutIconProps,
+	type CalloutRootProps,
+	type CalloutTextProps,
+} from "./Callout";
 export { Card, type CardProps } from "./Card";
 export { Checkbox, type CheckboxProps } from "./Checkbox";
 export {

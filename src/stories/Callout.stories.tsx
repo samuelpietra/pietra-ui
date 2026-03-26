@@ -78,18 +78,14 @@ export const Color: Story = {
 export const HighContrast: Story = {
 	render: () => (
 		<Flex direction="column" gap="3" style={{ maxWidth: 500 }}>
-			<Callout.Root color="blue">
-				<Callout.Icon>
-					<Info size={16} />
-				</Callout.Icon>
-				<Callout.Text>This is a default contrast callout.</Callout.Text>
-			</Callout.Root>
-			<Callout.Root color="blue" highContrast>
-				<Callout.Icon>
-					<Info size={16} />
-				</Callout.Icon>
-				<Callout.Text>This is a high contrast callout.</Callout.Text>
-			</Callout.Root>
+			{SAMPLE_COLORS.map((color) => (
+				<Callout.Root key={color} color={color} highContrast>
+					<Callout.Icon>
+						<Info size={16} />
+					</Callout.Icon>
+					<Callout.Text>This is a {color} high contrast callout.</Callout.Text>
+				</Callout.Root>
+			))}
 		</Flex>
 	),
 };

@@ -22,107 +22,66 @@ export const Default: Story = {
 	),
 };
 
+const DIRECTIONS = ["column", "row"] as const;
+
 export const Direction: Story = {
 	render: () => (
 		<Flex gap="3">
-			<Flex gap="3" direction="column" width="25%">
-				<Text weight="bold">Column</Text>
-				<Flex gap="3" direction="column">
-					<Cell>One</Cell>
-					<Cell>Two</Cell>
-					<Cell>Three</Cell>
+			{DIRECTIONS.map((direction) => (
+				<Flex key={direction} gap="3" direction="column" width="25%">
+					<Text weight="bold">{direction}</Text>
+					<Flex gap="3" direction={direction}>
+						<Cell>One</Cell>
+						<Cell>Two</Cell>
+						<Cell>Three</Cell>
+					</Flex>
 				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column" width="25%">
-				<Text weight="bold">Row</Text>
-				<Flex gap="3" direction="row">
-					<Cell>One</Cell>
-					<Cell>Two</Cell>
-					<Cell>Three</Cell>
-				</Flex>
-			</Flex>
+			))}
 		</Flex>
 	),
 };
+
+const ALIGNS = ["start", "center", "end"] as const;
 
 export const Align: Story = {
 	render: () => (
 		<Flex gap="3">
-			<Flex gap="3" direction="column" width="33%">
-				<Text weight="bold">Start</Text>
-				<Flex
-					gap="3"
-					align="start"
-					style={{ height: 100, background: "var(--gray-a2)" }}
-				>
-					<Cell p="2">Small</Cell>
-					<Cell>Medium</Cell>
-					<Cell p="6">Large</Cell>
+			{ALIGNS.map((align) => (
+				<Flex key={align} gap="3" direction="column" width="33%">
+					<Text weight="bold">{align}</Text>
+					<Flex
+						gap="3"
+						align={align}
+						style={{ height: 100, background: "var(--gray-a2)" }}
+					>
+						<Cell p="2">Small</Cell>
+						<Cell>Medium</Cell>
+						<Cell p="6">Large</Cell>
+					</Flex>
 				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column" width="33%">
-				<Text weight="bold">Center</Text>
-				<Flex
-					gap="3"
-					align="center"
-					style={{ height: 100, background: "var(--gray-a2)" }}
-				>
-					<Cell p="2">Small</Cell>
-					<Cell>Medium</Cell>
-					<Cell p="6">Large</Cell>
-				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column" width="33%">
-				<Text weight="bold">End</Text>
-				<Flex
-					gap="3"
-					align="end"
-					style={{ height: 100, background: "var(--gray-a2)" }}
-				>
-					<Cell p="2">Small</Cell>
-					<Cell>Medium</Cell>
-					<Cell p="6">Large</Cell>
-				</Flex>
-			</Flex>
+			))}
 		</Flex>
 	),
 };
 
+const JUSTIFIES = ["start", "center", "between", "end"] as const;
+
 export const Justify: Story = {
 	render: () => (
 		<Flex gap="3">
-			<Flex gap="3" direction="column" width="25%">
-				<Text weight="bold">Start</Text>
-				<Flex gap="3" justify="start" style={{ background: "var(--gray-a2)" }}>
-					<Cell>One</Cell>
-					<Cell>Two</Cell>
+			{JUSTIFIES.map((justify) => (
+				<Flex key={justify} gap="3" direction="column" width="25%">
+					<Text weight="bold">{justify}</Text>
+					<Flex
+						gap="3"
+						justify={justify}
+						style={{ background: "var(--gray-a2)" }}
+					>
+						<Cell>One</Cell>
+						<Cell>Two</Cell>
+					</Flex>
 				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column" width="25%">
-				<Text weight="bold">Center</Text>
-				<Flex gap="3" justify="center" style={{ background: "var(--gray-a2)" }}>
-					<Cell>One</Cell>
-					<Cell>Two</Cell>
-				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column" width="25%">
-				<Text weight="bold">Between</Text>
-				<Flex
-					gap="3"
-					justify="between"
-					style={{ background: "var(--gray-a2)" }}
-				>
-					<Cell>One</Cell>
-					<Cell>Two</Cell>
-				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column" width="25%">
-				<Text weight="bold">End</Text>
-				<Flex gap="3" justify="end" style={{ background: "var(--gray-a2)" }}>
-					<Cell>One</Cell>
-					<Cell>Two</Cell>
-				</Flex>
-			</Flex>
+			))}
 		</Flex>
 	),
 };

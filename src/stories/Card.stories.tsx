@@ -55,10 +55,12 @@ export const Size: Story = {
 	),
 };
 
+const VARIANTS = ["classic", "surface", "ghost"] as const;
+
 export const Variant: Story = {
 	render: () => (
 		<Flex gap="3" direction="column" style={{ maxWidth: 400 }}>
-			{(["classic", "surface", "ghost"] as const).map((variant) => (
+			{VARIANTS.map((variant) => (
 				<Card key={variant} variant={variant}>
 					<Text>
 						<Text weight="bold">{variant}</Text> — A card with the {variant}{" "}

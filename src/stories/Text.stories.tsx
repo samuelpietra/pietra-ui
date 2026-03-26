@@ -17,50 +17,44 @@ export const Default: Story = {
 	},
 };
 
+const SIZES = ["1", "2", "3", "4", "5", "6", "7", "8", "9"] as const;
+
 export const Size: Story = {
 	render: () => (
 		<Flex gap="3" direction="column">
-			<Text size="1">The quick brown fox jumps over the size 1.</Text>
-			<Text size="2">The quick brown fox jumps over the size 2.</Text>
-			<Text size="3">The quick brown fox jumps over the size 3.</Text>
-			<Text size="4">The quick brown fox jumps over the size 4.</Text>
-			<Text size="5">The quick brown fox jumps over the size 5.</Text>
-			<Text size="6">The quick brown fox jumps over the size 6.</Text>
-			<Text size="7">The quick brown fox jumps over the size 7.</Text>
-			<Text size="8">The quick brown fox jumps over the size 8.</Text>
-			<Text size="9">The quick brown fox jumps over the size 9.</Text>
+			{SIZES.map((size) => (
+				<Text key={size} size={size}>
+					The quick brown fox jumps over the size {size}.
+				</Text>
+			))}
 		</Flex>
 	),
 };
+
+const WEIGHTS = ["regular", "medium", "bold"] as const;
 
 export const Weight: Story = {
 	render: () => (
 		<Flex gap="3" direction="column">
-			<Text weight="regular" as="div">
-				The quick brown fox jumps over the regular weight.
-			</Text>
-			<Text weight="medium" as="div">
-				The quick brown fox jumps over the medium weight.
-			</Text>
-			<Text weight="bold" as="div">
-				The quick brown fox jumps over the bold weight.
-			</Text>
+			{WEIGHTS.map((weight) => (
+				<Text key={weight} weight={weight} as="div">
+					The quick brown fox jumps over the {weight} weight.
+				</Text>
+			))}
 		</Flex>
 	),
 };
 
+const ALIGNS = ["left", "center", "right"] as const;
+
 export const Align: Story = {
 	render: () => (
 		<Flex gap="3" direction="column">
-			<Text align="left" as="div">
-				Left-aligned
-			</Text>
-			<Text align="center" as="div">
-				Center-aligned
-			</Text>
-			<Text align="right" as="div">
-				Right-aligned
-			</Text>
+			{ALIGNS.map((align) => (
+				<Text key={align} align={align} as="div">
+					{align}-aligned
+				</Text>
+			))}
 		</Flex>
 	),
 };
@@ -92,6 +86,9 @@ export const Trim: Story = {
 	),
 };
 
+const SAMPLE_TEXT =
+	"The goal of typography is to relate font size, line height, and line width in a proportional way that maximizes beauty and makes reading easier and more pleasant.";
+
 export const Truncate: Story = {
 	render: () => (
 		<Flex
@@ -103,89 +100,46 @@ export const Truncate: Story = {
 				resize: "horizontal",
 			}}
 		>
-			<Text truncate>
-				The goal of typography is to relate font size, line height, and line
-				width in a proportional way that maximizes beauty and makes reading
-				easier and more pleasant.
-			</Text>
+			<Text truncate>{SAMPLE_TEXT}</Text>
 		</Flex>
 	),
 };
+
+const WRAPS = ["nowrap", "balance", "pretty"] as const;
 
 export const Wrap: Story = {
 	render: () => (
 		<Flex gap="3" direction="column">
-			<Flex gap="3" direction="column">
-				<Text weight="bold">nowrap</Text>
-				<Flex
-					p="3"
-					overflow="auto"
-					width="300px"
-					style={{
-						border: "1px dotted var(--gray-a7)",
-						resize: "horizontal",
-					}}
-				>
-					<Text wrap="nowrap">
-						The goal of typography is to relate font size, line height, and line
-						width in a proportional way that maximizes beauty and makes reading
-						easier and more pleasant.
-					</Text>
+			{WRAPS.map((wrap) => (
+				<Flex key={wrap} gap="3" direction="column">
+					<Text weight="bold">{wrap}</Text>
+					<Flex
+						p="3"
+						overflow="auto"
+						width="300px"
+						style={{
+							border: "1px dotted var(--gray-a7)",
+							resize: "horizontal",
+						}}
+					>
+						<Text wrap={wrap}>{SAMPLE_TEXT}</Text>
+					</Flex>
 				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column">
-				<Text weight="bold">balance</Text>
-				<Flex
-					p="3"
-					overflow="auto"
-					width="300px"
-					style={{
-						border: "1px dotted var(--gray-a7)",
-						resize: "horizontal",
-					}}
-				>
-					<Text wrap="balance">
-						The goal of typography is to relate font size, line height, and line
-						width in a proportional way that maximizes beauty and makes reading
-						easier and more pleasant.
-					</Text>
-				</Flex>
-			</Flex>
-			<Flex gap="3" direction="column">
-				<Text weight="bold">pretty</Text>
-				<Flex
-					p="3"
-					overflow="auto"
-					width="300px"
-					style={{
-						border: "1px dotted var(--gray-a7)",
-						resize: "horizontal",
-					}}
-				>
-					<Text wrap="pretty">
-						The goal of typography is to relate font size, line height, and line
-						width in a proportional way that maximizes beauty and makes reading
-						easier and more pleasant.
-					</Text>
-				</Flex>
-			</Flex>
+			))}
 		</Flex>
 	),
 };
 
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson"] as const;
+
 export const Color: Story = {
 	render: () => (
 		<Flex direction="column">
-			<Text color="indigo">
-				The quick brown fox jumps over the indigo color.
-			</Text>
-			<Text color="cyan">The quick brown fox jumps over the cyan color.</Text>
-			<Text color="orange">
-				The quick brown fox jumps over the orange color.
-			</Text>
-			<Text color="crimson">
-				The quick brown fox jumps over the crimson color.
-			</Text>
+			{SAMPLE_COLORS.map((color) => (
+				<Text key={color} color={color}>
+					The quick brown fox jumps over the {color} color.
+				</Text>
+			))}
 		</Flex>
 	),
 };

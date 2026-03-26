@@ -20,52 +20,36 @@ export const Default: Story = {
 	),
 };
 
+const COLUMN_COUNTS = ["2", "3", "4"] as const;
+
 export const Columns: Story = {
 	render: () => (
 		<Grid columns="3" gap="3">
-			<Flex gap="3" direction="column">
-				<Text weight="bold">2 columns</Text>
-				<Grid columns="2" gap="3">
-					{makeCells(4)}
-				</Grid>
-			</Flex>
-			<Flex gap="3" direction="column">
-				<Text weight="bold">3 columns</Text>
-				<Grid columns="3" gap="3">
-					{makeCells(6)}
-				</Grid>
-			</Flex>
-			<Flex gap="3" direction="column">
-				<Text weight="bold">4 columns</Text>
-				<Grid columns="4" gap="3">
-					{makeCells(4)}
-				</Grid>
-			</Flex>
+			{COLUMN_COUNTS.map((cols) => (
+				<Flex key={cols} gap="3" direction="column">
+					<Text weight="bold">{cols} columns</Text>
+					<Grid columns={cols} gap="3">
+						{makeCells(Number(cols) * 2)}
+					</Grid>
+				</Flex>
+			))}
 		</Grid>
 	),
 };
 
+const GAPS = ["1", "3", "6"] as const;
+
 export const Gap: Story = {
 	render: () => (
 		<Grid columns="3" gap="3">
-			<Flex gap="3" direction="column">
-				<Text weight="bold">gap: 1</Text>
-				<Grid columns="3" gap="1">
-					{makeCells(3)}
-				</Grid>
-			</Flex>
-			<Flex gap="3" direction="column">
-				<Text weight="bold">gap: 3</Text>
-				<Grid columns="3" gap="3">
-					{makeCells(3)}
-				</Grid>
-			</Flex>
-			<Flex gap="3" direction="column">
-				<Text weight="bold">gap: 6</Text>
-				<Grid columns="3" gap="6">
-					{makeCells(3)}
-				</Grid>
-			</Flex>
+			{GAPS.map((gap) => (
+				<Flex key={gap} gap="3" direction="column">
+					<Text weight="bold">gap: {gap}</Text>
+					<Grid columns="3" gap={gap}>
+						{makeCells(3)}
+					</Grid>
+				</Flex>
+			))}
 		</Grid>
 	),
 };

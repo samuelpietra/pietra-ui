@@ -17,107 +17,88 @@ export const Default: Story = {
 	},
 };
 
+const SIZES = ["1", "2", "3"] as const;
+
 export const Size: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
-			<Button size="1" variant="soft">
-				Size 1
-			</Button>
-			<Button size="2" variant="soft">
-				Size 2
-			</Button>
-			<Button size="3" variant="soft">
-				Size 3
-			</Button>
+			{SIZES.map((size) => (
+				<Button key={size} size={size} variant="soft">
+					Size {size}
+				</Button>
+			))}
 		</Flex>
 	),
 };
+
+const VARIANTS = [
+	"classic",
+	"solid",
+	"soft",
+	"surface",
+	"outline",
+	"ghost",
+] as const;
 
 export const Variant: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
-			<Button variant="classic">Classic</Button>
-			<Button variant="solid">Solid</Button>
-			<Button variant="soft">Soft</Button>
-			<Button variant="surface">Surface</Button>
-			<Button variant="outline">Outline</Button>
-			<Button variant="ghost">Ghost</Button>
+			{VARIANTS.map((variant) => (
+				<Button key={variant} variant={variant}>
+					{variant}
+				</Button>
+			))}
 		</Flex>
 	),
 };
 
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson"] as const;
+
 export const Color: Story = {
 	render: () => (
 		<Flex gap="3">
-			<Button color="indigo" variant="soft">
-				Indigo
-			</Button>
-			<Button color="cyan" variant="soft">
-				Cyan
-			</Button>
-			<Button color="orange" variant="soft">
-				Orange
-			</Button>
-			<Button color="crimson" variant="soft">
-				Crimson
-			</Button>
+			{SAMPLE_COLORS.map((color) => (
+				<Button key={color} color={color} variant="soft">
+					{color}
+				</Button>
+			))}
 		</Flex>
 	),
 };
+
+const HC_VARIANTS = ["classic", "solid", "soft", "surface", "outline"] as const;
 
 export const HighContrast: Story = {
 	render: () => (
 		<Flex gap="3" direction="column">
 			<Flex gap="3">
-				<Button color="gray" variant="classic">
-					Classic
-				</Button>
-				<Button color="gray" variant="solid">
-					Solid
-				</Button>
-				<Button color="gray" variant="soft">
-					Soft
-				</Button>
-				<Button color="gray" variant="surface">
-					Surface
-				</Button>
-				<Button color="gray" variant="outline">
-					Outline
-				</Button>
+				{HC_VARIANTS.map((variant) => (
+					<Button key={variant} color="gray" variant={variant}>
+						{variant}
+					</Button>
+				))}
 			</Flex>
 			<Flex gap="3">
-				<Button color="gray" variant="classic" highContrast>
-					Classic
-				</Button>
-				<Button color="gray" variant="solid" highContrast>
-					Solid
-				</Button>
-				<Button color="gray" variant="soft" highContrast>
-					Soft
-				</Button>
-				<Button color="gray" variant="surface" highContrast>
-					Surface
-				</Button>
-				<Button color="gray" variant="outline" highContrast>
-					Outline
-				</Button>
+				{HC_VARIANTS.map((variant) => (
+					<Button key={variant} color="gray" variant={variant} highContrast>
+						{variant}
+					</Button>
+				))}
 			</Flex>
 		</Flex>
 	),
 };
 
+const RADII = ["none", "large", "full"] as const;
+
 export const Radius: Story = {
 	render: () => (
 		<Flex gap="3">
-			<Button radius="none" variant="soft">
-				None
-			</Button>
-			<Button radius="large" variant="soft">
-				Large
-			</Button>
-			<Button radius="full" variant="soft">
-				Full
-			</Button>
+			{RADII.map((radius) => (
+				<Button key={radius} radius={radius} variant="soft">
+					{radius}
+				</Button>
+			))}
 		</Flex>
 	),
 };

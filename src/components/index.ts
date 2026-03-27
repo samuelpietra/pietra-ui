@@ -67,4 +67,9 @@ export { Skeleton, type SkeletonProps } from "./Skeleton";
 export { Spinner, type SpinnerProps } from "./Spinner";
 export { Switch, type SwitchProps } from "./Switch";
 export { Text, type TextProps } from "./Text";
+export {
+	TextField,
+	type TextFieldRootProps,
+	type TextFieldSlotProps,
+} from "./TextField";
 export { Tooltip, type TooltipProps } from "./Tooltip";

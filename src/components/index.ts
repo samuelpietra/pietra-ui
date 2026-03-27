@@ -48,6 +48,7 @@ export {
 } from "./HoverCard";
 export { Image, type ImageProps, type ImageShape } from "./Image";
 export { Link, type LinkProps } from "./Link";
+export { Progress, type ProgressProps } from "./Progress";
 export { Radio, type RadioProps } from "./Radio";
 export {
 	RadioCards,

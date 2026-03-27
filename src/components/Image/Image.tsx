@@ -144,9 +144,15 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
 		);
 
 		return (
-			<div style={clipStyle}>
+			<div data-testid="image-wrapper" style={clipStyle}>
 				{content}
-				{showSkeleton && <Skeleton loading style={skeletonOverlayStyle} />}
+				{showSkeleton && (
+					<Skeleton
+						data-testid="image-skeleton"
+						loading
+						style={skeletonOverlayStyle}
+					/>
+				)}
 			</div>
 		);
 	},

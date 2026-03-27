@@ -21,6 +21,7 @@ export {
 	type CheckboxGroupItemProps,
 	type CheckboxGroupRootProps,
 } from "./CheckboxGroup";
+export { Container, type ContainerProps } from "./Container";
 export {
 	DropdownMenu,
 	type DropdownMenuCheckboxItemProps,

@@ -46,6 +46,7 @@ export {
 	type HoverCardRootProps,
 	type HoverCardTriggerProps,
 } from "./HoverCard";
+export { IconButton, type IconButtonProps } from "./IconButton";
 export { Image, type ImageProps, type ImageShape } from "./Image";
 export { Link, type LinkProps } from "./Link";
 export { Progress, type ProgressProps } from "./Progress";

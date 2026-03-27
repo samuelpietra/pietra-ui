@@ -3,7 +3,16 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, Grid, Switch, Text } from "@/components";
 
-import { RADII, SAMPLE_COLORS, SIZES } from "./fixtures";
+const DISABLED_STATES = [
+	{ disabled: false, defaultChecked: false, label: "Off" },
+	{ disabled: false, defaultChecked: true, label: "On" },
+	{ disabled: true, defaultChecked: false, label: "Off" },
+	{ disabled: true, defaultChecked: true, label: "On" },
+] as const;
+const RADII = ["none", "small", "medium", "large", "full"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
+const SIZES = ["1", "2", "3"] as const;
+const VARIANTS = ["classic", "surface", "soft"] as const;
 
 const meta: Meta<typeof Switch> = {
 	title: "Components/Switch",
@@ -33,8 +42,6 @@ export const Size: Story = {
 		</Flex>
 	),
 };
-
-const VARIANTS = ["classic", "surface", "soft"] as const;
 
 export const Variant: Story = {
 	render: () => (
@@ -81,13 +88,6 @@ export const Radius: Story = {
 		</Flex>
 	),
 };
-
-const DISABLED_STATES = [
-	{ disabled: false, defaultChecked: false, label: "Off" },
-	{ disabled: false, defaultChecked: true, label: "On" },
-	{ disabled: true, defaultChecked: false, label: "Off" },
-	{ disabled: true, defaultChecked: true, label: "On" },
-] as const;
 
 export const Disabled: Story = {
 	render: () => (

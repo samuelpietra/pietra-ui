@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { CheckboxCards, Flex, Text } from "@/components";
 
-import { SAMPLE_COLORS, SIZES } from "./fixtures";
+const ITEMS = ["React", "Vue", "Svelte", "Angular"] as const;
+const SIZES = ["1", "2", "3"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
+const SHORT_ITEMS = ["React", "Vue"] as const;
+const VARIANTS = ["surface", "classic"] as const;
 
 const meta: Meta<typeof CheckboxCards.Root> = {
 	title: "Components/CheckboxCards",
@@ -11,9 +15,6 @@ const meta: Meta<typeof CheckboxCards.Root> = {
 
 export default meta;
 type Story = StoryObj<typeof CheckboxCards.Root>;
-
-const ITEMS = ["React", "Vue", "Svelte", "Angular"] as const;
-const SHORT_ITEMS = ["React", "Vue"] as const;
 
 export const Default: Story = {
 	render: () => (
@@ -47,8 +48,6 @@ export const Size: Story = {
 		</Flex>
 	),
 };
-
-const VARIANTS = ["surface", "classic"] as const;
 
 export const Variant: Story = {
 	render: () => (

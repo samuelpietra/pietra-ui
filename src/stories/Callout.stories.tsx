@@ -3,7 +3,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Callout, Flex } from "@/components";
 
-import { SIZES } from "./fixtures";
+const SAMPLE_COLORS = ["blue", "green", "yellow", "red"] as const;
+const SIZES = ["1", "2", "3"] as const;
+const VARIANTS = ["soft", "surface", "outline"] as const;
 
 const meta: Meta<typeof Callout.Root> = {
 	title: "Components/Callout",
@@ -41,8 +43,6 @@ export const Size: Story = {
 	),
 };
 
-const VARIANTS = ["soft", "surface", "outline"] as const;
-
 export const Variant: Story = {
 	render: () => (
 		<Flex direction="column" gap="3" style={{ maxWidth: 500 }}>
@@ -57,8 +57,6 @@ export const Variant: Story = {
 		</Flex>
 	),
 };
-
-const SAMPLE_COLORS = ["blue", "green", "yellow", "red"] as const;
 
 export const Color: Story = {
 	render: () => (

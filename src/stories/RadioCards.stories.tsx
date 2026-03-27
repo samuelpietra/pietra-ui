@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, RadioCards, Text } from "@/components";
 
-import { SAMPLE_COLORS, SIZES } from "./fixtures";
+const SIZES = ["1", "2", "3"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
 
 const meta: Meta<typeof RadioCards.Root> = {
 	title: "Components/RadioCards",
@@ -17,7 +18,6 @@ const PLANS = [
 	{ value: "6-core", cpu: "6-core CPU", ram: "24 GB RAM" },
 	{ value: "4-core", cpu: "4-core CPU", ram: "16 GB RAM" },
 ] as const;
-
 const SHORT_PLANS = PLANS.slice(0, 2);
 
 function PlanItem({ cpu, ram }: { cpu: string; ram: string }) {

@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, RadioGroup, Text } from "@/components";
 
-import { SAMPLE_COLORS, SIZES } from "./fixtures";
+const SIZES = ["1", "2", "3"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
+const VARIANTS = ["classic", "surface", "soft"] as const;
 
 const meta: Meta<typeof RadioGroup.Root> = {
 	title: "Components/RadioGroup",
@@ -39,8 +41,6 @@ export const Size: Story = {
 		</Flex>
 	),
 };
-
-const VARIANTS = ["classic", "surface", "soft"] as const;
 
 export const Variant: Story = {
 	render: () => (

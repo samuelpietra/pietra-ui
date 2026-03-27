@@ -3,7 +3,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Checkbox, Flex, Grid, Text } from "@/components";
 
-import { SAMPLE_COLORS, SIZES } from "./fixtures";
+const DISABLED_STATES = [
+	{ disabled: false, defaultChecked: false, label: "Not checked" },
+	{ disabled: false, defaultChecked: true, label: "Checked" },
+	{ disabled: true, defaultChecked: false, label: "Not checked" },
+	{ disabled: true, defaultChecked: true, label: "Checked" },
+] as const;
+const SIZES = ["1", "2", "3"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
+const VARIANTS = ["classic", "surface", "soft"] as const;
 
 const meta: Meta<typeof Checkbox> = {
 	title: "Components/Checkbox",
@@ -26,8 +34,6 @@ export const Size: Story = {
 		</Flex>
 	),
 };
-
-const VARIANTS = ["classic", "surface", "soft"] as const;
 
 export const Variant: Story = {
 	render: () => (
@@ -64,13 +70,6 @@ export const HighContrast: Story = {
 		</Grid>
 	),
 };
-
-const DISABLED_STATES = [
-	{ disabled: false, defaultChecked: false, label: "Not checked" },
-	{ disabled: false, defaultChecked: true, label: "Checked" },
-	{ disabled: true, defaultChecked: false, label: "Not checked" },
-	{ disabled: true, defaultChecked: true, label: "Checked" },
-] as const;
 
 export const Disabled: Story = {
 	render: () => (

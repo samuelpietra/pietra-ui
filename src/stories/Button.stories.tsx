@@ -3,7 +3,18 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button, Flex, Spinner } from "@/components";
 
-import { SIZES } from "./fixtures";
+const HC_VARIANTS = ["classic", "solid", "soft", "surface", "outline"] as const;
+const RADII = ["none", "large", "full"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson"] as const;
+const SIZES = ["1", "2", "3"] as const;
+const VARIANTS = [
+	"classic",
+	"solid",
+	"soft",
+	"surface",
+	"outline",
+	"ghost",
+] as const;
 
 const meta: Meta<typeof Button> = {
 	title: "Components/Button",
@@ -31,15 +42,6 @@ export const Size: Story = {
 	),
 };
 
-const VARIANTS = [
-	"classic",
-	"solid",
-	"soft",
-	"surface",
-	"outline",
-	"ghost",
-] as const;
-
 export const Variant: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
@@ -52,8 +54,6 @@ export const Variant: Story = {
 	),
 };
 
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson"] as const;
-
 export const Color: Story = {
 	render: () => (
 		<Flex gap="3">
@@ -65,8 +65,6 @@ export const Color: Story = {
 		</Flex>
 	),
 };
-
-const HC_VARIANTS = ["classic", "solid", "soft", "surface", "outline"] as const;
 
 export const HighContrast: Story = {
 	render: () => (
@@ -88,8 +86,6 @@ export const HighContrast: Story = {
 		</Flex>
 	),
 };
-
-const RADII = ["none", "large", "full"] as const;
 
 export const Radius: Story = {
 	render: () => (

@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Badge, Flex } from "@/components";
 
-import { RADII, SIZES } from "./fixtures";
+const RADII = ["none", "small", "medium", "large", "full"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson"] as const;
+const SIZES = ["1", "2", "3"] as const;
+const VARIANTS = ["solid", "soft", "surface", "outline"] as const;
 
 const meta: Meta<typeof Badge> = {
 	title: "Components/Badge",
@@ -34,8 +37,6 @@ export const Size: Story = {
 	),
 };
 
-const VARIANTS = ["solid", "soft", "surface", "outline"] as const;
-
 export const Variant: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
@@ -47,8 +48,6 @@ export const Variant: Story = {
 		</Flex>
 	),
 };
-
-const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson"] as const;
 
 export const Color: Story = {
 	render: () => (

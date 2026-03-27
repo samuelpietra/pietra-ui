@@ -3,7 +3,20 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, Grid, Radio, Text } from "@/components";
 
-import { SAMPLE_COLORS, SIZES } from "./fixtures";
+const DENSITY_OPTIONS = [
+	{ value: "default", label: "Default" },
+	{ value: "comfortable", label: "Comfortable" },
+	{ value: "compact", label: "Compact", defaultChecked: true },
+] as const;
+const DISABLED_STATES = [
+	{ disabled: false, defaultChecked: false, label: "Not checked" },
+	{ disabled: false, defaultChecked: true, label: "Checked" },
+	{ disabled: true, defaultChecked: false, label: "Not checked" },
+	{ disabled: true, defaultChecked: true, label: "Checked" },
+] as const;
+const SIZES = ["1", "2", "3"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
+const VARIANTS = ["classic", "surface", "soft"] as const;
 
 const meta: Meta<typeof Radio> = {
 	title: "Components/Radio",
@@ -12,12 +25,6 @@ const meta: Meta<typeof Radio> = {
 
 export default meta;
 type Story = StoryObj<typeof Radio>;
-
-const DENSITY_OPTIONS = [
-	{ value: "default", label: "Default" },
-	{ value: "comfortable", label: "Comfortable" },
-	{ value: "compact", label: "Compact", defaultChecked: true },
-] as const;
 
 export const Default: Story = {
 	render: () => (
@@ -44,8 +51,6 @@ export const Size: Story = {
 	),
 };
 
-const VARIANTS = ["classic", "surface", "soft"] as const;
-
 export const Variant: Story = {
 	render: () => (
 		<Flex gap="3" align="center">
@@ -65,13 +70,6 @@ export const Color: Story = {
 		</Flex>
 	),
 };
-
-const DISABLED_STATES = [
-	{ disabled: false, defaultChecked: false, label: "Not checked" },
-	{ disabled: false, defaultChecked: true, label: "Checked" },
-	{ disabled: true, defaultChecked: false, label: "Not checked" },
-	{ disabled: true, defaultChecked: true, label: "Checked" },
-] as const;
 
 export const Disabled: Story = {
 	render: () => (

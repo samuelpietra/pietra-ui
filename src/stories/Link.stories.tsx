@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Flex, Link, Text } from "@/components";
 
-import { SAMPLE_COLORS, SIZES } from "./fixtures";
+const SIZES = ["1", "2", "3"] as const;
+const SAMPLE_COLORS = ["indigo", "cyan", "orange", "crimson", "gray"] as const;
+const UNDERLINES = ["auto", "always", "hover", "none"] as const;
+const WEIGHTS = ["regular", "medium", "bold"] as const;
 
 const meta: Meta<typeof Link> = {
 	title: "Typography/Link",
@@ -31,8 +34,6 @@ export const Size: Story = {
 		</Flex>
 	),
 };
-
-const WEIGHTS = ["regular", "medium", "bold"] as const;
 
 export const Weight: Story = {
 	render: () => (
@@ -79,8 +80,6 @@ export const HighContrast: Story = {
 		</Flex>
 	),
 };
-
-const UNDERLINES = ["auto", "always", "hover", "none"] as const;
 
 export const Underline: Story = {
 	render: () => (

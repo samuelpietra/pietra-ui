@@ -2,7 +2,12 @@
   /* Radix Themes sets min-height: 100vh on root theme elements.
      Inside Storybook docs, each story gets its own root Theme wrapper,
      causing every canvas to expand to full viewport height. */
-  .docs-story .radix-themes[data-is-root-theme="true"] {
+  .radix-themes[data-is-root-theme="true"] {
     min-height: auto;
+  }
+
+  .sb-story {
+    border-radius: 4px;
+    overflow: hidden;
   }
 </style>

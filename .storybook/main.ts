@@ -7,23 +7,24 @@ const config: StorybookConfig = {
     "../src/stories/**/*.stories.@(ts|tsx)",
     "../src/stories/**/*.mdx"
   ],
+  staticDirs: ["./public"],
   addons: ["@storybook/addon-essentials", "@storybook/addon-a11y"],
   docs: {
-    autodocs: true,
+    autodocs: true
   },
   framework: {
     name: "@storybook/react-vite",
-    options: {},
+    options: {}
   },
   viteFinal: async (config, { configDir }) => {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          "@": path.resolve(configDir, "../src"),
-        },
-      },
+          "@": path.resolve(configDir, "../src")
+        }
+      }
     });
-  },
+  }
 };
 
 export default config;

@@ -4,6 +4,7 @@ import "@radix-ui/themes/styles.css";
 
 import { ThemeProvider } from "../src/theme";
 import "../src/theme/pietra-theme.css";
+import storybookThemes from "./storybook-themes";
 
 const AvailableThemes: Record<string, {
   label: string;
@@ -13,17 +14,17 @@ const AvailableThemes: Record<string, {
   light: {
     label: "Pietra Light",
     icon: "sun",
-    appearance: "light",
+    appearance: "light"
   },
   dark: {
     label: "Pietra Dark",
     icon: "moon",
-    appearance: "dark",
-  },
+    appearance: "dark"
+  }
 };
 
 const getAppearance = (themeName: string) => {
-  return AvailableThemes[themeName]?.appearance ?? "light";
+  return AvailableThemes[themeName]?.appearance ?? "dark";
 };
 
 const preview: Preview = {
@@ -36,36 +37,43 @@ const preview: Preview = {
         items: Object.entries(AvailableThemes).map(([key, theme]) => ({
           value: key,
           title: theme.label,
-          icon: theme.icon,
+          icon: theme.icon
         })),
-        dynamicTitle: true,
-      },
-    },
+        dynamicTitle: true
+      }
+    }
   },
   initialGlobals: {
-    theme: "light",
+    theme: window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
   },
   decorators: [
     (Story, { globals }) => (
       <ThemeProvider appearance={getAppearance(globals.theme)}>
-        <Story />
+        <div style={{ padding: 8 }}>
+          <Story />
+        </div>
       </ThemeProvider>
-    ),
+    )
   ],
   parameters: {
     layout: "padded",
     docs: {
       source: {
-        type: "dynamic",
+        type: "dynamic"
       },
+      theme: window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? storybookThemes.dark
+        : storybookThemes.light
     },
     options: {
       storySort: {
         method: "alphabetical",
-        order: ["Theme", "Layout", "Typography", "Components"],
-      },
-    },
-  },
+        order: ["Theme", "Layout", "Typography", "Components"]
+      }
+    }
+  }
 };
 
 export default preview;

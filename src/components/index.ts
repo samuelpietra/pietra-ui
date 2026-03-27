@@ -40,6 +40,12 @@ export {
 } from "./DropdownMenu";
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
+export {
+	HoverCard,
+	type HoverCardContentProps,
+	type HoverCardRootProps,
+	type HoverCardTriggerProps,
+} from "./HoverCard";
 export { Image, type ImageProps, type ImageShape } from "./Image";
 export { Link, type LinkProps } from "./Link";
 export { Radio, type RadioProps } from "./Radio";

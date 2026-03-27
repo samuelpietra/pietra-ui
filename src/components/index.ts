@@ -63,6 +63,16 @@ export {
 	type RadioGroupRootProps,
 } from "./RadioGroup";
 export { Section, type SectionProps } from "./Section";
+export {
+	Select,
+	type SelectContentProps,
+	type SelectGroupProps,
+	type SelectItemProps,
+	type SelectLabelProps,
+	type SelectRootProps,
+	type SelectSeparatorProps,
+	type SelectTriggerProps,
+} from "./Select";
 export { Skeleton, type SkeletonProps } from "./Skeleton";
 export { Spinner, type SpinnerProps } from "./Spinner";
 export { Switch, type SwitchProps } from "./Switch";

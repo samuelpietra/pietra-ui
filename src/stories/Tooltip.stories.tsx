@@ -44,6 +44,27 @@ export const OnText: Story = {
 	),
 };
 
+export const Side: Story = {
+	render: () => (
+		<Flex direction="column" align="center" gap="6" py="8">
+			<Tooltip content="Tooltip on top" side="top">
+				<Button variant="soft">top</Button>
+			</Tooltip>
+			<Flex gap="9" align="center">
+				<Tooltip content="Tooltip on left" side="left">
+					<Button variant="soft">left</Button>
+				</Tooltip>
+				<Tooltip content="Tooltip on right" side="right">
+					<Button variant="soft">right</Button>
+				</Tooltip>
+			</Flex>
+			<Tooltip content="Tooltip on bottom" side="bottom">
+				<Button variant="soft">bottom</Button>
+			</Tooltip>
+		</Flex>
+	),
+};
+
 export const WithIcons: Story = {
 	render: () => (
 		<Flex gap="3">

@@ -1,0 +1,82 @@
+.pietra-data-table {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  font-family: var(--default-font-family);
+  font-size: var(--font-size-2);
+  color: var(--gray-12);
+}
+
+.pietra-data-table-body {
+  flex: 1;
+  min-height: 0;
+}
+
+.pietra-data-table-header {
+  border-bottom: 1px solid var(--gray-a5);
+  font-weight: 500;
+  color: var(--gray-11);
+}
+
+.pietra-data-table-header-row {
+  display: flex;
+  height: 40px;
+  align-items: center;
+}
+
+.pietra-data-table-cell {
+  padding: 0 var(--space-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pietra-data-table-sortable {
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--radius-1);
+}
+
+.pietra-data-table-sortable:focus-visible {
+  outline: 2px solid var(--accent-9);
+  outline-offset: -2px;
+}
+
+.pietra-data-table-sort-indicator {
+  margin-left: var(--space-1);
+}
+
+.pietra-data-table-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-a3);
+  box-sizing: border-box;
+}
+
+.pietra-data-table-row:focus-visible {
+  outline: 2px solid var(--accent-9);
+  outline-offset: -2px;
+}
+
+.pietra-data-table-row-striped {
+  background-color: var(--gray-a2);
+}
+
+.pietra-data-table-row-hoverable {
+  transition: background-color var(--pietra-transition-fast);
+}
+
+.pietra-data-table-row-hoverable:hover {
+  background-color: var(--gray-a4);
+}
+
+.pietra-data-table-row-striped.pietra-data-table-row-hoverable:hover {
+  background-color: var(--gray-a5);
+}
+
+.pietra-data-table-empty {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4);
+  color: var(--gray-9);
+}

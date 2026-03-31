@@ -23,6 +23,12 @@ export {
 } from "./CheckboxGroup";
 export { Container, type ContainerProps } from "./Container";
 export {
+	DataTable,
+	type DataTableColumn,
+	type DataTableProps,
+	type SortState,
+} from "./DataTable";
+export {
 	DropdownMenu,
 	type DropdownMenuCheckboxItemProps,
 	type DropdownMenuContentProps,

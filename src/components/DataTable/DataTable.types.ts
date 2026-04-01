@@ -23,6 +23,7 @@ export type DataTableProps<T> = {
 	noDataMessage?: ReactNode;
 	onRowClick?: (item: T) => void;
 	onSortChange?: (sort: SortState) => void;
+	rowClassName?: (item: T, index: number) => string | undefined;
 	rowHeight?: number;
 	sort?: SortState;
 	striped?: boolean;

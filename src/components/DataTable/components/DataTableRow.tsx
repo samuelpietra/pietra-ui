@@ -7,6 +7,7 @@ export interface DataTableRowProps {
 	columnStyles: CSSProperties[];
 	hasRowClick: boolean;
 	hoverable: boolean;
+	rowClassName?: (item: unknown, index: number) => string | undefined;
 	sortedData: unknown[];
 	striped: boolean;
 }
@@ -18,6 +19,7 @@ export function DataTableRow({
 	columnStyles,
 	hasRowClick,
 	hoverable,
+	rowClassName,
 	sortedData,
 	striped,
 }: {
@@ -30,6 +32,7 @@ export function DataTableRow({
 		"pietra-data-table-row",
 		hoverable && "pietra-data-table-row-hoverable",
 		striped && index % 2 === 0 && "pietra-data-table-row-striped",
+		rowClassName?.(item, index),
 	]
 		.filter(Boolean)
 		.join(" ");

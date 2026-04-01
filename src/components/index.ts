@@ -10,6 +10,21 @@ export {
 	type CalloutTextProps,
 } from "./Callout";
 export { Card, type CardProps } from "./Card";
+export {
+	Catalog,
+	type CatalogContextValue,
+	type CatalogDescriptorField,
+	type CatalogField,
+	type CatalogIdentifierField,
+	CatalogItemCount,
+	type CatalogProps,
+	CatalogTable,
+	type CatalogTableProps,
+	CatalogToolbar,
+	type FieldCreator,
+	type MapItemToFields,
+	useCatalogContext,
+} from "./Catalog";
 export { Checkbox, type CheckboxProps } from "./Checkbox";
 export {
 	CheckboxCards,

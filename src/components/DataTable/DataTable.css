@@ -14,7 +14,7 @@
 
 .pietra-data-table-header {
   border-bottom: 1px solid var(--gray-a5);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--gray-11);
 }
 
@@ -25,10 +25,13 @@
 }
 
 .pietra-data-table-cell {
+  display: flex;
+  align-items: center;
   padding: 0 var(--space-3);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-height: 0;
 }
 
 .pietra-data-table-sortable {
@@ -51,6 +54,7 @@
   align-items: center;
   border-bottom: 1px solid var(--gray-a3);
   box-sizing: border-box;
+  color: var(--gray-11);
 }
 
 .pietra-data-table-row:focus-visible {

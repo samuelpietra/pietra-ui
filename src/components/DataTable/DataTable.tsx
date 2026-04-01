@@ -21,6 +21,7 @@ export function DataTable<T>({
 	noDataMessage = "No results found.",
 	onRowClick,
 	onSortChange,
+	rowClassName,
 	rowHeight = DEFAULT_ROW_HEIGHT,
 	sort,
 	striped = false,
@@ -172,6 +173,7 @@ export function DataTable<T>({
 							columnStyles,
 							hasRowClick: !!onRowClick,
 							hoverable,
+							rowClassName: rowClassName as DataTableRowProps["rowClassName"],
 							sortedData,
 							striped,
 						}}

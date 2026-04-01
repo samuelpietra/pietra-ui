@@ -379,6 +379,26 @@ describe("DataTable", () => {
 		});
 	});
 
+	describe("rowClassName", () => {
+		it("applies custom class from rowClassName callback", () => {
+			render(
+				<DataTable
+					columns={COLUMNS}
+					data={ITEMS}
+					ariaLabel="Test"
+					rowClassName={(_item, index) =>
+						index === 1 ? "custom-highlight" : undefined
+					}
+				/>,
+			);
+
+			const rows = getDataRows();
+			expect(rows[0]).not.toHaveClass("custom-highlight");
+			expect(rows[1]).toHaveClass("custom-highlight");
+			expect(rows[2]).not.toHaveClass("custom-highlight");
+		});
+	});
+
 	describe("aria structure", () => {
 		it("has correct role hierarchy", () => {
 			render(<DataTable columns={COLUMNS} data={ITEMS} ariaLabel="Test" />);

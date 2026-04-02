@@ -101,7 +101,33 @@ export const Truncate: Story = {
 				resize: "horizontal",
 			}}
 		>
-			<Text truncate>{SAMPLE_TEXT}</Text>
+			<Text numberOfLines={1}>{SAMPLE_TEXT}</Text>
+		</Flex>
+	),
+};
+
+const NUMBER_OF_LINES = [1, 2, 3] as const;
+
+export const NumberOfLines: Story = {
+	render: () => (
+		<Flex gap="3" direction="column">
+			{NUMBER_OF_LINES.map((lines) => (
+				<Flex key={lines} gap="3" direction="column">
+					<Text weight="bold">numberOfLines: {lines}</Text>
+					<Flex
+						p="3"
+						overflow="auto"
+						width="300px"
+						tabIndex={0}
+						style={{
+							border: "1px dotted var(--gray-a7)",
+							resize: "horizontal",
+						}}
+					>
+						<Text numberOfLines={lines}>{SAMPLE_TEXT}</Text>
+					</Flex>
+				</Flex>
+			))}
 		</Flex>
 	),
 };

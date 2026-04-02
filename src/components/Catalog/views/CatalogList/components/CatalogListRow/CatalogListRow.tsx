@@ -71,17 +71,17 @@ export function CatalogListRow({
 				gap="1"
 			>
 				<Flex direction="column" minWidth="0">
-					<Text size="2" weight="medium" truncate>
+					<Text size="2" weight="medium" numberOfLines={1}>
 						{renderFieldContent(title, item)}
 					</Text>
 					{subtitle && (
-						<Text size="1" color="gray" truncate>
+						<Text size="1" color="gray" numberOfLines={1}>
 							{renderFieldContent(subtitle, item)}
 						</Text>
 					)}
 				</Flex>
 				{description && (
-					<Text size="1" color="gray" truncate>
+					<Text size="1" color="gray" numberOfLines={2}>
 						{renderFieldContent(description, item)}
 					</Text>
 				)}

@@ -21,4 +21,45 @@ describe("Text", () => {
 		render(<Text className="custom">Test</Text>);
 		expect(screen.getByText("Test")).toHaveClass("custom");
 	});
+
+	describe("numberOfLines", () => {
+		it("applies clamp class and inline style", () => {
+			render(<Text numberOfLines={2}>Clamped text</Text>);
+
+			const el = screen.getByText("Clamped text");
+			expect(el).toHaveClass("pietra-text-clamp");
+			expect(el.style.webkitLineClamp).toBe("2");
+		});
+
+		it("does not apply clamp class when not set", () => {
+			render(<Text>Normal text</Text>);
+
+			const el = screen.getByText("Normal text");
+			expect(el).not.toHaveClass("pietra-text-clamp");
+		});
+
+		it("merges with existing className", () => {
+			render(
+				<Text numberOfLines={3} className="custom">
+					Clamped text
+				</Text>,
+			);
+
+			const el = screen.getByText("Clamped text");
+			expect(el).toHaveClass("pietra-text-clamp");
+			expect(el).toHaveClass("custom");
+		});
+
+		it("merges with existing style", () => {
+			render(
+				<Text numberOfLines={2} style={{ color: "red" }}>
+					Styled text
+				</Text>,
+			);
+
+			const el = screen.getByText("Styled text");
+			expect(el.style.color).toBe("red");
+			expect(el.style.webkitLineClamp).toBe("2");
+		});
+	});
 });

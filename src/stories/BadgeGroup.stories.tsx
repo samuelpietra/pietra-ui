@@ -1,4 +1,3 @@
-import { Popover } from "@radix-ui/themes";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
@@ -6,6 +5,7 @@ import {
 	BadgeGroup,
 	type BadgeGroupItem,
 	Flex,
+	Popover,
 	Text,
 } from "@/components";
 

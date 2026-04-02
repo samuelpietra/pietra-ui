@@ -83,6 +83,13 @@ export {
 export { IconButton, type IconButtonProps } from "./IconButton";
 export { Image, type ImageProps, type ImageShape } from "./Image";
 export { Link, type LinkProps } from "./Link";
+export {
+	Popover,
+	type PopoverCloseProps,
+	type PopoverContentProps,
+	type PopoverRootProps,
+	type PopoverTriggerProps,
+} from "./Popover";
 export { Progress, type ProgressProps } from "./Progress";
 export { Radio, type RadioProps } from "./Radio";
 export {

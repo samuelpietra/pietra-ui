@@ -3,82 +3,11 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Catalog } from "./Catalog";
-import type { FieldCreator } from "./Catalog.types";
-import { useCatalogContext } from "./CatalogContext";
-import { CatalogItemCount } from "./CatalogItemCount";
-import { CatalogTable } from "./CatalogTable";
-import { CatalogToolbar } from "./CatalogToolbar";
-
-type Player = {
-	id: string;
-	name: string;
-	nationality: string;
-	marketValue: number;
-	position: string;
-};
-
-const PLAYERS: Player[] = [
-	{
-		id: "1",
-		name: "Ronaldo Nazario",
-		nationality: "Brazil",
-		marketValue: 45,
-		position: "Striker",
-	},
-	{
-		id: "2",
-		name: "Zinedine Zidane",
-		nationality: "France",
-		marketValue: 55,
-		position: "Midfielder",
-	},
-	{
-		id: "3",
-		name: "Ronaldinho Gaucho",
-		nationality: "Brazil",
-		marketValue: 40,
-		position: "Midfielder",
-	},
-];
-
-function createFields(createField: FieldCreator<Player>) {
-	return [
-		createField<"id">({
-			type: "identifier",
-			id: "playerId",
-			value: (p) => p.id,
-		}),
-		createField<"name">({
-			type: "descriptor",
-			id: "name",
-			label: "Player",
-			value: (p) => p.name,
-			comparator: (a, b) => a.localeCompare(b),
-		}),
-		createField<"nationality">({
-			type: "descriptor",
-			id: "nationality",
-			label: "Nationality",
-			value: (p) => p.nationality,
-		}),
-		createField<"marketValue">({
-			type: "descriptor",
-			id: "marketValue",
-			label: "Market Value",
-			value: (p) => p.marketValue,
-			render: (value) => `€${value}M`,
-			align: "right",
-			width: 140,
-		}),
-		createField<"position">({
-			type: "descriptor",
-			id: "position",
-			label: "Position",
-			value: (p) => p.position,
-		}),
-	];
-}
+import { createFields, PLAYERS, type Player } from "../__fixtures__/mock";
+import { CatalogItemCount, CatalogToolbar } from "../components";
+import { Catalog } from "../context";
+import { useCatalogContext } from "../hooks";
+import { CatalogTable } from "../views";
 
 function getDataRows() {
 	return screen.getAllByRole("row").slice(1);

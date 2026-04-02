@@ -1,0 +1,1 @@
+export { CatalogItemCount } from "./CatalogItemCount";

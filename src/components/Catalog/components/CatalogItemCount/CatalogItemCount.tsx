@@ -1,5 +1,6 @@
-import { Text } from "../Text";
-import { useCatalogContext } from "./CatalogContext";
+import { Text } from "@/components/Text";
+
+import { useCatalogContext } from "../../hooks";
 
 export function CatalogItemCount() {
 	const { collection } = useCatalogContext();

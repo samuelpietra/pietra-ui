@@ -1,8 +1,9 @@
-import { createContext, useContext } from "react";
+import { useContext } from "react";
 
-import type { CatalogContextValue } from "./Catalog.types";
-
-export const CatalogContext = createContext<CatalogContextValue | null>(null);
+import {
+	CatalogContext,
+	type CatalogContextValue,
+} from "../context/Catalog.context";
 
 export function useCatalogContext<T>(): CatalogContextValue<T> {
 	const context = useContext(CatalogContext);

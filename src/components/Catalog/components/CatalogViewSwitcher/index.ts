@@ -1,0 +1,1 @@
+export { CatalogViewSwitcher } from "./CatalogViewSwitcher";

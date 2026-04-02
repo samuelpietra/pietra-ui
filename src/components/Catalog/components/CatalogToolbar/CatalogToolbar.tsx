@@ -1,5 +1,7 @@
 import { type ComponentPropsWithoutRef, forwardRef } from "react";
 
+import "./CatalogToolbar.css";
+
 export const CatalogToolbar = forwardRef<
 	HTMLDivElement,
 	ComponentPropsWithoutRef<"div">

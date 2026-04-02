@@ -1,18 +1,29 @@
 import { useState } from "react";
+import { Search } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
+	Avatar,
 	Badge,
 	Button,
 	Catalog,
 	CatalogItemCount,
+	CatalogList,
 	CatalogTable,
 	CatalogToolbar,
+	CatalogViewSwitcher,
 	type FieldCreator,
 	Flex,
 	Text,
+	TextField,
 	useCatalogContext,
 } from "@/components";
+
+import frenchieBlack from "./assets/frenchie-black.png";
+import frenchieBlue from "./assets/frenchie-blue.png";
+import frenchieGreen from "./assets/frenchie-green.png";
+import frenchieRed from "./assets/frenchie-red.png";
+import frenchieYellow from "./assets/frenchie-yellow.png";
 
 type Player = {
 	id: string;
@@ -21,6 +32,8 @@ type Player = {
 	marketValue: number;
 	position: string;
 	tags: string[];
+	image: string;
+	bio: string;
 };
 
 const PLAYERS: Player[] = [
@@ -31,6 +44,8 @@ const PLAYERS: Player[] = [
 		marketValue: 45,
 		position: "Striker",
 		tags: ["legend", "ballon d'or"],
+		image: frenchieYellow,
+		bio: "Il Fenomeno. Widely regarded as one of the greatest strikers of all time, known for his explosive pace, clinical finishing, and ability to dribble past entire defenses.",
 	},
 	{
 		id: "2",
@@ -39,6 +54,8 @@ const PLAYERS: Player[] = [
 		marketValue: 55,
 		position: "Midfielder",
 		tags: ["legend", "ballon d'or"],
+		image: frenchieBlue,
+		bio: "The maestro of elegance. His roulette turns and silky first touch made him one of the most technically gifted players in football history.",
 	},
 	{
 		id: "3",
@@ -47,6 +64,8 @@ const PLAYERS: Player[] = [
 		marketValue: 40,
 		position: "Midfielder",
 		tags: ["legend", "skillful"],
+		image: frenchieGreen,
+		bio: "Barcelona legend. Worldly-known for impossible dribblings, overwhelming freekicks and a crooked smile all the time.",
 	},
 	{
 		id: "4",
@@ -55,6 +74,8 @@ const PLAYERS: Player[] = [
 		marketValue: 35,
 		position: "Forward",
 		tags: ["legend"],
+		image: frenchieRed,
+		bio: "Arsenal's all-time top scorer. A lethal combination of pace, power, and technical brilliance that terrorized Premier League defenses for years.",
 	},
 	{
 		id: "5",
@@ -63,6 +84,8 @@ const PLAYERS: Player[] = [
 		marketValue: 30,
 		position: "Defender",
 		tags: ["legend", "captain"],
+		image: frenchieBlack,
+		bio: "The definition of defensive perfection. Spent his entire 25-year career at AC Milan, mastering both left-back and centre-back positions with unmatched grace.",
 	},
 	{
 		id: "6",
@@ -71,6 +94,8 @@ const PLAYERS: Player[] = [
 		marketValue: 25,
 		position: "Defender",
 		tags: ["legend", "captain"],
+		image: frenchieYellow,
+		bio: "The heart and soul of Barcelona's golden era. A warrior on the pitch whose leadership and determination inspired every teammate around him.",
 	},
 	{
 		id: "7",
@@ -79,6 +104,8 @@ const PLAYERS: Player[] = [
 		marketValue: 35,
 		position: "Goalkeeper",
 		tags: ["legend"],
+		image: frenchieBlue,
+		bio: "One of the greatest goalkeepers ever to grace the game. His reflexes, commanding presence, and longevity set the standard for generations.",
 	},
 	{
 		id: "8",
@@ -87,6 +114,8 @@ const PLAYERS: Player[] = [
 		marketValue: 28,
 		position: "Midfielder",
 		tags: ["legend"],
+		image: frenchieGreen,
+		bio: "The only player to win the Champions League with three different clubs. A powerful, versatile midfielder with an extraordinary football intellect.",
 	},
 	{
 		id: "9",
@@ -95,6 +124,8 @@ const PLAYERS: Player[] = [
 		marketValue: 30,
 		position: "Goalkeeper",
 		tags: ["legend", "captain"],
+		image: frenchieRed,
+		bio: "Der Titan. A fierce competitor between the posts, known for his incredible shot-stopping ability and intimidating presence that rattled strikers worldwide.",
 	},
 	{
 		id: "10",
@@ -103,6 +134,8 @@ const PLAYERS: Player[] = [
 		marketValue: 32,
 		position: "Striker",
 		tags: ["legend"],
+		image: frenchieBlack,
+		bio: "Africa's greatest ever striker. His blistering speed and predatory instincts made him a key figure in Barcelona's treble-winning season.",
 	},
 ];
 
@@ -144,37 +177,43 @@ function createFields(createField: FieldCreator<Player>) {
 			value: (p) => p.position,
 			comparator: (a, b) => a.localeCompare(b),
 		}),
+		createField<"tags">({
+			type: "descriptor",
+			id: "tags",
+			label: "Tags",
+			value: (p) => p.tags,
+			render: (tags) =>
+				tags.map((t) => (
+					<Badge key={t} variant="soft" mx="1" size="1">
+						{t}
+					</Badge>
+				)),
+		}),
 	];
 }
 
-const meta: Meta = {
-	title: "Components/Catalog",
-};
-
-export default meta;
-type Story = StoryObj;
-
-export const Default: Story = {
-	render: () => (
-		<Catalog collection={PLAYERS} mapItemToFields={createFields}>
-			<CatalogToolbar>
-				<CatalogItemCount />
-			</CatalogToolbar>
-			<CatalogTable />
-		</Catalog>
-	),
-};
-
-export const WithSelection: Story = {
-	render: () => (
-		<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
-			<CatalogToolbar>
-				<CatalogItemCount />
-			</CatalogToolbar>
-			<CatalogTable />
-		</Catalog>
-	),
-};
+function listViewProps() {
+	return {
+		titleField: "name",
+		subtitleField: "position",
+		descriptionField: (_: unknown, createField: FieldCreator<Player>) =>
+			createField<"bio">({
+				type: "descriptor",
+				id: "bio",
+				label: "Bio",
+				value: (p) => p.bio,
+			}),
+		previewField: (_: unknown, createField: FieldCreator<Player>) =>
+			createField<"image">({
+				type: "descriptor",
+				id: "preview",
+				label: "Preview",
+				value: (p) => p.image,
+				render: (url) => <Avatar size="7" src={url} fallback="?" />,
+			}),
+		footerField: "tags",
+	} as const;
+}
 
 function BulkActions() {
 	const { selectedItems, setSelectedItems } = useCatalogContext<Player>();
@@ -196,7 +235,14 @@ function BulkActions() {
 	);
 }
 
-export const FullExample: Story = {
+const meta: Meta = {
+	title: "Components/Catalog",
+};
+
+export default meta;
+type Story = StoryObj;
+
+export const Default: Story = {
 	render: () => {
 		const [filter, setFilter] = useState("");
 		const filtered = PLAYERS.filter((p) =>
@@ -204,66 +250,41 @@ export const FullExample: Story = {
 		);
 
 		return (
-			<Catalog
-				collection={filtered}
-				mapItemToFields={(createField) => [
-					createField<"id">({
-						type: "identifier",
-						id: "playerId",
-						value: (p) => p.id,
-					}),
-					createField<"name">({
-						type: "descriptor",
-						id: "name",
-						label: "Player",
-						value: (p) => p.name,
-						comparator: (a, b) => a.localeCompare(b),
-						onClick: (p) => alert(`Navigate to ${p.name}`),
-					}),
-					createField<"marketValue">({
-						type: "descriptor",
-						id: "marketValue",
-						label: "Market Value",
-						value: (p) => p.marketValue,
-						render: (value) => `€${value}M`,
-						comparator: (a, b) => a - b,
-						align: "right",
-						width: 140,
-					}),
-					createField<"tags">({
-						type: "descriptor",
-						id: "tags",
-						label: "Tags",
-						value: (p) => p.tags,
-						render: (tags) =>
-							tags.map((t) => (
-								<Badge key={t} variant="soft" size="1">
-									{t}
-								</Badge>
-							)),
-					}),
-				]}
-				selectable
-			>
+			<Catalog collection={filtered} mapItemToFields={createFields}>
 				<CatalogToolbar>
 					<CatalogItemCount />
-					<BulkActions />
-					<input
-						placeholder="Filter..."
+					<TextField.Root
+						size="1"
+						placeholder="Search players..."
 						value={filter}
 						onChange={(e) => setFilter(e.target.value)}
-						style={{
-							marginLeft: "auto",
-							padding: "4px 8px",
-							border: "1px solid var(--gray-6)",
-							borderRadius: "var(--radius-1)",
-						}}
-					/>
+						style={{ marginLeft: "auto" }}
+					>
+						<TextField.Slot>
+							<Search size={12} />
+						</TextField.Slot>
+					</TextField.Root>
+					<CatalogViewSwitcher />
 				</CatalogToolbar>
-				<CatalogTable striped />
+				<CatalogTable defaultView />
+				<CatalogList {...listViewProps()} />
 			</Catalog>
 		);
 	},
+};
+
+export const Selectable: Story = {
+	render: () => (
+		<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
+			<CatalogToolbar>
+				<CatalogItemCount />
+				<BulkActions />
+				<CatalogViewSwitcher />
+			</CatalogToolbar>
+			<CatalogTable defaultView />
+			<CatalogList {...listViewProps()} />
+		</Catalog>
+	),
 };
 
 export const NoData: Story = {
@@ -271,8 +292,10 @@ export const NoData: Story = {
 		<Catalog<Player> collection={[]} mapItemToFields={createFields}>
 			<CatalogToolbar>
 				<CatalogItemCount />
+				<CatalogViewSwitcher />
 			</CatalogToolbar>
 			<CatalogTable
+				defaultView
 				noDataMessage={
 					<Flex direction="column" align="center" gap="1" py="4">
 						<Text weight="medium">No players found</Text>

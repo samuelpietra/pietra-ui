@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 
-import { useCatalogContext } from "./CatalogContext";
+import { useCatalogContext } from "./useCatalogContext";
 
 export function useCatalogSelection<T = unknown>() {
 	const { collection, getItemId, selectable, selectedItems, setSelectedItems } =
@@ -21,7 +21,9 @@ export function useCatalogSelection<T = unknown>() {
 		if (!selectable || collection.length === 0) {
 			return { allSelected: false, someSelected: false };
 		}
+
 		const all = collection.every(isSelected);
+
 		return {
 			allSelected: all,
 			someSelected: !all && collection.some(isSelected),
@@ -31,11 +33,14 @@ export function useCatalogSelection<T = unknown>() {
 	const toggleItem = useCallback(
 		(item: T) => {
 			const id = getItemId(item);
+
 			setSelectedItems((prev) => {
 				const exists = prev.some((i) => getItemId(i) === id);
+
 				if (exists) {
 					return prev.filter((i) => getItemId(i) !== id);
 				}
+
 				return [...prev, item];
 			});
 		},
@@ -43,11 +48,7 @@ export function useCatalogSelection<T = unknown>() {
 	);
 
 	const toggleAll = useCallback(() => {
-		if (allSelected) {
-			setSelectedItems([]);
-		} else {
-			setSelectedItems([...collection]);
-		}
+		setSelectedItems(allSelected ? [] : [...collection]);
 	}, [allSelected, collection, setSelectedItems]);
 
 	return {

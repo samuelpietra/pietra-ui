@@ -4,16 +4,6 @@
   max-height: 100%;
 }
 
-.pietra-catalog-toolbar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  background-color: var(--gray-a2);
-  border-radius: var(--radius-1);
-  font-size: var(--font-size-1);
-}
-
 .pietra-catalog-row-selected {
   background-color: var(--accent-a3);
 }

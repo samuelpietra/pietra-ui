@@ -1,14 +1,21 @@
 import type { ReactNode } from "react";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo } from "react";
+import { Table } from "lucide-react";
 
-import { Checkbox } from "../Checkbox";
-import { DataTable, type DataTableColumn } from "../DataTable";
-import type {
-	CatalogDescriptorField,
-	CatalogTableProps,
-} from "./Catalog.types";
-import { useCatalogContext } from "./CatalogContext";
-import { useCatalogSelection } from "./useCatalogSelection";
+import { Checkbox, DataTable, type DataTableColumn } from "@/components";
+
+import type { CatalogDescriptorField } from "../../Catalog.types";
+import { CatalogView, RowCheckbox } from "../../components";
+import { useCatalogContext, useCatalogSelection } from "../../hooks";
+
+export type CatalogTableProps = {
+	ariaLabel?: string;
+	defaultView?: boolean;
+	hoverable?: boolean;
+	noDataMessage?: ReactNode;
+	rowHeight?: number;
+	striped?: boolean;
+};
 
 function wrapClickable<T>(
 	content: ReactNode,
@@ -43,6 +50,7 @@ function fieldToColumn<T>(
 		header: field.label,
 		cell: (item) => {
 			const value = field.value(item);
+
 			return wrapClickable(
 				field.render?.(value, item) ?? String(value),
 				field,
@@ -70,30 +78,9 @@ function SelectAllHeader() {
 	);
 }
 
-function RowCheckbox({ item }: { item: unknown }) {
-	const { getItemId, selectedItems, setSelectedItems } = useCatalogContext();
-	const id = getItemId(item);
-	const checked = selectedItems.some((s) => getItemId(s) === id);
-
-	return (
-		<Checkbox
-			aria-label="Select row"
-			size="2"
-			checked={checked}
-			onClick={(e) => e.stopPropagation()}
-			onCheckedChange={() => {
-				setSelectedItems((prev) => {
-					const exists = prev.some((i) => getItemId(i) === id);
-					if (exists) return prev.filter((i) => getItemId(i) !== id);
-					return [...prev, item];
-				});
-			}}
-		/>
-	);
-}
-
 export function CatalogTable({
 	ariaLabel = "Catalog",
+	defaultView,
 	hoverable,
 	noDataMessage,
 	rowHeight,
@@ -102,10 +89,6 @@ export function CatalogTable({
 	const { collection, fields, selectable, sort, setSort } = useCatalogContext();
 
 	const { isSelected, toggleItem } = useCatalogSelection();
-	const isSelectedRef = useRef(isSelected);
-	isSelectedRef.current = isSelected;
-	const toggleItemRef = useRef(toggleItem);
-	toggleItemRef.current = toggleItem;
 
 	const columns = useMemo(() => {
 		const fieldColumns = fields
@@ -125,34 +108,39 @@ export function CatalogTable({
 	}, [fields, selectable]);
 
 	const handleRowClick = useCallback(
-		(item: unknown) => toggleItemRef.current(item),
-		[],
+		(item: unknown) => toggleItem(item),
+		[toggleItem],
 	);
 
 	const rowClassName = useCallback(
 		(item: unknown) => {
 			if (!selectable) return undefined;
-			return isSelectedRef.current(item)
-				? "pietra-catalog-row-selected"
-				: undefined;
+			return isSelected(item) ? "pietra-catalog-row-selected" : undefined;
 		},
-		[selectable],
+		[selectable, isSelected],
 	);
 
 	return (
-		<DataTable
-			ariaLabel={ariaLabel}
-			columns={columns}
-			data={collection}
-			hoverable={hoverable}
-			noDataMessage={noDataMessage}
-			onRowClick={selectable ? handleRowClick : undefined}
-			onSortChange={setSort}
-			rowClassName={selectable ? rowClassName : undefined}
-			rowHeight={rowHeight}
-			sort={sort}
-			striped={striped}
-		/>
+		<CatalogView
+			id="table"
+			label="Table"
+			icon={Table}
+			defaultView={defaultView}
+		>
+			<DataTable
+				ariaLabel={ariaLabel}
+				columns={columns}
+				data={collection}
+				hoverable={hoverable}
+				noDataMessage={noDataMessage}
+				onRowClick={selectable ? handleRowClick : undefined}
+				onSortChange={setSort}
+				rowClassName={selectable ? rowClassName : undefined}
+				rowHeight={rowHeight}
+				sort={sort}
+				striped={striped}
+			/>
+		</CatalogView>
 	);
 }
 

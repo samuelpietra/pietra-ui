@@ -1,0 +1,38 @@
+.pietra-catalog-list-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--gray-a3);
+  box-sizing: border-box;
+  transition: background-color var(--pietra-transition-fast);
+}
+
+.pietra-catalog-list-row > .rt-CheckboxRoot,
+.pietra-catalog-list-row > .rt-Box {
+  align-self: center;
+}
+
+.pietra-catalog-list-row:hover {
+  background-color: var(--gray-a4);
+}
+
+.pietra-catalog-list-row-selected {
+  background-color: var(--accent-a3);
+}
+
+.pietra-catalog-list-row-selected:hover {
+  background-color: var(--accent-a4);
+}
+
+.pietra-catalog-list-row:focus-visible {
+  outline: 2px solid var(--accent-9);
+  outline-offset: -2px;
+}
+
+.pietra-catalog-list-empty {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4);
+  color: var(--gray-9);
+}

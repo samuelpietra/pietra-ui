@@ -1,16 +1,33 @@
-export { Catalog } from "./Catalog";
 export type {
-	CatalogContextValue,
 	CatalogDescriptorField,
 	CatalogField,
 	CatalogIdentifierField,
-	CatalogProps,
-	CatalogTableProps,
 	FieldCreator,
+	FieldMapper,
 	MapItemToFields,
 } from "./Catalog.types";
-export { useCatalogContext } from "./CatalogContext";
-export { CatalogItemCount } from "./CatalogItemCount";
-export { CatalogTable } from "./CatalogTable";
-export { CatalogToolbar } from "./CatalogToolbar";
-export { useCatalogSelection } from "./useCatalogSelection";
+export { type ResolvedField, renderFieldContent } from "./Catalog.utils";
+export {
+	CatalogItemCount,
+	CatalogToolbar,
+	CatalogView,
+	type CatalogViewProps,
+	CatalogViewSwitcher,
+} from "./components";
+export {
+	Catalog,
+	type CatalogContextValue,
+	type CatalogProps,
+	type CatalogViewEntry,
+} from "./context";
+export {
+	useCatalogContext,
+	useCatalogSelection,
+	useResolvedFields,
+} from "./hooks";
+export {
+	CatalogList,
+	type CatalogListProps,
+	CatalogTable,
+	type CatalogTableProps,
+} from "./views";

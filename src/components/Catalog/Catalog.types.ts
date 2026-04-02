@@ -1,6 +1,4 @@
-import type { Dispatch, ReactNode, SetStateAction } from "react";
-
-import type { SortState } from "../DataTable";
+import type { ReactNode } from "react";
 
 // --- Field types ---
 
@@ -38,33 +36,21 @@ export type MapItemToFields<T> = (
 	// biome-ignore lint/suspicious/noExplicitAny: fields array holds mixed K types
 ) => CatalogField<T, any>[];
 
-// --- Context ---
+// --- Field mapper ---
 
-export type CatalogContextValue<T = unknown> = {
-	collection: T[];
-	// biome-ignore lint/suspicious/noExplicitAny: fields array holds mixed K types
-	fields: CatalogField<T, any>[];
-	getItemId: (item: T) => string;
-	selectable: boolean;
-	selectedItems: T[];
-	setSelectedItems: Dispatch<SetStateAction<T[]>>;
-	sort?: SortState;
-	setSort: (sort?: SortState) => void;
-};
+// biome-ignore lint/suspicious/noExplicitAny: identity function for inline field creation in FieldMapper callbacks
+type FieldMapperCreator<T> = <V extends keyof T = any>(
+	field: CatalogField<T, V>,
+) => CatalogField<T, V>;
 
-// --- Props ---
+export type FieldMapper<T> =
+	| string
+	| ((
+			// biome-ignore lint/suspicious/noExplicitAny: fields array holds mixed K types
+			fields: CatalogField<T, any>[],
+			createField: FieldMapperCreator<T>,
+			// biome-ignore lint/suspicious/noExplicitAny: returned field has unknown K
+	  ) => CatalogField<T, any>);
 
-export type CatalogProps<T> = {
-	children: ReactNode;
-	collection: T[];
-	mapItemToFields: MapItemToFields<T>;
-	selectable?: boolean;
-};
-
-export type CatalogTableProps = {
-	ariaLabel?: string;
-	hoverable?: boolean;
-	noDataMessage?: ReactNode;
-	rowHeight?: number;
-	striped?: boolean;
-};
+// biome-ignore lint/suspicious/noExplicitAny: T is inferred at the consumer call site
+export type AnyFieldMapper = FieldMapper<any>;

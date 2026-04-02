@@ -29,11 +29,9 @@ describe("BadgeGroup", () => {
 		);
 	});
 
-	it("renders indicator in measuring mode on first render", () => {
+	it("renders indicator element even when not overflowing", () => {
 		const { container } = render(<BadgeGroup badges={badges} />);
-		const indicator = container.querySelector(
-			".pietra-badge-group-indicator-measuring",
-		);
+		const indicator = container.querySelector("[data-badge-group-indicator]");
 
 		expect(indicator).toBeInTheDocument();
 	});
@@ -59,27 +57,25 @@ describe("BadgeGroup", () => {
 		expect(ref.current).toBeInstanceOf(HTMLDivElement);
 	});
 
-	it("renders default +N indicator", () => {
+	it("hides indicator when not overflowing", () => {
 		const { container } = render(<BadgeGroup badges={badges} />);
 		const indicator = container.querySelector("[data-badge-group-indicator]");
 
-		expect(indicator?.textContent).toContain("+");
+		expect(indicator?.classList).toContain(
+			"pietra-badge-group-indicator-hidden",
+		);
+		expect(indicator?.textContent).toBe("");
 	});
 
-	it("uses custom indicator render prop", () => {
-		const { container } = render(
-			<BadgeGroup
-				badges={badges}
-				indicator={(count, overflow) => (
-					<span data-testid="custom">
-						{count} hidden ({overflow.length})
-					</span>
-				)}
-			/>,
-		);
+	it("accepts custom indicator render prop", () => {
+		const customIndicator = vi.fn(() => (
+			<span data-testid="custom">overflow</span>
+		));
 
-		const custom = container.querySelector("[data-testid='custom']");
-		expect(custom).toBeInTheDocument();
+		render(<BadgeGroup badges={badges} indicator={customIndicator} />);
+
+		// In jsdom there's no overflow, so indicator should not be called
+		expect(customIndicator).not.toHaveBeenCalled();
 	});
 
 	it("renders badges with correct keys from id", () => {

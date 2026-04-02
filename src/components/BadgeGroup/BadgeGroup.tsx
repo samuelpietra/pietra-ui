@@ -3,11 +3,12 @@ import {
 	type ReactNode,
 	useCallback,
 	useEffect,
-	useLayoutEffect,
 	useRef,
 	useState,
 } from "react";
 import { composeRefs } from "@radix-ui/react-compose-refs";
+
+import { useLatest } from "@/hooks/useLatest";
 
 import { Badge, type BadgeProps } from "../Badge";
 
@@ -33,86 +34,69 @@ const defaultIndicator = (count: number) => (
 export const BadgeGroup = forwardRef<HTMLDivElement, BadgeGroupProps>(
 	({ badges, gap = 2, indicator = defaultIndicator }, ref) => {
 		const containerRef = useRef<HTMLDivElement | null>(null);
-		const widthCache = useRef(new Map<string, number>());
-		const indicatorWidthRef = useRef(0);
+		const badgesRef = useLatest(badges);
 		const [visibleCount, setVisibleCount] = useState(badges.length);
 
 		const gapPx = gap * 4;
 
-		// Check if any badge ID is missing from cache (new or changed badges)
-		const needsMeasure = badges.some((b) => !widthCache.current.has(b.id));
+		// biome-ignore lint/correctness/useExhaustiveDependencies: reads badges from ref to keep calculate stable across renders
+		const calculate = useCallback(() => {
+			const container = containerRef.current;
+			if (!container) return;
 
-		// During measurement, show all items so they can be measured
-		const effectiveVisible = needsMeasure ? badges.length : visibleCount;
+			const currentBadges = badgesRef.current;
+			const availableWidth = container.clientWidth;
 
-		const calculate = useCallback(
-			(measure: boolean) => {
-				const container = containerRef.current;
-				if (!container) return;
+			if (availableWidth === 0) return;
 
-				const availableWidth = container.clientWidth;
-				if (availableWidth === 0) return;
+			const items = container.querySelectorAll<HTMLElement>(
+				"[data-badge-group-item]",
+			);
+			const indEl = container.querySelector<HTMLElement>(
+				"[data-badge-group-indicator]",
+			);
+			const indicatorWidth = indEl ? indEl.offsetWidth : 0;
 
-				if (measure) {
-					widthCache.current.clear();
-					const items = container.querySelectorAll<HTMLElement>(
-						"[data-badge-group-item]",
-					);
-					items.forEach((el, i) => {
-						if (i < badges.length) {
-							widthCache.current.set(badges[i].id, el.offsetWidth);
-						}
-					});
-					const indEl = container.querySelector<HTMLElement>(
-						"[data-badge-group-indicator]",
-					);
-					if (indEl) {
-						indicatorWidthRef.current = indEl.offsetWidth;
-					}
-				}
+			let usedWidth = 0;
+			let count = 0;
 
-				let usedWidth = 0;
-				let count = 0;
+			for (let i = 0; i < currentBadges.length; i++) {
+				const itemWidth = items[i]?.offsetWidth ?? 0;
+				const nextUsed = usedWidth + (count > 0 ? gapPx : 0) + itemWidth;
 
-				for (const badge of badges) {
-					const itemWidth = widthCache.current.get(badge.id) ?? 0;
-					const nextUsed = usedWidth + (count > 0 ? gapPx : 0) + itemWidth;
+				const isLast = i === currentBadges.length - 1;
+				const spaceNeeded = isLast
+					? nextUsed
+					: nextUsed + gapPx + indicatorWidth;
 
-					const isLast = count === badges.length - 1;
-					const spaceNeeded = isLast
-						? nextUsed
-						: nextUsed + gapPx + indicatorWidthRef.current;
+				if (spaceNeeded > availableWidth && count > 0) break;
 
-					if (spaceNeeded > availableWidth && count > 0) break;
+				usedWidth = nextUsed;
+				count++;
+			}
 
-					usedWidth = nextUsed;
-					count++;
-				}
+			setVisibleCount((prev) => (prev === count ? prev : count));
+		}, [gapPx]);
 
-				setVisibleCount((prev) => (prev === count ? prev : count));
-			},
-			[badges, gapPx],
-		);
+		// Recalculate after every render — badges may change without a resize
+		useEffect(() => {
+			calculate();
+		});
 
-		// Measure + calculate before paint (blocks until done, no flash)
-		useLayoutEffect(() => {
-			calculate(needsMeasure);
-		}, [needsMeasure, calculate]);
-
-		// Recalculate from cache on container resize
+		// Recalculate on container resize
 		useEffect(() => {
 			const container = containerRef.current;
 			if (!container) return;
 
-			const observer = new ResizeObserver(() => calculate(false));
+			const observer = new ResizeObserver(() => calculate());
 			observer.observe(container);
 
 			return () => observer.disconnect();
 		}, [calculate]);
 
-		const isOverflowing = effectiveVisible < badges.length;
-		const overflowCount = badges.length - effectiveVisible;
-		const overflowBadges = badges.slice(effectiveVisible);
+		const isOverflowing = visibleCount < badges.length;
+		const overflowCount = badges.length - visibleCount;
+		const overflowBadges = badges.slice(visibleCount);
 
 		return (
 			<div
@@ -125,7 +109,7 @@ export const BadgeGroup = forwardRef<HTMLDivElement, BadgeGroupProps>(
 						key={id}
 						data-badge-group-item=""
 						className={
-							i < effectiveVisible
+							i < visibleCount
 								? "pietra-badge-group-item"
 								: "pietra-badge-group-item pietra-badge-group-item-hidden"
 						}
@@ -136,17 +120,12 @@ export const BadgeGroup = forwardRef<HTMLDivElement, BadgeGroupProps>(
 				<div
 					data-badge-group-indicator=""
 					className={
-						needsMeasure
-							? "pietra-badge-group-indicator pietra-badge-group-indicator-measuring"
-							: "pietra-badge-group-indicator"
+						isOverflowing
+							? "pietra-badge-group-indicator"
+							: "pietra-badge-group-indicator pietra-badge-group-indicator-hidden"
 					}
 				>
-					{isOverflowing || needsMeasure
-						? indicator(
-								overflowCount || badges.length,
-								overflowBadges.length > 0 ? overflowBadges : badges,
-							)
-						: null}
+					{isOverflowing ? indicator(overflowCount, overflowBadges) : null}
 				</div>
 			</div>
 		);

@@ -35,17 +35,12 @@ export const BadgeGroup = forwardRef<HTMLDivElement, BadgeGroupProps>(
 		const containerRef = useRef<HTMLDivElement | null>(null);
 		const widthCache = useRef(new Map<string, number>());
 		const indicatorWidthRef = useRef(0);
-		const prevBadgesRef = useRef(badges);
 		const [visibleCount, setVisibleCount] = useState(badges.length);
 
 		const gapPx = gap * 4;
 
-		// Track badge identity changes via ref instead of O(n) scan every render
-		let needsMeasure = widthCache.current.size === 0;
-		if (prevBadgesRef.current !== badges) {
-			prevBadgesRef.current = badges;
-			needsMeasure = true;
-		}
+		// Check if any badge ID is missing from cache (new or changed badges)
+		const needsMeasure = badges.some((b) => !widthCache.current.has(b.id));
 
 		// During measurement, show all items so they can be measured
 		const effectiveVisible = needsMeasure ? badges.length : visibleCount;

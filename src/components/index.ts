@@ -1,6 +1,11 @@
 export { AspectRatio, type AspectRatioProps } from "./AspectRatio";
 export { Avatar, type AvatarProps } from "./Avatar";
 export { Badge, type BadgeProps } from "./Badge";
+export {
+	BadgeGroup,
+	type BadgeGroupItem,
+	type BadgeGroupProps,
+} from "./BadgeGroup";
 export { Box, type BoxProps } from "./Box";
 export { Button, type ButtonProps } from "./Button";
 export {

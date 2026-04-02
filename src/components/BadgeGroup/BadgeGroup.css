@@ -1,0 +1,25 @@
+.pietra-badge-group {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+}
+
+.pietra-badge-group-item {
+  flex-shrink: 0;
+}
+
+.pietra-badge-group-item-hidden {
+  display: none;
+}
+
+.pietra-badge-group-indicator {
+  flex-shrink: 0;
+}
+
+.pietra-badge-group-indicator-measuring {
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+}

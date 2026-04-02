@@ -4,7 +4,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import {
 	Avatar,
-	Badge,
+	BadgeGroup,
+	type BadgeGroupItem,
+	type BadgeProps,
 	Button,
 	Catalog,
 	CatalogItemCount,
@@ -25,13 +27,18 @@ import frenchieGreen from "./assets/frenchie-green.png";
 import frenchieRed from "./assets/frenchie-red.png";
 import frenchieYellow from "./assets/frenchie-yellow.png";
 
+type Tag = {
+	label: string;
+	color: BadgeProps["color"];
+};
+
 type Player = {
 	id: string;
 	name: string;
 	nationality: string;
 	marketValue: number;
 	position: string;
-	tags: string[];
+	tags: Tag[];
 	image: string;
 	bio: string;
 };
@@ -43,29 +50,14 @@ const PLAYERS: Player[] = [
 		nationality: "Brazil",
 		marketValue: 45,
 		position: "Striker",
-		tags: ["legend", "ballon d'or"],
+		tags: [
+			{ label: "ballon d'or", color: "gold" },
+			{ label: "finisher", color: "red" },
+			{ label: "skillful", color: "cyan" },
+			{ label: "legend", color: "violet" },
+		],
 		image: frenchieYellow,
 		bio: "Il Fenomeno. Widely regarded as one of the greatest strikers of all time, known for his explosive pace, clinical finishing, and ability to dribble past entire defenses.",
-	},
-	{
-		id: "2",
-		name: "Zinedine Zidane",
-		nationality: "France",
-		marketValue: 55,
-		position: "Midfielder",
-		tags: ["legend", "ballon d'or"],
-		image: frenchieBlue,
-		bio: "The maestro of elegance. His roulette turns and silky first touch made him one of the most technically gifted players in football history.",
-	},
-	{
-		id: "3",
-		name: "Ronaldinho Gaucho",
-		nationality: "Brazil",
-		marketValue: 40,
-		position: "Midfielder",
-		tags: ["legend", "skillful"],
-		image: frenchieGreen,
-		bio: "Barcelona legend. Worldly-known for impossible dribblings, overwhelming freekicks and a crooked smile all the time.",
 	},
 	{
 		id: "4",
@@ -73,7 +65,10 @@ const PLAYERS: Player[] = [
 		nationality: "France",
 		marketValue: 35,
 		position: "Forward",
-		tags: ["legend"],
+		tags: [
+			{ label: "finisher", color: "red" },
+			{ label: "leader", color: "teal" },
+		],
 		image: frenchieRed,
 		bio: "Arsenal's all-time top scorer. A lethal combination of pace, power, and technical brilliance that terrorized Premier League defenses for years.",
 	},
@@ -83,9 +78,44 @@ const PLAYERS: Player[] = [
 		nationality: "Italy",
 		marketValue: 30,
 		position: "Defender",
-		tags: ["legend", "captain"],
+		tags: [
+			{ label: "captain", color: "orange" },
+			{ label: "leader", color: "teal" },
+			{ label: "legend", color: "violet" },
+			{ label: "versatile", color: "green" },
+		],
 		image: frenchieBlack,
 		bio: "The definition of defensive perfection. Spent his entire 25-year career at AC Milan, mastering both left-back and centre-back positions with unmatched grace.",
+	},
+	{
+		id: "2",
+		name: "Zinedine Zidane",
+		nationality: "France",
+		marketValue: 55,
+		position: "Midfielder",
+		tags: [
+			{ label: "ballon d'or", color: "gold" },
+			{ label: "playmaker", color: "blue" },
+			{ label: "captain", color: "orange" },
+			{ label: "legend", color: "violet" },
+		],
+		image: frenchieBlue,
+		bio: "The maestro of elegance. His roulette turns and silky first touch made him one of the most technically gifted players in football history.",
+	},
+	{
+		id: "3",
+		name: "Ronaldinho Gaucho",
+		nationality: "Brazil",
+		marketValue: 40,
+		position: "Midfielder",
+		tags: [
+			{ label: "ballon d'or", color: "gold" },
+			{ label: "skillful", color: "cyan" },
+			{ label: "playmaker", color: "blue" },
+			{ label: "versatile", color: "green" },
+		],
+		image: frenchieGreen,
+		bio: "Barcelona legend. Worldly-known for impossible dribblings, overwhelming freekicks and a crooked smile all the time.",
 	},
 	{
 		id: "6",
@@ -93,7 +123,10 @@ const PLAYERS: Player[] = [
 		nationality: "Spain",
 		marketValue: 25,
 		position: "Defender",
-		tags: ["legend", "captain"],
+		tags: [
+			{ label: "captain", color: "orange" },
+			{ label: "leader", color: "teal" },
+		],
 		image: frenchieYellow,
 		bio: "The heart and soul of Barcelona's golden era. A warrior on the pitch whose leadership and determination inspired every teammate around him.",
 	},
@@ -103,7 +136,12 @@ const PLAYERS: Player[] = [
 		nationality: "Italy",
 		marketValue: 35,
 		position: "Goalkeeper",
-		tags: ["legend"],
+		tags: [
+			{ label: "leader", color: "teal" },
+			{ label: "captain", color: "orange" },
+			{ label: "legend", color: "violet" },
+			{ label: "versatile", color: "green" },
+		],
 		image: frenchieBlue,
 		bio: "One of the greatest goalkeepers ever to grace the game. His reflexes, commanding presence, and longevity set the standard for generations.",
 	},
@@ -113,7 +151,12 @@ const PLAYERS: Player[] = [
 		nationality: "Netherlands",
 		marketValue: 28,
 		position: "Midfielder",
-		tags: ["legend"],
+		tags: [
+			{ label: "versatile", color: "green" },
+			{ label: "playmaker", color: "blue" },
+			{ label: "skillful", color: "cyan" },
+			{ label: "leader", color: "teal" },
+		],
 		image: frenchieGreen,
 		bio: "The only player to win the Champions League with three different clubs. A powerful, versatile midfielder with an extraordinary football intellect.",
 	},
@@ -123,7 +166,12 @@ const PLAYERS: Player[] = [
 		nationality: "Germany",
 		marketValue: 30,
 		position: "Goalkeeper",
-		tags: ["legend", "captain"],
+		tags: [
+			{ label: "captain", color: "orange" },
+			{ label: "leader", color: "teal" },
+			{ label: "legend", color: "violet" },
+			{ label: "finisher", color: "red" },
+		],
 		image: frenchieRed,
 		bio: "Der Titan. A fierce competitor between the posts, known for his incredible shot-stopping ability and intimidating presence that rattled strikers worldwide.",
 	},
@@ -133,7 +181,12 @@ const PLAYERS: Player[] = [
 		nationality: "Cameroon",
 		marketValue: 32,
 		position: "Striker",
-		tags: ["legend"],
+		tags: [
+			{ label: "finisher", color: "red" },
+			{ label: "skillful", color: "cyan" },
+			{ label: "leader", color: "teal" },
+			{ label: "versatile", color: "green" },
+		],
 		image: frenchieBlack,
 		bio: "Africa's greatest ever striker. His blistering speed and predatory instincts made him a key figure in Barcelona's treble-winning season.",
 	},
@@ -182,12 +235,19 @@ function createFields(createField: FieldCreator<Player>) {
 			id: "tags",
 			label: "Tags",
 			value: (p) => p.tags,
-			render: (tags) =>
-				tags.map((t) => (
-					<Badge key={t} variant="soft" mx="1" size="1">
-						{t}
-					</Badge>
-				)),
+			render: (tags) => (
+				<BadgeGroup
+					badges={tags.map(
+						(t): BadgeGroupItem => ({
+							id: t.label,
+							children: t.label,
+							color: t.color,
+							variant: "soft",
+							size: "1",
+						}),
+					)}
+				/>
+			),
 		}),
 	];
 }

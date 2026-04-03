@@ -5,6 +5,7 @@ import { Table } from "lucide-react";
 import { Checkbox, DataTable, type DataTableColumn } from "@/components";
 
 import type { CatalogDescriptorField } from "../../Catalog.types";
+import { renderFieldContent } from "../../Catalog.utils";
 import { CatalogView, RowCheckbox } from "../../components";
 import { useCatalogContext, useCatalogSelection } from "../../hooks";
 
@@ -17,28 +18,6 @@ export type CatalogTableProps = {
 	striped?: boolean;
 };
 
-function wrapClickable<T>(
-	content: ReactNode,
-	// biome-ignore lint/suspicious/noExplicitAny: fields hold mixed K types from the field system
-	field: CatalogDescriptorField<T, any>,
-	item: T,
-) {
-	if (!field.onClick) return content;
-
-	return (
-		<button
-			type="button"
-			className="pietra-catalog-clickable-cell"
-			onClick={(e) => {
-				e.stopPropagation();
-				field.onClick?.(item);
-			}}
-		>
-			{content}
-		</button>
-	);
-}
-
 function fieldToColumn<T>(
 	// biome-ignore lint/suspicious/noExplicitAny: fields hold mixed K types from the field system
 	field: CatalogDescriptorField<T, any>,
@@ -48,15 +27,7 @@ function fieldToColumn<T>(
 	return {
 		id: field.id,
 		header: field.label,
-		cell: (item) => {
-			const value = field.value(item);
-
-			return wrapClickable(
-				field.render?.(value, item) ?? String(value),
-				field,
-				item,
-			);
-		},
+		cell: (item) => renderFieldContent(field as never, item),
 		comparator: comparator
 			? (a, b) => comparator(field.value(a), field.value(b))
 			: undefined,
@@ -115,7 +86,7 @@ export function CatalogTable({
 	const rowClassName = useCallback(
 		(item: unknown) => {
 			if (!selectable) return undefined;
-			return isSelected(item) ? "pietra-catalog-row-selected" : undefined;
+			return isSelected(item) ? "pietra-catalog-table-row-selected" : undefined;
 		},
 		[selectable, isSelected],
 	);

@@ -40,8 +40,11 @@ export function CatalogListRow({
 	const selected = selectable && isSelected(item);
 
 	return (
+		// biome-ignore lint/a11y/useAriaPropsSupportedByRole: aria-selected is valid when role="option" (dynamic)
 		<li
 			style={style}
+			role={selectable ? "option" : undefined}
+			aria-selected={selectable ? selected : undefined}
 			className={[
 				"pietra-catalog-list-row",
 				selected && "pietra-catalog-list-row-selected",

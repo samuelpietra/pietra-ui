@@ -6,7 +6,6 @@ export type {
 	FieldMapper,
 	MapItemToFields,
 } from "./Catalog.types";
-export { type ResolvedField, renderFieldContent } from "./Catalog.utils";
 export {
 	CatalogItemCount,
 	CatalogToolbar,
@@ -20,12 +19,10 @@ export {
 	type CatalogProps,
 	type CatalogViewEntry,
 } from "./context";
+export { useCatalogContext } from "./hooks";
 export {
-	useCatalogContext,
-	useCatalogSelection,
-	useResolvedFields,
-} from "./hooks";
-export {
+	CatalogGrid,
+	type CatalogGridProps,
 	CatalogList,
 	type CatalogListProps,
 	CatalogTable,

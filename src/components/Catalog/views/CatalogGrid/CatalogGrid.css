@@ -1,0 +1,72 @@
+.pietra-catalog-grid-cell {
+  padding: var(--space-2);
+  box-sizing: border-box;
+}
+
+.pietra-catalog-grid-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--pietra-transition-fast);
+}
+
+.pietra-catalog-grid-card:hover {
+  background-color: var(--gray-a4);
+}
+
+.pietra-catalog-grid-card-selected {
+  outline: 2px solid var(--accent-9);
+  outline-offset: -2px;
+  background-color: var(--accent-a3);
+}
+
+.pietra-catalog-grid-card-selected:hover {
+  background-color: var(--accent-a4);
+}
+
+.pietra-catalog-grid-card:focus-visible {
+  outline: 2px solid var(--accent-9);
+  outline-offset: -2px;
+}
+
+.pietra-catalog-grid-card-toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1);
+  border-radius: var(--card-border-radius) var(--card-border-radius) 0 0;
+  background-color: var(--pietra-color-translucent);
+  backdrop-filter: blur(10px);
+}
+
+.pietra-catalog-grid-card-preview {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--gray-a2);
+}
+
+.pietra-catalog-grid-card-preview > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pietra-catalog-grid-empty {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4);
+  color: var(--gray-9);
+}

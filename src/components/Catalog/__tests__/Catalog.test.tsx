@@ -7,7 +7,7 @@ import { createFields, PLAYERS, type Player } from "../__fixtures__/mock";
 import { CatalogItemCount, CatalogToolbar } from "../components";
 import { Catalog } from "../context";
 import { useCatalogContext } from "../hooks";
-import { CatalogTable } from "../views";
+import { CatalogGrid, CatalogList, CatalogTable } from "../views";
 
 function getDataRows() {
 	return screen.getAllByRole("row").slice(1);
@@ -394,6 +394,96 @@ describe("Catalog", () => {
 			await userEvent.click(buttons[0]);
 
 			expect(handleClick).toHaveBeenCalledWith(PLAYERS[0]);
+		});
+	});
+
+	describe("CatalogList", () => {
+		it("renders list items using field values", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields}>
+					<CatalogList titleField="name" />
+				</Catalog>,
+			);
+
+			expect(screen.getByText("Ronaldo Nazario")).toBeInTheDocument();
+			expect(screen.getByText("Zinedine Zidane")).toBeInTheDocument();
+			expect(screen.getByText("Ronaldinho Gaucho")).toBeInTheDocument();
+		});
+
+		it("renders empty state", () => {
+			render(
+				<Catalog collection={[]} mapItemToFields={createFields}>
+					<CatalogList titleField="name" noDataMessage="No players" />
+				</Catalog>,
+			);
+
+			expect(screen.getByText("No players")).toBeInTheDocument();
+		});
+
+		it("shows checkboxes when selectable", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
+					<CatalogList titleField="name" />
+				</Catalog>,
+			);
+
+			const checkboxes = screen.getAllByRole("checkbox");
+			expect(checkboxes).toHaveLength(3);
+		});
+
+		it("uses listbox role when selectable", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
+					<CatalogList titleField="name" />
+				</Catalog>,
+			);
+
+			expect(screen.getByRole("listbox")).toBeInTheDocument();
+		});
+	});
+
+	describe("CatalogGrid", () => {
+		it("renders grid cards using field values", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields}>
+					<CatalogGrid titleField="name" />
+				</Catalog>,
+			);
+
+			expect(screen.getByText("Ronaldo Nazario")).toBeInTheDocument();
+			expect(screen.getByText("Zinedine Zidane")).toBeInTheDocument();
+			expect(screen.getByText("Ronaldinho Gaucho")).toBeInTheDocument();
+		});
+
+		it("renders empty state", () => {
+			render(
+				<Catalog collection={[]} mapItemToFields={createFields}>
+					<CatalogGrid titleField="name" noDataMessage="No players" />
+				</Catalog>,
+			);
+
+			expect(screen.getByText("No players")).toBeInTheDocument();
+		});
+
+		it("shows checkboxes when selectable", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
+					<CatalogGrid titleField="name" />
+				</Catalog>,
+			);
+
+			const checkboxes = screen.getAllByRole("checkbox");
+			expect(checkboxes).toHaveLength(3);
+		});
+
+		it("uses listbox role when selectable", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
+					<CatalogGrid titleField="name" />
+				</Catalog>,
+			);
+
+			expect(screen.getByRole("listbox")).toBeInTheDocument();
 		});
 	});
 });

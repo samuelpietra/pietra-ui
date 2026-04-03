@@ -8,8 +8,8 @@ export type ResolvedField = {
 	onClick?: (item: unknown) => void;
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: identity bridge for FieldMapper factory calls
-function identity(field: CatalogField<any, any>) {
+// biome-ignore lint/suspicious/noExplicitAny: identity bridge for FieldMapper and FieldCreator calls
+export function identity(field: CatalogField<any, any>) {
 	return field;
 }
 

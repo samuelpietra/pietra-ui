@@ -3,12 +3,12 @@ import { List, useDynamicRowHeight } from "react-window";
 import { List as ListIcon } from "lucide-react";
 
 import type { AnyFieldMapper } from "../../Catalog.types";
-import type { ResolvedField } from "../../Catalog.utils";
 import { CatalogView } from "../../components";
 import {
 	useCatalogContext,
 	useCatalogSelection,
 	useResolvedFields,
+	useSortedCollection,
 } from "../../hooks";
 import { CatalogListRow, type CatalogListRowProps } from "./components";
 
@@ -39,33 +39,21 @@ export function CatalogList({
 }: CatalogListProps) {
 	const { collection, fields, selectable, sort } = useCatalogContext();
 	const { isSelected, toggleItem } = useCatalogSelection();
+	const sorted = useSortedCollection(collection, fields, sort);
 	const dynamicRowHeight = useDynamicRowHeight({
 		defaultRowHeight: rowHeight,
 	});
 
-	const sorted = useMemo(() => {
-		if (!sort) return collection;
-
-		const field = fields.find(
-			(f) => f.type === "descriptor" && f.id === sort.columnId,
-		) as unknown as ResolvedField | undefined;
-
-		if (!field?.value) return collection;
-
-		const comparator = (
-			field as unknown as {
-				comparator?: (a: unknown, b: unknown) => number;
-			}
-		).comparator;
-
-		if (!comparator) return collection;
-
-		const dir = sort.direction === "asc" ? 1 : -1;
-
-		return [...collection].sort(
-			(a, b) => dir * comparator(field.value(a), field.value(b)),
-		);
-	}, [collection, fields, sort]);
+	const mappers = useMemo(
+		() => ({
+			titleField,
+			subtitleField,
+			descriptionField,
+			previewField,
+			footerField,
+		}),
+		[titleField, subtitleField, descriptionField, previewField, footerField],
+	);
 
 	const {
 		titleField: title,
@@ -73,16 +61,7 @@ export function CatalogList({
 		descriptionField: description,
 		previewField: preview,
 		footerField: footer,
-	} = useResolvedFields(
-		{
-			titleField,
-			subtitleField,
-			descriptionField,
-			previewField,
-			footerField,
-		},
-		fields,
-	);
+	} = useResolvedFields(mappers, fields);
 
 	if (sorted.length === 0 && noDataMessage) {
 		return (
@@ -106,7 +85,7 @@ export function CatalogList({
 		>
 			<List<CatalogListRowProps>
 				className="pietra-catalog-list"
-				role="list"
+				role={selectable ? "listbox" : "list"}
 				rowCount={sorted.length}
 				rowHeight={dynamicRowHeight}
 				rowComponent={CatalogListRow}

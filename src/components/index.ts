@@ -20,6 +20,8 @@ export {
 	type CatalogContextValue,
 	type CatalogDescriptorField,
 	type CatalogField,
+	CatalogGrid,
+	type CatalogGridProps,
 	type CatalogIdentifierField,
 	CatalogItemCount,
 	CatalogList,

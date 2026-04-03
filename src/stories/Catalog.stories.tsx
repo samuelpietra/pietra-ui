@@ -9,6 +9,7 @@ import {
 	type BadgeProps,
 	Button,
 	Catalog,
+	CatalogGrid,
 	CatalogItemCount,
 	CatalogList,
 	CatalogTable,
@@ -275,6 +276,21 @@ function listViewProps() {
 	} as const;
 }
 
+function gridViewProps() {
+	return {
+		titleField: "name",
+		previewField: (_: unknown, createField: FieldCreator<Player>) =>
+			createField<"image">({
+				type: "descriptor",
+				id: "preview",
+				label: "Preview",
+				value: (p) => p.image,
+				render: (url) => <img src={url} alt="" />,
+			}),
+		footerField: "tags",
+	} as const;
+}
+
 function BulkActions() {
 	const { selectedItems, setSelectedItems } = useCatalogContext<Player>();
 
@@ -328,6 +344,7 @@ export const Default: Story = {
 				</CatalogToolbar>
 				<CatalogTable defaultView />
 				<CatalogList {...listViewProps()} />
+				<CatalogGrid {...gridViewProps()} />
 			</Catalog>
 		);
 	},
@@ -343,6 +360,7 @@ export const Selectable: Story = {
 			</CatalogToolbar>
 			<CatalogTable defaultView />
 			<CatalogList {...listViewProps()} />
+			<CatalogGrid {...gridViewProps()} />
 		</Catalog>
 	),
 };

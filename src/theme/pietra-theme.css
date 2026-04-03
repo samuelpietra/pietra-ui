@@ -8,4 +8,11 @@
   /* === Custom Pietra tokens === */
   --pietra-transition-fast: 150ms ease;
   --pietra-transition-normal: 250ms ease;
+
+  /* === Surfaces === */
+  --pietra-color-translucent: rgba(255, 255, 255, 0.45);
+}
+
+.radix-themes.dark {
+  --pietra-color-translucent: rgba(0, 0, 0, 0.45);
 }

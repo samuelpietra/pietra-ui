@@ -2,16 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { SortState } from "@/components/DataTable";
 
-import type {
-	CatalogField,
-	CatalogIdentifierField,
-	MapItemToFields,
-} from "../Catalog.types";
+import type { CatalogIdentifierField, MapItemToFields } from "../Catalog.types";
+import { identity } from "../Catalog.utils";
 import type { CatalogContextValue, CatalogViewEntry } from "../context";
-
-function identity<T, V extends keyof T>(field: CatalogField<T, V>) {
-	return field;
-}
 
 type UseCatalogStateOptions<T> = {
 	collection: T[];

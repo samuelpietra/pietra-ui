@@ -18,33 +18,31 @@ export function useCatalogSelection<T = unknown>() {
 	);
 
 	const { allSelected, someSelected } = useMemo(() => {
-		if (!selectable || collection.length === 0) {
+		if (!selectable || collection.length === 0 || selectedIds.size === 0) {
 			return { allSelected: false, someSelected: false };
 		}
 
-		const all = collection.every(isSelected);
+		const all = selectedIds.size === collection.length;
 
 		return {
 			allSelected: all,
-			someSelected: !all && collection.some(isSelected),
+			someSelected: !all,
 		};
-	}, [selectable, collection, isSelected]);
+	}, [selectable, collection.length, selectedIds]);
 
 	const toggleItem = useCallback(
 		(item: T) => {
 			const id = getItemId(item);
 
 			setSelectedItems((prev) => {
-				const exists = prev.some((i) => getItemId(i) === id);
-
-				if (exists) {
+				if (selectedIds.has(id)) {
 					return prev.filter((i) => getItemId(i) !== id);
 				}
 
 				return [...prev, item];
 			});
 		},
-		[getItemId, setSelectedItems],
+		[getItemId, setSelectedItems, selectedIds],
 	);
 
 	const toggleAll = useCallback(() => {

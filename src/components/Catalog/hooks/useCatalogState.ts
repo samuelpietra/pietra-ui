@@ -59,17 +59,14 @@ export function useCatalogState<T>({
 		setSelectedItems((prev) => {
 			if (prev.length === 0) return prev;
 
-			const collectionById = new Map(
-				collection.map((item) => [getItemId(item), item]),
+			const collectionIds = new Set(collection.map(getItemId));
+			const filtered = prev.filter((item) =>
+				collectionIds.has(getItemId(item)),
 			);
 
-			return prev.reduce<T[]>((acc, item) => {
-				const fresh = collectionById.get(getItemId(item));
+			if (filtered.length === prev.length) return prev;
 
-				if (fresh) acc.push(fresh);
-
-				return acc;
-			}, []);
+			return filtered;
 		});
 	}, [collection, getItemId]);
 

@@ -87,6 +87,7 @@ export {
 export { IconButton, type IconButtonProps } from "./IconButton";
 export { Image, type ImageProps, type ImageShape } from "./Image";
 export { Inset, type InsetProps } from "./Inset";
+export { Kbd, type KbdProps } from "./Kbd";
 export { Link, type LinkProps } from "./Link";
 export {
 	Popover,

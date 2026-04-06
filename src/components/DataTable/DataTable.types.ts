@@ -22,6 +22,7 @@ export type DataTableProps<T> = {
 	hoverable?: boolean;
 	noDataMessage?: ReactNode;
 	onRowClick?: (item: T) => void;
+	onRowContextMenu?: (item: T) => void;
 	onSortChange?: (sort: SortState) => void;
 	rowClassName?: (item: T, index: number) => string | undefined;
 	rowHeight?: number;

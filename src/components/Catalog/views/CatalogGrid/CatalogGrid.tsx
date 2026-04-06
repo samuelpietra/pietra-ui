@@ -3,9 +3,10 @@ import { Grid } from "react-window";
 import { LayoutGrid } from "lucide-react";
 
 import type { AnyFieldMapper } from "../../Catalog.types";
-import { CatalogView } from "../../components";
+import { CatalogContextMenuWrapper, CatalogView } from "../../components";
 import {
 	useCatalogContext,
+	useCatalogContextMenu,
 	useCatalogSelection,
 	useResolvedFields,
 	useSortedCollection,
@@ -38,6 +39,7 @@ export function CatalogGrid({
 }: CatalogGridProps) {
 	const { collection, fields, selectable, sort } = useCatalogContext();
 	const { isSelected, toggleItem } = useCatalogSelection();
+	const { onContextMenu, hasContextMenu } = useCatalogContextMenu();
 	const sorted = useSortedCollection(collection, fields, sort);
 	const [columnCount, setColumnCount] = useState(3);
 
@@ -82,25 +84,28 @@ export function CatalogGrid({
 			icon={LayoutGrid}
 			defaultView={defaultView}
 		>
-			<Grid<CatalogGridCardProps>
-				role={selectable ? "listbox" : "list"}
-				columnCount={columnCount}
-				columnWidth={`${100 / columnCount}%`}
-				rowCount={rowCount}
-				rowHeight={rowHeight}
-				cellComponent={CatalogGridCard}
-				cellProps={{
-					data: sorted,
-					columnCount,
-					isSelected,
-					selectable,
-					toggleItem,
-					title,
-					preview,
-					footer,
-				}}
-				onResize={handleResize}
-			/>
+			<CatalogContextMenuWrapper>
+				<Grid<CatalogGridCardProps>
+					role={selectable ? "listbox" : "list"}
+					columnCount={columnCount}
+					columnWidth={`${100 / columnCount}%`}
+					rowCount={rowCount}
+					rowHeight={rowHeight}
+					cellComponent={CatalogGridCard}
+					cellProps={{
+						data: sorted,
+						columnCount,
+						isSelected,
+						selectable,
+						toggleItem,
+						title,
+						preview,
+						footer,
+						onItemContextMenu: hasContextMenu ? onContextMenu : undefined,
+					}}
+					onResize={handleResize}
+				/>
+			</CatalogContextMenuWrapper>
 		</CatalogView>
 	);
 }

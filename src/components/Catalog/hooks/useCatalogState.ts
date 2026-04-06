@@ -2,7 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { SortState } from "@/components/DataTable";
 
-import type { CatalogIdentifierField, MapItemToFields } from "../Catalog.types";
+import type {
+	CatalogContextMenuRender,
+	CatalogIdentifierField,
+	MapItemToFields,
+} from "../Catalog.types";
 import { identity } from "../Catalog.utils";
 import type { CatalogContextValue, CatalogViewEntry } from "../context";
 
@@ -10,12 +14,14 @@ type UseCatalogStateOptions<T> = {
 	collection: T[];
 	mapItemToFields: MapItemToFields<T>;
 	selectable: boolean;
+	contextMenu?: CatalogContextMenuRender<T>;
 };
 
 export function useCatalogState<T>({
 	collection,
 	mapItemToFields,
 	selectable,
+	contextMenu,
 }: UseCatalogStateOptions<T>): CatalogContextValue<T> {
 	const fields = useMemo(() => mapItemToFields(identity), [mapItemToFields]);
 
@@ -33,6 +39,7 @@ export function useCatalogState<T>({
 		return identifierField.value;
 	}, [fields]);
 
+	const [contextItem, setContextItem] = useState<T | null>(null);
 	const [selectedItems, setSelectedItems] = useState<T[]>([]);
 	const [sort, setSort] = useState<SortState | undefined>(undefined);
 	const [view, setView] = useState<string | undefined>(undefined);
@@ -84,6 +91,9 @@ export function useCatalogState<T>({
 			setView,
 			views,
 			registerView,
+			contextItem,
+			setContextItem,
+			renderContextMenu: contextMenu,
 		}),
 		[
 			collection,
@@ -95,6 +105,8 @@ export function useCatalogState<T>({
 			view,
 			views,
 			registerView,
+			contextItem,
+			contextMenu,
 		],
 	);
 }

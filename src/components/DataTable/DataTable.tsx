@@ -20,6 +20,7 @@ export function DataTable<T>({
 	hoverable = true,
 	noDataMessage = "No results found.",
 	onRowClick,
+	onRowContextMenu,
 	onSortChange,
 	rowClassName,
 	rowHeight = DEFAULT_ROW_HEIGHT,
@@ -100,6 +101,15 @@ export function DataTable<T>({
 		if (rowIndex) onRowClick(sortedData[Number(rowIndex)]);
 	}
 
+	function handleRowContextMenu(e: MouseEvent<HTMLDivElement>) {
+		if (!onRowContextMenu) return;
+		const rowIndex = getRowIndex(e.target);
+		// Note: do not call e.preventDefault() here — the event must bubble up
+		// to Radix's ContextMenu.Trigger so it can open the menu and suppress
+		// the native browser context menu itself.
+		if (rowIndex) onRowContextMenu(sortedData[Number(rowIndex)]);
+	}
+
 	function handleRowKeyDown(e: KeyboardEvent<HTMLDivElement>) {
 		if (!onRowClick) return;
 		if (e.key === "Enter" || e.key === " ") {
@@ -161,6 +171,7 @@ export function DataTable<T>({
 					className="pietra-data-table-body"
 					role="rowgroup"
 					onClick={handleRowClick}
+					onContextMenu={handleRowContextMenu}
 					onKeyDown={handleRowKeyDown}
 				>
 					<List<DataTableRowProps>
@@ -172,6 +183,7 @@ export function DataTable<T>({
 							columns: columns as DataTableRowProps["columns"],
 							columnStyles,
 							hasRowClick: !!onRowClick,
+							hasRowContextMenu: !!onRowContextMenu,
 							hoverable,
 							rowClassName: rowClassName as DataTableRowProps["rowClassName"],
 							sortedData,

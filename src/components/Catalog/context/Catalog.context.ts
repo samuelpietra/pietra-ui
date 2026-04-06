@@ -7,7 +7,7 @@ import {
 
 import type { SortState } from "@/components/DataTable";
 
-import type { CatalogField } from "../Catalog.types";
+import type { CatalogContextMenuRender, CatalogField } from "../Catalog.types";
 
 export type CatalogViewEntry = {
 	id: string;
@@ -29,6 +29,9 @@ export type CatalogContextValue<T = unknown> = {
 	setView: (view: string) => void;
 	views: CatalogViewEntry[];
 	registerView: (entry: CatalogViewEntry, isDefault: boolean) => void;
+	contextItem: T | null;
+	setContextItem: (item: T | null) => void;
+	renderContextMenu?: CatalogContextMenuRender<T>;
 };
 
 export const CatalogContext = createContext<CatalogContextValue | null>(null);

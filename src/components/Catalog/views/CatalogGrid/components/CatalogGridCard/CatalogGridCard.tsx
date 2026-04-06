@@ -18,6 +18,7 @@ export interface CatalogGridCardProps {
 	title: ResolvedField;
 	preview?: ResolvedField;
 	footer?: ResolvedField;
+	onItemContextMenu?: (item: unknown) => void;
 }
 
 export function CatalogGridCard({
@@ -32,6 +33,7 @@ export function CatalogGridCard({
 	title,
 	preview,
 	footer,
+	onItemContextMenu,
 }: {
 	columnIndex: number;
 	rowIndex: number;
@@ -45,7 +47,14 @@ export function CatalogGridCard({
 	const selected = selectable && isSelected(item);
 
 	return (
-		<div style={style} className="pietra-catalog-grid-cell">
+		// biome-ignore lint/a11y/noStaticElementInteractions: onContextMenu tracks right-clicked item for Catalog context menu
+		<div
+			style={style}
+			className="pietra-catalog-grid-cell"
+			onContextMenu={
+				onItemContextMenu ? () => onItemContextMenu(item) : undefined
+			}
+		>
 			<Card
 				role={selectable ? "option" : undefined}
 				aria-selected={selectable ? selected : undefined}
@@ -94,3 +103,5 @@ export function CatalogGridCard({
 		</div>
 	);
 }
+
+CatalogGridCard.displayName = "CatalogGridCard";

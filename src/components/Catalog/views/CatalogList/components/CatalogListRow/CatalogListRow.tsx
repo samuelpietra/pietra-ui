@@ -18,6 +18,7 @@ export interface CatalogListRowProps {
 	description?: ResolvedField;
 	preview?: ResolvedField;
 	footer?: ResolvedField;
+	onItemContextMenu?: (item: unknown) => void;
 }
 
 export function CatalogListRow({
@@ -32,6 +33,7 @@ export function CatalogListRow({
 	description,
 	preview,
 	footer,
+	onItemContextMenu,
 }: {
 	index: number;
 	style: CSSProperties;
@@ -45,6 +47,9 @@ export function CatalogListRow({
 			style={style}
 			role={selectable ? "option" : undefined}
 			aria-selected={selectable ? selected : undefined}
+			onContextMenu={
+				onItemContextMenu ? () => onItemContextMenu(item) : undefined
+			}
 			className={[
 				"pietra-catalog-list-row",
 				selected && "pietra-catalog-list-row-selected",
@@ -97,3 +102,5 @@ export function CatalogListRow({
 		</li>
 	);
 }
+
+CatalogListRow.displayName = "CatalogListRow";

@@ -15,6 +15,7 @@ import {
 	CatalogTable,
 	CatalogToolbar,
 	CatalogViewSwitcher,
+	ContextMenu,
 	type FieldCreator,
 	Flex,
 	Text,
@@ -385,4 +386,105 @@ export const NoData: Story = {
 			/>
 		</Catalog>
 	),
+};
+
+function contextMenu(item: Player, selectedItems: Player[]) {
+	const isBatch = selectedItems.length > 1 && selectedItems.includes(item);
+
+	if (isBatch) {
+		return (
+			<>
+				<ContextMenu.Item
+					onSelect={() =>
+						alert(
+							`Viewing ${selectedItems.length} players:\n${selectedItems.map((p) => p.name).join(", ")}`,
+						)
+					}
+				>
+					View {selectedItems.length} players
+				</ContextMenu.Item>
+				<ContextMenu.Separator />
+				<ContextMenu.Item
+					color="red"
+					onSelect={() => alert(`Deleting ${selectedItems.length} players`)}
+				>
+					Delete {selectedItems.length} players
+				</ContextMenu.Item>
+			</>
+		);
+	}
+
+	return (
+		<>
+			<ContextMenu.Item onSelect={() => alert(`Viewing ${item.name}`)}>
+				View details
+			</ContextMenu.Item>
+			<ContextMenu.Item onSelect={() => alert(`Editing ${item.name}`)}>
+				Edit
+			</ContextMenu.Item>
+			<ContextMenu.Separator />
+			<ContextMenu.Item
+				color="red"
+				onSelect={() => alert(`Deleting ${item.name}`)}
+			>
+				Delete
+			</ContextMenu.Item>
+		</>
+	);
+}
+
+export const WithContextMenu: Story = {
+	render: () => (
+		<Catalog
+			collection={PLAYERS}
+			mapItemToFields={createFields}
+			contextMenu={contextMenu}
+		>
+			<CatalogToolbar>
+				<CatalogItemCount />
+				<CatalogViewSwitcher />
+			</CatalogToolbar>
+			<CatalogTable defaultView />
+			<CatalogList {...listViewProps()} />
+			<CatalogGrid {...gridViewProps()} />
+		</Catalog>
+	),
+};
+
+export const Complete: Story = {
+	render: () => {
+		const [filter, setFilter] = useState("");
+		const filtered = PLAYERS.filter((p) =>
+			p.name.toLowerCase().includes(filter.toLowerCase()),
+		);
+
+		return (
+			<Catalog
+				collection={filtered}
+				mapItemToFields={createFields}
+				contextMenu={contextMenu}
+				selectable
+			>
+				<CatalogToolbar>
+					<CatalogItemCount />
+					<BulkActions />
+					<TextField.Root
+						size="1"
+						placeholder="Search players..."
+						value={filter}
+						onChange={(e) => setFilter(e.target.value)}
+						style={{ marginLeft: "auto" }}
+					>
+						<TextField.Slot>
+							<Search size={12} />
+						</TextField.Slot>
+					</TextField.Root>
+					<CatalogViewSwitcher />
+				</CatalogToolbar>
+				<CatalogTable defaultView />
+				<CatalogList {...listViewProps()} />
+				<CatalogGrid {...gridViewProps()} />
+			</Catalog>
+		);
+	},
 };

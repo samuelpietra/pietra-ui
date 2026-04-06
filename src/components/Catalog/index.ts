@@ -1,4 +1,5 @@
 export type {
+	CatalogContextMenuRender,
 	CatalogDescriptorField,
 	CatalogField,
 	CatalogIdentifierField,

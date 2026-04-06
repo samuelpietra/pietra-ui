@@ -36,6 +36,13 @@ export type MapItemToFields<T> = (
 	// biome-ignore lint/suspicious/noExplicitAny: fields array holds mixed K types
 ) => CatalogField<T, any>[];
 
+// --- Context menu ---
+
+export type CatalogContextMenuRender<T> = (
+	item: T,
+	selectedItems: T[],
+) => ReactNode;
+
 // --- Field mapper ---
 
 // biome-ignore lint/suspicious/noExplicitAny: identity function for inline field creation in FieldMapper callbacks

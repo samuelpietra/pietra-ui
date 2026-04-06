@@ -3,9 +3,10 @@ import { List, useDynamicRowHeight } from "react-window";
 import { List as ListIcon } from "lucide-react";
 
 import type { AnyFieldMapper } from "../../Catalog.types";
-import { CatalogView } from "../../components";
+import { CatalogContextMenuWrapper, CatalogView } from "../../components";
 import {
 	useCatalogContext,
+	useCatalogContextMenu,
 	useCatalogSelection,
 	useResolvedFields,
 	useSortedCollection,
@@ -39,6 +40,7 @@ export function CatalogList({
 }: CatalogListProps) {
 	const { collection, fields, selectable, sort } = useCatalogContext();
 	const { isSelected, toggleItem } = useCatalogSelection();
+	const { onContextMenu, hasContextMenu } = useCatalogContextMenu();
 	const sorted = useSortedCollection(collection, fields, sort);
 	const dynamicRowHeight = useDynamicRowHeight({
 		defaultRowHeight: rowHeight,
@@ -83,24 +85,27 @@ export function CatalogList({
 			icon={ListIcon}
 			defaultView={defaultView}
 		>
-			<List<CatalogListRowProps>
-				className="pietra-catalog-list"
-				role={selectable ? "listbox" : "list"}
-				rowCount={sorted.length}
-				rowHeight={dynamicRowHeight}
-				rowComponent={CatalogListRow}
-				rowProps={{
-					data: sorted,
-					isSelected,
-					selectable,
-					toggleItem,
-					title,
-					subtitle,
-					description,
-					preview,
-					footer,
-				}}
-			/>
+			<CatalogContextMenuWrapper>
+				<List<CatalogListRowProps>
+					className="pietra-catalog-list"
+					role={selectable ? "listbox" : "list"}
+					rowCount={sorted.length}
+					rowHeight={dynamicRowHeight}
+					rowComponent={CatalogListRow}
+					rowProps={{
+						data: sorted,
+						isSelected,
+						selectable,
+						toggleItem,
+						title,
+						subtitle,
+						description,
+						preview,
+						footer,
+						onItemContextMenu: hasContextMenu ? onContextMenu : undefined,
+					}}
+				/>
+			</CatalogContextMenuWrapper>
 		</CatalogView>
 	);
 }

@@ -3,6 +3,9 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { ContextMenu } from "@/components/ContextMenu";
+import { renderWithTheme } from "@/test-utils";
+
 import { createFields, PLAYERS, type Player } from "../__fixtures__/mock";
 import { CatalogItemCount, CatalogToolbar } from "../components";
 import { Catalog } from "../context";
@@ -484,6 +487,156 @@ describe("Catalog", () => {
 			);
 
 			expect(screen.getByRole("listbox")).toBeInTheDocument();
+		});
+	});
+
+	describe("context menu", () => {
+		it("does not render ContextMenu when contextMenu prop is not provided", () => {
+			render(
+				<Catalog collection={PLAYERS} mapItemToFields={createFields}>
+					<CatalogTable />
+				</Catalog>,
+			);
+
+			expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+		});
+
+		// Context menu tests use renderWithTheme because Radix ContextMenu
+		// requires ThemeProvider to be present in the tree.
+
+		it("shows context menu items on right-click in CatalogTable", async () => {
+			const user = userEvent.setup();
+
+			renderWithTheme(
+				<Catalog
+					collection={PLAYERS}
+					mapItemToFields={createFields}
+					contextMenu={(item: Player) => (
+						<>
+							<ContextMenu.Item>Edit {item.name}</ContextMenu.Item>
+							<ContextMenu.Item>Delete</ContextMenu.Item>
+						</>
+					)}
+				>
+					<CatalogTable />
+				</Catalog>,
+			);
+
+			await user.pointer({
+				keys: "[MouseRight]",
+				target: screen.getByText("Ronaldo Nazario"),
+			});
+
+			expect(screen.getByText("Edit Ronaldo Nazario")).toBeInTheDocument();
+			expect(screen.getByText("Delete")).toBeInTheDocument();
+		});
+
+		it("shows context menu for the correct item in CatalogTable", async () => {
+			const user = userEvent.setup();
+
+			renderWithTheme(
+				<Catalog
+					collection={PLAYERS}
+					mapItemToFields={createFields}
+					contextMenu={(item: Player) => (
+						<ContextMenu.Item>Edit {item.name}</ContextMenu.Item>
+					)}
+				>
+					<CatalogTable />
+				</Catalog>,
+			);
+
+			await user.pointer({
+				keys: "[MouseRight]",
+				target: screen.getByText("Zinedine Zidane"),
+			});
+
+			expect(screen.getByText("Edit Zinedine Zidane")).toBeInTheDocument();
+		});
+
+		it("shows context menu items on right-click in CatalogList", async () => {
+			const user = userEvent.setup();
+
+			renderWithTheme(
+				<Catalog
+					collection={PLAYERS}
+					mapItemToFields={createFields}
+					contextMenu={(item: Player) => (
+						<ContextMenu.Item>Edit {item.name}</ContextMenu.Item>
+					)}
+				>
+					<CatalogList titleField="name" />
+				</Catalog>,
+			);
+
+			const listItems = screen.getAllByRole("listitem");
+
+			await user.pointer({
+				keys: "[MouseRight]",
+				target: listItems[0],
+			});
+
+			expect(screen.getByText("Edit Ronaldo Nazario")).toBeInTheDocument();
+		});
+
+		it("shows context menu items on right-click in CatalogGrid", async () => {
+			const user = userEvent.setup();
+
+			renderWithTheme(
+				<Catalog
+					collection={PLAYERS}
+					mapItemToFields={createFields}
+					contextMenu={(item: Player) => (
+						<ContextMenu.Item>Edit {item.name}</ContextMenu.Item>
+					)}
+				>
+					<CatalogGrid titleField="name" />
+				</Catalog>,
+			);
+
+			const cards = screen.getAllByText(/Nazario|Zidane|Gaucho/);
+
+			await user.pointer({
+				keys: "[MouseRight]",
+				target: cards[0],
+			});
+
+			expect(screen.getByText("Edit Ronaldo Nazario")).toBeInTheDocument();
+		});
+
+		it("passes selectedItems to contextMenu render function", async () => {
+			const user = userEvent.setup();
+
+			renderWithTheme(
+				<Catalog
+					collection={PLAYERS}
+					mapItemToFields={createFields}
+					contextMenu={(item: Player, selectedItems: Player[]) => {
+						if (selectedItems.length > 1 && selectedItems.includes(item)) {
+							return (
+								<ContextMenu.Item>
+									Batch ({selectedItems.length})
+								</ContextMenu.Item>
+							);
+						}
+						return <ContextMenu.Item>Single {item.name}</ContextMenu.Item>;
+					}}
+					selectable
+				>
+					<CatalogTable />
+				</Catalog>,
+			);
+
+			const rows = screen.getAllByRole("row").slice(1);
+			await user.click(rows[0]);
+			await user.click(rows[1]);
+
+			await user.pointer({
+				keys: "[MouseRight]",
+				target: rows[0],
+			});
+
+			expect(screen.getByText("Batch (2)")).toBeInTheDocument();
 		});
 	});
 });

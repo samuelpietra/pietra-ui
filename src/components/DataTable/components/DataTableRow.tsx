@@ -6,6 +6,7 @@ export interface DataTableRowProps {
 	columns: DataTableColumn<unknown>[];
 	columnStyles: CSSProperties[];
 	hasRowClick: boolean;
+	hasRowContextMenu: boolean;
 	hoverable: boolean;
 	rowClassName?: (item: unknown, index: number) => string | undefined;
 	sortedData: unknown[];
@@ -18,6 +19,7 @@ export function DataTableRow({
 	columns,
 	columnStyles,
 	hasRowClick,
+	hasRowContextMenu,
 	hoverable,
 	rowClassName,
 	sortedData,
@@ -43,7 +45,7 @@ export function DataTableRow({
 			className={classNames}
 			role="row"
 			tabIndex={hasRowClick ? 0 : undefined}
-			data-row-index={hasRowClick ? index : undefined}
+			data-row-index={hasRowClick || hasRowContextMenu ? index : undefined}
 		>
 			{columns.map((column, colIndex) => (
 				<div
@@ -58,3 +60,5 @@ export function DataTableRow({
 		</div>
 	);
 }
+
+DataTableRow.displayName = "DataTableRow";

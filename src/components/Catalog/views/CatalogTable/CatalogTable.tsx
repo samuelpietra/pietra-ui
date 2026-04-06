@@ -6,8 +6,16 @@ import { Checkbox, DataTable, type DataTableColumn } from "@/components";
 
 import type { CatalogDescriptorField } from "../../Catalog.types";
 import { renderFieldContent } from "../../Catalog.utils";
-import { CatalogView, RowCheckbox } from "../../components";
-import { useCatalogContext, useCatalogSelection } from "../../hooks";
+import {
+	CatalogContextMenuWrapper,
+	CatalogView,
+	RowCheckbox,
+} from "../../components";
+import {
+	useCatalogContext,
+	useCatalogContextMenu,
+	useCatalogSelection,
+} from "../../hooks";
 
 export type CatalogTableProps = {
 	ariaLabel?: string;
@@ -58,9 +66,8 @@ export function CatalogTable({
 	striped,
 }: CatalogTableProps) {
 	const { collection, fields, selectable, sort, setSort } = useCatalogContext();
-
 	const { isSelected, toggleItem } = useCatalogSelection();
-
+	const { onContextMenu, hasContextMenu } = useCatalogContextMenu();
 	const columns = useMemo(() => {
 		const fieldColumns = fields
 			.filter((f) => f.type !== "identifier")
@@ -98,19 +105,22 @@ export function CatalogTable({
 			icon={Table}
 			defaultView={defaultView}
 		>
-			<DataTable
-				ariaLabel={ariaLabel}
-				columns={columns}
-				data={collection}
-				hoverable={hoverable}
-				noDataMessage={noDataMessage}
-				onRowClick={selectable ? handleRowClick : undefined}
-				onSortChange={setSort}
-				rowClassName={selectable ? rowClassName : undefined}
-				rowHeight={rowHeight}
-				sort={sort}
-				striped={striped}
-			/>
+			<CatalogContextMenuWrapper>
+				<DataTable
+					ariaLabel={ariaLabel}
+					columns={columns}
+					data={collection}
+					hoverable={hoverable}
+					noDataMessage={noDataMessage}
+					onRowClick={selectable ? handleRowClick : undefined}
+					onRowContextMenu={hasContextMenu ? onContextMenu : undefined}
+					onSortChange={setSort}
+					rowClassName={selectable ? rowClassName : undefined}
+					rowHeight={rowHeight}
+					sort={sort}
+					striped={striped}
+				/>
+			</CatalogContextMenuWrapper>
 		</CatalogView>
 	);
 }

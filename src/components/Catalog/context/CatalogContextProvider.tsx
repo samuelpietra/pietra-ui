@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 
-import type { MapItemToFields } from "../Catalog.types";
+import type {
+	CatalogContextMenuRender,
+	MapItemToFields,
+} from "../Catalog.types";
 import { useCatalogState } from "../hooks/useCatalogState";
 import { CatalogContext, type CatalogContextValue } from "./Catalog.context";
 
@@ -9,6 +12,7 @@ import "../Catalog.css";
 export type CatalogProps<T> = {
 	children: ReactNode;
 	collection: T[];
+	contextMenu?: CatalogContextMenuRender<T>;
 	mapItemToFields: MapItemToFields<T>;
 	selectable?: boolean;
 };
@@ -16,11 +20,13 @@ export type CatalogProps<T> = {
 export function Catalog<T>({
 	children,
 	collection,
+	contextMenu,
 	mapItemToFields,
 	selectable = false,
 }: CatalogProps<T>) {
 	const contextValue = useCatalogState({
 		collection,
+		contextMenu,
 		mapItemToFields,
 		selectable,
 	});

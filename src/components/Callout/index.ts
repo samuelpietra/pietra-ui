@@ -1,10 +1,10 @@
-import { CalloutIcon } from "./CalloutIcon";
-import { CalloutRoot } from "./CalloutRoot";
-import { CalloutText } from "./CalloutText";
+import { CalloutIcon, CalloutRoot, CalloutText } from "./components";
 
-export type { CalloutIconProps } from "./CalloutIcon";
-export type { CalloutRootProps } from "./CalloutRoot";
-export type { CalloutTextProps } from "./CalloutText";
+export type {
+	CalloutIconProps,
+	CalloutRootProps,
+	CalloutTextProps,
+} from "./components";
 
 export const Callout = {
 	Root: CalloutRoot,

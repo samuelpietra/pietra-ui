@@ -6,6 +6,7 @@ export {
 	type BadgeGroupItem,
 	type BadgeGroupProps,
 } from "./BadgeGroup";
+export { Blockquote, type BlockquoteProps } from "./Blockquote";
 export { Box, type BoxProps } from "./Box";
 export { Button, type ButtonProps } from "./Button";
 export {

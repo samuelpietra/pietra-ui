@@ -79,6 +79,7 @@ export {
 export { Em, type EmProps } from "./Em";
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
+export { Heading, type HeadingProps } from "./Heading";
 export {
 	HoverCard,
 	type HoverCardContentProps,

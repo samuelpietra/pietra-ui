@@ -54,6 +54,22 @@ export {
 export { Code, type CodeProps } from "./Code";
 export { Container, type ContainerProps } from "./Container";
 export {
+	ContextMenu,
+	type ContextMenuCheckboxItemProps,
+	type ContextMenuContentProps,
+	type ContextMenuGroupProps,
+	type ContextMenuItemProps,
+	type ContextMenuLabelProps,
+	type ContextMenuRadioGroupProps,
+	type ContextMenuRadioItemProps,
+	type ContextMenuRootProps,
+	type ContextMenuSeparatorProps,
+	type ContextMenuSubContentProps,
+	type ContextMenuSubProps,
+	type ContextMenuSubTriggerProps,
+	type ContextMenuTriggerProps,
+} from "./ContextMenu";
+export {
 	DataTable,
 	type DataTableColumn,
 	type DataTableProps,

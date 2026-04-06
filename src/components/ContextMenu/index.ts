@@ -1,0 +1,47 @@
+import {
+	ContextMenuCheckboxItem,
+	ContextMenuContent,
+	ContextMenuGroup,
+	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuRadioGroup,
+	ContextMenuRadioItem,
+	ContextMenuRoot,
+	ContextMenuSeparator,
+	ContextMenuSub,
+	ContextMenuSubContent,
+	ContextMenuSubTrigger,
+	ContextMenuTrigger,
+} from "./components";
+
+export type {
+	ContextMenuCheckboxItemProps,
+	ContextMenuContentProps,
+	ContextMenuGroupProps,
+	ContextMenuItemProps,
+	ContextMenuLabelProps,
+	ContextMenuRadioGroupProps,
+	ContextMenuRadioItemProps,
+	ContextMenuRootProps,
+	ContextMenuSeparatorProps,
+	ContextMenuSubContentProps,
+	ContextMenuSubProps,
+	ContextMenuSubTriggerProps,
+	ContextMenuTriggerProps,
+} from "./components";
+
+export const ContextMenu = {
+	Root: ContextMenuRoot,
+	Trigger: ContextMenuTrigger,
+	Content: ContextMenuContent,
+	Label: ContextMenuLabel,
+	Item: ContextMenuItem,
+	Group: ContextMenuGroup,
+	RadioGroup: ContextMenuRadioGroup,
+	RadioItem: ContextMenuRadioItem,
+	CheckboxItem: ContextMenuCheckboxItem,
+	Sub: ContextMenuSub,
+	SubTrigger: ContextMenuSubTrigger,
+	SubContent: ContextMenuSubContent,
+	Separator: ContextMenuSeparator,
+};

@@ -1,18 +1,7 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 
 import { BadgeGroup, type BadgeGroupItem } from "./BadgeGroup";
-
-beforeEach(() => {
-	vi.stubGlobal(
-		"ResizeObserver",
-		class {
-			observe() {}
-			unobserve() {}
-			disconnect() {}
-		},
-	);
-});
 
 const badges: BadgeGroupItem[] = [
 	{ id: "a", children: "Alpha" },

@@ -50,6 +50,7 @@ export {
 	type CheckboxGroupItemProps,
 	type CheckboxGroupRootProps,
 } from "./CheckboxGroup";
+export { Code, type CodeProps } from "./Code";
 export { Container, type ContainerProps } from "./Container";
 export {
 	DataTable,

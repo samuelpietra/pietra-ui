@@ -84,6 +84,7 @@ export {
 } from "./HoverCard";
 export { IconButton, type IconButtonProps } from "./IconButton";
 export { Image, type ImageProps, type ImageShape } from "./Image";
+export { Inset, type InsetProps } from "./Inset";
 export { Link, type LinkProps } from "./Link";
 export {
 	Popover,

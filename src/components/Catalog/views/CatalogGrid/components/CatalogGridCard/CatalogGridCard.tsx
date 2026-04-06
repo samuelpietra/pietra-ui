@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactElement } from "react";
-import { Card, Flex, Inset, Text } from "@radix-ui/themes";
+
+import { Card, Flex, Inset, Text } from "@/components";
 
 import {
 	type ResolvedField,
@@ -80,7 +81,7 @@ export function CatalogGridCard({
 					</CatalogGridToolbar>
 				)}
 				<Flex direction="column" gap="1" pt="2">
-					<Text size="2" weight="medium" truncate>
+					<Text size="2" weight="medium" numberOfLines={1}>
 						{renderFieldContent(title, item)}
 					</Text>
 					{footer && (

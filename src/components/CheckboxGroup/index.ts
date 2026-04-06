@@ -1,8 +1,9 @@
-import { CheckboxGroupItem } from "./CheckboxGroupItem";
-import { CheckboxGroupRoot } from "./CheckboxGroupRoot";
+import { CheckboxGroupItem, CheckboxGroupRoot } from "./components";
 
-export type { CheckboxGroupItemProps } from "./CheckboxGroupItem";
-export type { CheckboxGroupRootProps } from "./CheckboxGroupRoot";
+export type {
+	CheckboxGroupItemProps,
+	CheckboxGroupRootProps,
+} from "./components";
 
 export const CheckboxGroup = {
 	Root: CheckboxGroupRoot,

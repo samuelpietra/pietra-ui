@@ -1,10 +1,14 @@
-import { HoverCardContent } from "./HoverCardContent";
-import { HoverCardRoot } from "./HoverCardRoot";
-import { HoverCardTrigger } from "./HoverCardTrigger";
+import {
+	HoverCardContent,
+	HoverCardRoot,
+	HoverCardTrigger,
+} from "./components";
 
-export type { HoverCardContentProps } from "./HoverCardContent";
-export type { HoverCardRootProps } from "./HoverCardRoot";
-export type { HoverCardTriggerProps } from "./HoverCardTrigger";
+export type {
+	HoverCardContentProps,
+	HoverCardRootProps,
+	HoverCardTriggerProps,
+} from "./components";
 
 export const HoverCard = {
 	Root: HoverCardRoot,

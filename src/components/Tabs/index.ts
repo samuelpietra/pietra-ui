@@ -1,12 +1,11 @@
-import { TabsContent } from "./TabsContent";
-import { TabsList } from "./TabsList";
-import { TabsRoot } from "./TabsRoot";
-import { TabsTrigger } from "./TabsTrigger";
+import { TabsContent, TabsList, TabsRoot, TabsTrigger } from "./components";
 
-export type { TabsContentProps } from "./TabsContent";
-export type { TabsListProps } from "./TabsList";
-export type { TabsRootProps } from "./TabsRoot";
-export type { TabsTriggerProps } from "./TabsTrigger";
+export type {
+	TabsContentProps,
+	TabsListProps,
+	TabsRootProps,
+	TabsTriggerProps,
+} from "./components";
 
 export const Tabs = {
 	Root: TabsRoot,

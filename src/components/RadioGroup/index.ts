@@ -1,8 +1,6 @@
-import { RadioGroupItem } from "./RadioGroupItem";
-import { RadioGroupRoot } from "./RadioGroupRoot";
+import { RadioGroupItem, RadioGroupRoot } from "./components";
 
-export type { RadioGroupItemProps } from "./RadioGroupItem";
-export type { RadioGroupRootProps } from "./RadioGroupRoot";
+export type { RadioGroupItemProps, RadioGroupRootProps } from "./components";
 
 export const RadioGroup = {
 	Root: RadioGroupRoot,

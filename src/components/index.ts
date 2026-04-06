@@ -75,6 +75,7 @@ export {
 	type DropdownMenuTriggerIconProps,
 	type DropdownMenuTriggerProps,
 } from "./DropdownMenu";
+export { Em, type EmProps } from "./Em";
 export { Flex, type FlexProps } from "./Flex";
 export { Grid, type GridProps } from "./Grid";
 export {

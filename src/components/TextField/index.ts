@@ -1,10 +1,8 @@
-import { TextFieldRoot } from "./TextFieldRoot";
-import { TextFieldSlot } from "./TextFieldSlot";
+import { TextFieldRoot, TextFieldSlot } from "./components";
+
+export type { TextFieldRootProps, TextFieldSlotProps } from "./components";
 
 export const TextField = {
 	Root: TextFieldRoot,
 	Slot: TextFieldSlot,
 };
-
-export type { TextFieldRootProps } from "./TextFieldRoot";
-export type { TextFieldSlotProps } from "./TextFieldSlot";

@@ -6,8 +6,8 @@ import {
 } from "react";
 import { TextField as RadixTextField } from "@radix-ui/themes";
 
-import { Spinner } from "../Spinner";
-import { TextFieldSlot } from "./TextFieldSlot";
+import { Spinner } from "../../../Spinner";
+import { TextFieldSlot } from "../TextFieldSlot";
 
 type RadixTextFieldRootProps = ComponentPropsWithoutRef<
 	typeof RadixTextField.Root

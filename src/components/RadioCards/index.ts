@@ -1,8 +1,6 @@
-import { RadioCardsItem } from "./RadioCardsItem";
-import { RadioCardsRoot } from "./RadioCardsRoot";
+import { RadioCardsItem, RadioCardsRoot } from "./components";
 
-export type { RadioCardsItemProps } from "./RadioCardsItem";
-export type { RadioCardsRootProps } from "./RadioCardsRoot";
+export type { RadioCardsItemProps, RadioCardsRootProps } from "./components";
 
 export const RadioCards = {
 	Root: RadioCardsRoot,

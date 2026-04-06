@@ -99,6 +99,7 @@ export {
 	type PopoverTriggerProps,
 } from "./Popover";
 export { Progress, type ProgressProps } from "./Progress";
+export { Quote, type QuoteProps } from "./Quote";
 export { Radio, type RadioProps } from "./Radio";
 export {
 	RadioCards,

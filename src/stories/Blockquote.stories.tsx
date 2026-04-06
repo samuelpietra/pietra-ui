@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Blockquote, Box, Em } from "@/components";
+import { Blockquote, Box, Quote } from "@/components";
 
 const meta: Meta<typeof Blockquote> = {
 	title: "Typography/Blockquote",
@@ -14,7 +14,7 @@ export const Default: Story = {
 	render: () => (
 		<Box>
 			<Blockquote>With great power comes great responsibility.</Blockquote>
-			<Em>— Uncle Ben</Em>
+			<Quote>— Uncle Ben</Quote>
 		</Box>
 	),
 };

@@ -4,10 +4,21 @@ import {
 	type QuoteProps as RadixQuoteProps,
 } from "@radix-ui/themes";
 
-export type QuoteProps = RadixQuoteProps;
+import { clampLines } from "@/utils/style";
 
-export const Quote = forwardRef<HTMLQuoteElement, QuoteProps>((props, ref) => {
-	return <RadixQuote ref={ref} {...props} />;
-});
+export type QuoteProps = RadixQuoteProps & {
+	numberOfLines?: number;
+	truncate?: never;
+};
+
+export const Quote = forwardRef<HTMLQuoteElement, QuoteProps>(
+	({ numberOfLines, truncate: _, className, style, ...props }, ref) => (
+		<RadixQuote
+			ref={ref}
+			{...clampLines(numberOfLines, className, style)}
+			{...props}
+		/>
+	),
+);
 
 Quote.displayName = "Quote";

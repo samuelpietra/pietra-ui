@@ -4,10 +4,21 @@ import {
 	type CodeProps as RadixCodeProps,
 } from "@radix-ui/themes";
 
-export type CodeProps = RadixCodeProps;
+import { clampLines } from "@/utils/style";
 
-export const Code = forwardRef<HTMLElement, CodeProps>((props, ref) => {
-	return <RadixCode ref={ref} {...props} />;
-});
+export type CodeProps = RadixCodeProps & {
+	numberOfLines?: number;
+	truncate?: never;
+};
+
+export const Code = forwardRef<HTMLElement, CodeProps>(
+	({ numberOfLines, truncate: _, className, style, ...props }, ref) => (
+		<RadixCode
+			ref={ref}
+			{...clampLines(numberOfLines, className, style)}
+			{...props}
+		/>
+	),
+);
 
 Code.displayName = "Code";

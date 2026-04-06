@@ -27,7 +27,7 @@ describe("Text", () => {
 			render(<Text numberOfLines={2}>Clamped text</Text>);
 
 			const el = screen.getByText("Clamped text");
-			expect(el).toHaveClass("pietra-text-clamp");
+			expect(el).toHaveClass("pietra-line-clamp");
 			expect(el.style.webkitLineClamp).toBe("2");
 		});
 
@@ -35,7 +35,7 @@ describe("Text", () => {
 			render(<Text>Normal text</Text>);
 
 			const el = screen.getByText("Normal text");
-			expect(el).not.toHaveClass("pietra-text-clamp");
+			expect(el).not.toHaveClass("pietra-line-clamp");
 		});
 
 		it("merges with existing className", () => {
@@ -46,7 +46,7 @@ describe("Text", () => {
 			);
 
 			const el = screen.getByText("Clamped text");
-			expect(el).toHaveClass("pietra-text-clamp");
+			expect(el).toHaveClass("pietra-line-clamp");
 			expect(el).toHaveClass("custom");
 		});
 

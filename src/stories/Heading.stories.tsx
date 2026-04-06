@@ -82,7 +82,7 @@ export const Trim: Story = {
 export const Truncate: Story = {
 	render: () => (
 		<Box style={{ maxWidth: 300 }}>
-			<Heading size="5" truncate>
+			<Heading size="5" numberOfLines={1}>
 				This heading is truncated because it is too long to fit in the container
 			</Heading>
 		</Box>

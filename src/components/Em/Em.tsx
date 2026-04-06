@@ -1,10 +1,21 @@
 import { forwardRef } from "react";
 import { Em as RadixEm, type EmProps as RadixEmProps } from "@radix-ui/themes";
 
-export type EmProps = RadixEmProps;
+import { clampLines } from "@/utils/style";
 
-export const Em = forwardRef<HTMLElement, EmProps>((props, ref) => {
-	return <RadixEm ref={ref} {...props} />;
-});
+export type EmProps = RadixEmProps & {
+	numberOfLines?: number;
+	truncate?: never;
+};
+
+export const Em = forwardRef<HTMLElement, EmProps>(
+	({ numberOfLines, truncate: _, className, style, ...props }, ref) => (
+		<RadixEm
+			ref={ref}
+			{...clampLines(numberOfLines, className, style)}
+			{...props}
+		/>
+	),
+);
 
 Em.displayName = "Em";

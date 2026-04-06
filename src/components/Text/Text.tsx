@@ -4,27 +4,18 @@ import {
 	type TextProps as RadixTextProps,
 } from "@radix-ui/themes";
 
-import "./Text.css";
+import { clampLines } from "@/utils/style";
 
 export type TextProps = RadixTextProps & {
 	numberOfLines?: number;
-	truncate?: never; // enforces numberOfLines usage
+	truncate?: never;
 };
 
 export const Text = forwardRef<HTMLSpanElement, TextProps>(
 	({ numberOfLines, truncate: _, className, style, ...props }, ref) => (
 		<RadixText
 			ref={ref}
-			className={
-				numberOfLines
-					? className
-						? `pietra-text-clamp ${className}`
-						: "pietra-text-clamp"
-					: className
-			}
-			style={
-				numberOfLines ? { ...style, WebkitLineClamp: numberOfLines } : style
-			}
+			{...clampLines(numberOfLines, className, style)}
 			{...props}
 		/>
 	),

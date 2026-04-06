@@ -4,12 +4,21 @@ import {
 	type HeadingProps as RadixHeadingProps,
 } from "@radix-ui/themes";
 
-export type HeadingProps = RadixHeadingProps;
+import { clampLines } from "@/utils/style";
+
+export type HeadingProps = RadixHeadingProps & {
+	numberOfLines?: number;
+	truncate?: never;
+};
 
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
-	(props, ref) => {
-		return <RadixHeading ref={ref} {...props} />;
-	},
+	({ numberOfLines, truncate: _, className, style, ...props }, ref) => (
+		<RadixHeading
+			ref={ref}
+			{...clampLines(numberOfLines, className, style)}
+			{...props}
+		/>
+	),
 );
 
 Heading.displayName = "Heading";

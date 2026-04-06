@@ -4,10 +4,21 @@ import {
 	type StrongProps as RadixStrongProps,
 } from "@radix-ui/themes";
 
-export type StrongProps = RadixStrongProps;
+import { clampLines } from "@/utils/style";
 
-export const Strong = forwardRef<HTMLElement, StrongProps>((props, ref) => {
-	return <RadixStrong ref={ref} {...props} />;
-});
+export type StrongProps = RadixStrongProps & {
+	numberOfLines?: number;
+	truncate?: never;
+};
+
+export const Strong = forwardRef<HTMLElement, StrongProps>(
+	({ numberOfLines, truncate: _, className, style, ...props }, ref) => (
+		<RadixStrong
+			ref={ref}
+			{...clampLines(numberOfLines, className, style)}
+			{...props}
+		/>
+	),
+);
 
 Strong.displayName = "Strong";

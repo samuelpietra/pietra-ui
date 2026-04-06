@@ -1,8 +1,9 @@
-import { CheckboxCardsItem } from "./CheckboxCardsItem";
-import { CheckboxCardsRoot } from "./CheckboxCardsRoot";
+import { CheckboxCardsItem, CheckboxCardsRoot } from "./components";
 
-export type { CheckboxCardsItemProps } from "./CheckboxCardsItem";
-export type { CheckboxCardsRootProps } from "./CheckboxCardsRoot";
+export type {
+	CheckboxCardsItemProps,
+	CheckboxCardsRootProps,
+} from "./components";
 
 export const CheckboxCards = {
 	Root: CheckboxCardsRoot,

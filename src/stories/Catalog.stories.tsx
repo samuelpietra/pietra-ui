@@ -319,75 +319,6 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {
-	render: () => {
-		const [filter, setFilter] = useState("");
-		const filtered = PLAYERS.filter((p) =>
-			p.name.toLowerCase().includes(filter.toLowerCase()),
-		);
-
-		return (
-			<Catalog collection={filtered} mapItemToFields={createFields}>
-				<CatalogToolbar>
-					<CatalogItemCount />
-					<TextField.Root
-						size="1"
-						placeholder="Search players..."
-						value={filter}
-						onChange={(e) => setFilter(e.target.value)}
-						style={{ marginLeft: "auto" }}
-					>
-						<TextField.Slot>
-							<Search size={12} />
-						</TextField.Slot>
-					</TextField.Root>
-					<CatalogViewSwitcher />
-				</CatalogToolbar>
-				<CatalogTable defaultView />
-				<CatalogList {...listViewProps()} />
-				<CatalogGrid {...gridViewProps()} />
-			</Catalog>
-		);
-	},
-};
-
-export const Selectable: Story = {
-	render: () => (
-		<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
-			<CatalogToolbar>
-				<CatalogItemCount />
-				<BulkActions />
-				<CatalogViewSwitcher />
-			</CatalogToolbar>
-			<CatalogTable defaultView />
-			<CatalogList {...listViewProps()} />
-			<CatalogGrid {...gridViewProps()} />
-		</Catalog>
-	),
-};
-
-export const NoData: Story = {
-	render: () => (
-		<Catalog<Player> collection={[]} mapItemToFields={createFields}>
-			<CatalogToolbar>
-				<CatalogItemCount />
-				<CatalogViewSwitcher />
-			</CatalogToolbar>
-			<CatalogTable
-				defaultView
-				noDataMessage={
-					<Flex direction="column" align="center" gap="1" py="4">
-						<Text weight="medium">No players found</Text>
-						<Text size="1" color="gray">
-							Try adjusting your search or filters.
-						</Text>
-					</Flex>
-				}
-			/>
-		</Catalog>
-	),
-};
-
 function contextMenu(item: Player, selectedItems: Player[]) {
 	const isBatch = selectedItems.length > 1 && selectedItems.includes(item);
 
@@ -433,25 +364,7 @@ function contextMenu(item: Player, selectedItems: Player[]) {
 	);
 }
 
-export const WithContextMenu: Story = {
-	render: () => (
-		<Catalog
-			collection={PLAYERS}
-			mapItemToFields={createFields}
-			contextMenu={contextMenu}
-		>
-			<CatalogToolbar>
-				<CatalogItemCount />
-				<CatalogViewSwitcher />
-			</CatalogToolbar>
-			<CatalogTable defaultView />
-			<CatalogList {...listViewProps()} />
-			<CatalogGrid {...gridViewProps()} />
-		</Catalog>
-	),
-};
-
-export const Complete: Story = {
+export const Default: Story = {
 	render: () => {
 		const [filter, setFilter] = useState("");
 		const filtered = PLAYERS.filter((p) =>
@@ -481,10 +394,65 @@ export const Complete: Story = {
 					</TextField.Root>
 					<CatalogViewSwitcher />
 				</CatalogToolbar>
-				<CatalogTable defaultView />
+				<CatalogTable defaultView striped />
 				<CatalogList {...listViewProps()} />
 				<CatalogGrid {...gridViewProps()} />
 			</Catalog>
 		);
 	},
+};
+
+export const Selectable: Story = {
+	render: () => (
+		<Catalog collection={PLAYERS} mapItemToFields={createFields} selectable>
+			<CatalogToolbar>
+				<CatalogItemCount />
+				<BulkActions />
+				<CatalogViewSwitcher />
+			</CatalogToolbar>
+			<CatalogTable defaultView />
+			<CatalogList {...listViewProps()} />
+			<CatalogGrid {...gridViewProps()} />
+		</Catalog>
+	),
+};
+
+export const NoData: Story = {
+	render: () => (
+		<Catalog<Player> collection={[]} mapItemToFields={createFields}>
+			<CatalogToolbar>
+				<CatalogItemCount />
+				<CatalogViewSwitcher />
+			</CatalogToolbar>
+			<CatalogTable
+				defaultView
+				noDataMessage={
+					<Flex direction="column" align="center" gap="1" py="4">
+						<Text weight="medium">No players found</Text>
+						<Text size="1" color="gray">
+							Try adjusting your search or filters.
+						</Text>
+					</Flex>
+				}
+			/>
+		</Catalog>
+	),
+};
+
+export const WithContextMenu: Story = {
+	render: () => (
+		<Catalog
+			collection={PLAYERS}
+			mapItemToFields={createFields}
+			contextMenu={contextMenu}
+		>
+			<CatalogToolbar>
+				<CatalogItemCount />
+				<CatalogViewSwitcher />
+			</CatalogToolbar>
+			<CatalogTable defaultView />
+			<CatalogList {...listViewProps()} />
+			<CatalogGrid {...gridViewProps()} />
+		</Catalog>
+	),
 };

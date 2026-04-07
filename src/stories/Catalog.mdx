@@ -1,0 +1,498 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+
+import * as CatalogStories from './Catalog.stories';
+
+import { Catalog } from '@/components/Catalog/context/CatalogContextProvider';
+import { CatalogTable } from '@/components/Catalog/views/CatalogTable/CatalogTable';
+import { CatalogGrid } from '@/components/Catalog/views/CatalogGrid/CatalogGrid';
+import { CatalogList } from '@/components/Catalog/views/CatalogList/CatalogList';
+
+<Meta of={CatalogStories} />
+
+<style>{`
+  .docs-collapsible-summary {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .docs-collapsible-summary::before {
+    content: '▶';
+    font-size: 10px;
+    margin-right: 8px;
+  }
+  details[open] > .docs-collapsible-summary::before {
+    content: '▼';
+    margin-right: 7px;
+  }
+  .docs-collapsible-summary h3 {
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+  }
+`}</style>
+
+# Catalog
+
+Compound data browser for displaying and interacting with collections across different built-in or user-created views.
+
+> **Note:** All built-in views (`CatalogTable`, `CatalogList`, `CatalogGrid`) are virtualized and optimized for large datasets. If you build a custom view, consider virtualizing it as well — a non-virtualized view may suffer noticeable performance degradation with large collections.
+
+<a href="https://github.com/samuelpietra/pietra-ui/tree/main/src/components/Catalog" target="_blank">View source ↗</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/samuelpietra/pietra-ui/issues/new?title=[Catalog]+" target="_blank">Report an issue ↗</a>
+
+<Canvas of={CatalogStories.Default} />
+
+```tsx
+<Catalog
+  collection={players}
+  contextMenu={contextMenu}
+  mapItemToFields={mapItemToFields}
+  selectable
+>
+  <CatalogToolbar>
+    <CatalogItemCount />
+    {/* <SomeCustomAction /> */}
+    <CatalogViewSwitcher />
+  </CatalogToolbar>
+
+  <CatalogTable
+    defaultView
+    striped
+  />
+  <CatalogList
+    titleField="name"
+    subtitleField="position"
+  />
+  <CatalogGrid
+    titleField="name"
+    footerField="tags"
+  />
+  {/* <SomeCustomView /> */}
+</Catalog>
+```
+
+## API Reference
+
+### Catalog
+
+The root provider. Manages collection data, field definitions, selection state, sorting, and active view.
+
+<ArgTypes of={Catalog} />
+
+### CatalogTable
+
+Tabular view based on <a href="/?path=/docs/components-datatable" target="_blank">DataTable</a>. Renders every **descriptor** field declared under `mapItemToFields` as table columns with optional sorting.
+
+<ArgTypes of={CatalogTable} />
+
+### CatalogList
+
+Vertical list view with structured slots for title, subtitle, description, preview, and footer.
+
+Each field prop accepts a **string** (matching a field `id` from `mapItemToFields`) or a **callback** that receives the fields array and a `createField` helper for inline field creation.
+
+```tsx
+<CatalogList
+  // String reference — reuses existing fields
+  titleField="name"
+  subtitleField="position"
+  footerField="tags"
+  // Callback — creates a new field inline for this view
+  descriptionField={(_: unknown, createField: FieldCreator<Player>) =>
+    createField<"bio">({
+      type: "descriptor",
+      id: "bio",
+      label: "Bio",
+      value: (player) => player.bio
+    })
+  }
+  previewField={(_: unknown, createField: FieldCreator<Player>) =>
+    createField<"image">({
+      type: "descriptor",
+      id: "preview",
+      label: "Preview",
+      value: (player) => player.image,
+      render: (url) => <Avatar size="7" src={url} fallback="?" />
+    })
+  }
+/>
+```
+
+<ArgTypes of={CatalogList} />
+
+### CatalogGrid
+
+<a href="/?path=/docs/components-card" target="_blank">Card</a> grid view. Same **field mapper** pattern as [CatalogList](#cataloglist) — string references or inline callbacks.
+
+```tsx
+<CatalogGrid
+  titleField="name"
+  footerField="tags"
+  previewField={(_: unknown, createField: FieldCreator<Player>) =>
+    createField<"image">({
+      type: "descriptor",
+      id: "preview",
+      label: "Preview",
+      value: (player) => player.image,
+      render: (url) => <img src={url} alt="" />
+    })
+  }
+/>
+```
+
+<ArgTypes of={CatalogGrid} />
+
+### CatalogToolbar
+
+Layout container for toolbar controls. Forwards all `div` props and `ref`.
+
+### CatalogItemCount
+
+Displays the current `collection.length` (e.g. "10 items"). No props — reads from context.
+
+### CatalogViewSwitcher
+
+Renders icon buttons for each registered view. Automatically hidden when only one view is present. No props — reads from context.
+
+### useCatalogContext
+
+Hook that returns the full `CatalogContextValue<T>`. Must be called inside a `<Catalog>` provider.
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collection</code></td>
+      <td><code>T[]</code></td>
+      <td>The current data array.</td>
+    </tr>
+    <tr>
+      <td><code>fields</code></td>
+      <td><code>{'CatalogField<T>[]'}</code></td>
+      <td>Resolved field definitions.</td>
+    </tr>
+    <tr>
+      <td><code>getItemId</code></td>
+      <td><code>{'(item: T) => string'}</code></td>
+      <td>Returns the identifier value for an item.</td>
+    </tr>
+    <tr>
+      <td><code>selectable</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether selection is enabled.</td>
+    </tr>
+    <tr>
+      <td><code>selectedItems</code></td>
+      <td><code>T[]</code></td>
+      <td>Currently selected items.</td>
+    </tr>
+    <tr>
+      <td><code>setSelectedItems</code></td>
+      <td><code>{'Dispatch<SetStateAction<T[]>>'}</code></td>
+      <td>State setter for selection.</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>SortState | undefined</code></td>
+      <td>Current sort column and direction.</td>
+    </tr>
+    <tr>
+      <td><code>setSort</code></td>
+      <td><code>{'(sort?: SortState) => void'}</code></td>
+      <td>Updates sort state.</td>
+    </tr>
+    <tr>
+      <td><code>view</code></td>
+      <td><code>string | undefined</code></td>
+      <td>Active view ID.</td>
+    </tr>
+    <tr>
+      <td><code>setView</code></td>
+      <td><code>{'(view: string) => void'}</code></td>
+      <td>Switches the active view.</td>
+    </tr>
+    <tr>
+      <td><code>views</code></td>
+      <td><code>{'CatalogViewEntry[]'}</code></td>
+      <td>Registered views (id, label, icon).</td>
+    </tr>
+    <tr>
+      <td><code>contextItem</code></td>
+      <td><code>T | null</code></td>
+      <td>The item that triggered the context menu.</td>
+    </tr>
+    <tr>
+      <td><code>renderContextMenu</code></td>
+      <td><code>{'(item: T, selectedItems: T[]) => ReactNode'}</code></td>
+      <td>The context menu render function, if provided.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Examples
+
+### Fields
+
+Fields define how your data maps to columns and view slots. Use `mapItemToFields` to declare them with the `createField` helper.
+
+Each collection needs exactly one **identifier** field (used internally for keying and selection) and one or more **descriptor** fields (visible columns/slots).
+
+```tsx
+function mapItemToFields(createField: FieldCreator<Player>) {
+  return [
+    // Identifier — not rendered, used for keying
+    createField<"id">({
+      type: "identifier",
+      id: "playerId",
+      value: (p) => p.id,
+    }),
+
+    // Simple descriptor
+    createField<"name">({
+      type: "descriptor",
+      id: "name",
+      label: "Player",
+      value: (p) => p.name,
+      comparator: (a, b) => a.localeCompare(b), // enables sorting
+    }),
+
+    // Descriptor with custom render
+    createField<"marketValue">({
+      type: "descriptor",
+      id: "marketValue",
+      label: "Market Value",
+      value: (p) => p.marketValue,
+      render: (value) => `€${value}M`,
+      comparator: (a, b) => a - b,
+      align: "right",
+      width: 140,
+    }),
+  ];
+}
+```
+
+#### Descriptor field options
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>id</code></td>
+      <td><code>string</code></td>
+      <td>Unique field identifier.</td>
+    </tr>
+    <tr>
+      <td><code>label</code></td>
+      <td><code>string</code></td>
+      <td>Column header / accessible label.</td>
+    </tr>
+    <tr>
+      <td><code>value</code></td>
+      <td><code>{'(item: T) => T[K]'}</code></td>
+      <td>Extracts the raw value from an item.</td>
+    </tr>
+    <tr>
+      <td><code>render</code></td>
+      <td><code>{'(value: T[K], item: T) => ReactNode'}</code></td>
+      <td>Custom renderer. Falls back to the raw value.</td>
+    </tr>
+    <tr>
+      <td><code>comparator</code></td>
+      <td><code>{'(a: T[K], b: T[K]) => number'}</code></td>
+      <td>Enables sorting on this field.</td>
+    </tr>
+    <tr>
+      <td><code>onClick</code></td>
+      <td><code>{'(item: T) => void'}</code></td>
+      <td>Makes the cell clickable.</td>
+    </tr>
+    <tr>
+      <td><code>align</code></td>
+      <td><code>"left" | "center" | "right"</code></td>
+      <td>Text alignment in table columns.</td>
+    </tr>
+    <tr>
+      <td><code>width</code></td>
+      <td><code>string | number</code></td>
+      <td>Fixed column width.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Selection
+
+Pass `selectable` to `Catalog` to enable checkbox selection. Use `useCatalogContext` to access `selectedItems` and `setSelectedItems` for building bulk actions.
+
+```tsx
+function BulkActions() {
+  const { selectedItems, setSelectedItems } = useCatalogContext<Player>();
+
+  if (selectedItems.length === 0) return null;
+
+  return (
+    <Button
+      size="1"
+      color="red"
+      variant="soft"
+      onClick={() => {
+        delete(selectedItems.map((item) => item.id));
+        alert(`Removing ${selectedItems.length} players`);
+        setSelectedItems([]);
+      }}
+    >
+      Remove ({selectedItems.length})
+    </Button>
+  );
+}
+
+<Catalog
+  collection={players}
+  mapItemToFields={createFields}
+  selectable
+>
+  <CatalogToolbar>
+    <CatalogItemCount />
+    <BulkActions />
+    <CatalogViewSwitcher />
+  </CatalogToolbar>
+  <CatalogTable defaultView />
+</Catalog>
+```
+
+### Sorting
+
+Add a `comparator` function to any descriptor field to make its column sortable. Click column headers in the table view to cycle through ascending, descending, and unsorted states.
+
+```tsx
+createField<"name">({
+  type: "descriptor",
+  id: "name",
+  label: "Player",
+  value: (p) => p.name,
+  comparator: (a, b) => a.localeCompare(b) // string sort
+}),
+
+createField<"marketValue">({
+  type: "descriptor",
+  id: "marketValue",
+  label: "Market Value",
+  value: (p) => p.marketValue,
+  comparator: (a, b) => a - b // numeric sort
+})
+```
+
+### Context Menu
+
+Pass a `contextMenu` render function to `Catalog`. It receives the right-clicked item and the current selection, letting you build single-item or batch actions.
+
+```tsx
+function contextMenu(item: Player, selectedItems: Player[]) {
+  const isBatch = selectedItems.length > 1 && selectedItems.includes(item);
+
+  if (isBatch) {
+    return (
+      <>
+        <ContextMenu.Item
+          onSelect={() => viewDetails(selectedItems)}
+        >
+          View {selectedItems.length} players
+        </ContextMenu.Item>
+        <ContextMenu.Separator />
+        <ContextMenu.Item
+          color="red"
+          onSelect={() => delete(selectedItems)}
+        >
+          Delete {selectedItems.length} players
+        </ContextMenu.Item>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <ContextMenu.Item onSelect={() => viewDetails(item)}>
+        View details
+      </ContextMenu.Item>
+      <ContextMenu.Separator />
+      <ContextMenu.Item
+        color="red"
+        onSelect={() => delete(item)}
+      >
+        Delete
+      </ContextMenu.Item>
+    </>
+  );
+}
+
+<Catalog
+  collection={players}
+  mapItemToFields={createFields}
+  contextMenu={contextMenu}
+>
+  ...
+</Catalog>
+```
+
+### View Switching
+
+Register multiple views and use `CatalogViewSwitcher` to toggle between them. Set `defaultView` on the view that should be visible initially.
+
+```tsx
+<Catalog
+  collection={players}
+  mapItemToFields={createFields}
+>
+  <CatalogToolbar>
+    <CatalogViewSwitcher />
+  </CatalogToolbar>
+  <CatalogTable defaultView />
+  <CatalogList
+    titleField="name"
+    subtitleField="position"
+  />
+  <CatalogGrid titleField="name" />
+</Catalog>
+```
+
+### Empty State
+
+Pass `noDataMessage` to any view to display custom content when the collection is empty.
+
+<Canvas of={CatalogStories.NoData} />
+
+```tsx
+<CatalogTable
+  defaultView
+  noDataMessage={
+    <Flex
+      direction="column"
+      align="center"
+      gap="1"
+      py="4"
+    >
+      <Text weight="medium">No players found</Text>
+      <Text
+        color="gray"
+        size="1"
+      >
+        Try adjusting your search or filters.
+      </Text>
+    </Flex>
+  }
+/>
+```

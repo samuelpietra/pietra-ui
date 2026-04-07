@@ -31,9 +31,9 @@ export type FieldCreator<T> = <V extends keyof T>(
 	field: CatalogField<T, V>,
 ) => CatalogField<T, V>;
 
+// biome-ignore lint/suspicious/noExplicitAny: fields array holds mixed K types
 export type MapItemToFields<T> = (
 	createField: FieldCreator<T>,
-	// biome-ignore lint/suspicious/noExplicitAny: fields array holds mixed K types
 ) => CatalogField<T, any>[];
 
 // --- Context menu ---

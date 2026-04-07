@@ -19,12 +19,19 @@ const DEFAULT_ROW_HEIGHT = 220;
 const DEFAULT_MIN_COLUMN_WIDTH = 180;
 
 export type CatalogGridProps = {
+	/** Marks this as the initially visible view. */
 	defaultView?: boolean;
+	/** Field used as the card title. */
 	titleField: AnyFieldMapper;
+	/** Field rendered as the card's visual preview. */
 	previewField?: AnyFieldMapper;
+	/** Field rendered at the bottom of each card. */
 	footerField?: AnyFieldMapper;
+	/** Content shown when the collection is empty. */
 	noDataMessage?: ReactNode;
+	/** Minimum column width in pixels for the auto-fit grid. */
 	minColumnWidth?: number;
+	/** Fixed row height in pixels. */
 	rowHeight?: number;
 };
 

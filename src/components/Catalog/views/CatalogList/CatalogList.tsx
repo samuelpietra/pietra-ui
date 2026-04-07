@@ -18,13 +18,21 @@ import "./CatalogList.css";
 const DEFAULT_ROW_HEIGHT = 100;
 
 export type CatalogListProps = {
+	/** Marks this as the initially visible view. */
 	defaultView?: boolean;
+	/** Field used as the primary title. */
 	titleField: AnyFieldMapper;
+	/** Field rendered below the title. */
 	subtitleField?: AnyFieldMapper;
+	/** Field rendered as body text. */
 	descriptionField?: AnyFieldMapper;
+	/** Field rendered as a leading visual (avatar, thumbnail). */
 	previewField?: AnyFieldMapper;
+	/** Field rendered at the bottom of each row. */
 	footerField?: AnyFieldMapper;
+	/** Content shown when the collection is empty. */
 	noDataMessage?: ReactNode;
+	/** Fixed row height in pixels. */
 	rowHeight?: number;
 };
 

@@ -18,11 +18,17 @@ import {
 } from "../../hooks";
 
 export type CatalogTableProps = {
+	/** Accessible label for the table element. */
 	ariaLabel?: string;
+	/** Marks this as the initially visible view. */
 	defaultView?: boolean;
+	/** Highlights rows on hover. */
 	hoverable?: boolean;
+	/** Content shown when the collection is empty. */
 	noDataMessage?: ReactNode;
+	/** Fixed row height in pixels. */
 	rowHeight?: number;
+	/** Alternates row background color. */
 	striped?: boolean;
 };
 

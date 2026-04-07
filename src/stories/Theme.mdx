@@ -1,12 +1,59 @@
-import { Canvas, Meta } from '@storybook/blocks';
-
-import * as ButtonStories from './Button.stories';
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Theme/Overview" />
 
 # ThemeProvider
 
-**Pietra UI** ships a `ThemeProvider` that wraps [Radix Themes](https://www.radix-ui.com) with opinionated defaults.
+Thin wrapper around [Radix Themes](https://www.radix-ui.com/themes) `<Theme>` with opinionated defaults. All Radix theme props are supported — consumer props override the defaults.
+
+<a href="https://github.com/samuelpietra/pietra-ui/tree/main/src/theme" target="_blank">View source ↗</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/samuelpietra/pietra-ui/issues/new?title=[ThemeProvider]+" target="_blank">Report an issue ↗</a>
+
+---
+
+## Defaults
+
+Pietra UI ships these defaults out of the box:
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>accentColor</code></td>
+      <td><code>"gray"</code></td>
+      <td>Primary accent color for interactive elements.</td>
+    </tr>
+    <tr>
+      <td><code>appearance</code></td>
+      <td><code>"inherit"</code></td>
+      <td>Inherits from system/parent preference.</td>
+    </tr>
+    <tr>
+      <td><code>grayColor</code></td>
+      <td><code>"slate"</code></td>
+      <td>Gray scale used for backgrounds and borders.</td>
+    </tr>
+    <tr>
+      <td><code>radius</code></td>
+      <td><code>"medium"</code></td>
+      <td>Border radius token applied globally.</td>
+    </tr>
+    <tr>
+      <td><code>scaling</code></td>
+      <td><code>"100%"</code></td>
+      <td>Base scaling factor for all components.</td>
+    </tr>
+  </tbody>
+</table>
+
+Any prop passed to `ThemeProvider` overrides the corresponding default. All other [Radix Theme props](https://www.radix-ui.com/themes/docs/components/theme) are forwarded as-is.
 
 ## Usage
 
@@ -24,12 +71,26 @@ function App() {
 }
 ```
 
-## Overriding defaults
-
-Consumer props override the **Pietra UI** defaults:
+## Overriding Defaults
 
 ```tsx
 <ThemeProvider accentColor="blue" radius="full">
   <Button>Blue rounded button</Button>
+</ThemeProvider>
+```
+
+## Dark Mode
+
+Set `appearance` explicitly, or leave it as `"inherit"` to follow the system preference:
+
+```tsx
+// Explicit dark mode
+<ThemeProvider appearance="dark">
+  ...
+</ThemeProvider>
+
+// System preference (default)
+<ThemeProvider>
+  ...
 </ThemeProvider>
 ```

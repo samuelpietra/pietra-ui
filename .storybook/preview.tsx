@@ -70,7 +70,7 @@ const preview: Preview = {
     options: {
       storySort: {
         method: "alphabetical",
-        order: ["Theme", "Layout", "Typography", "Components"]
+        order: ["General", "Theme", "Layout", "Typography", "Components"]
       }
     }
   }

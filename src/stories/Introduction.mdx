@@ -1,0 +1,102 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="General/Introduction" />
+
+<style>{`
+  .intro-logo {
+    display: block;
+    margin: 0 auto 32px;
+    width: 240px;
+  }
+  .intro-badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .intro-badges img {
+    height: 22px;
+  }
+  .intro-description {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+`}</style>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/full-logo-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="images/full-logo-light.svg" />
+  <img className="intro-logo" alt="Pietra UI" src="images/full-logo-dark.svg" />
+</picture>
+
+<div className="intro-description">
+  An opinionated component library built on top of [Radix Themes](https://www.radix-ui.com/themes).
+</div>
+
+<div className="intro-badges">
+  <img alt="React 18" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" />
+  <img alt="TypeScript 5" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" />
+  <img alt="Radix Themes 3" src="https://img.shields.io/badge/Radix_Themes-3-6E56CF?logo=radixui&logoColor=white" />
+  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-green" />
+</div>
+
+<div className="intro-description">
+  <a href="https://github.com/samuelpietra/pietra-ui" target="_blank">View source ↗</a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/samuelpietra/pietra-ui/issues" target="_blank">Report an issue ↗</a>
+
+  Pietra UI extends Radix with higher-level, composition-first components — compound data browsers, virtualized lists, and more — while keeping its accessibility and theming intact.
+</div>
+
+---
+
+<br />
+
+## Getting Started
+
+### Installation
+
+```bash
+npm install pietra-ui react react-dom
+```
+
+### Setup
+
+Wrap your app with `ThemeProvider` and import the stylesheet:
+
+```tsx
+import { ThemeProvider, Button, Text } from "pietra-ui";
+import "pietra-ui/styles.css";
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Text size="5" weight="bold">Hello Pietra</Text>
+      <Button>Click me</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+---
+
+## Highlights
+
+- **Compound components** — compose declaratively, just like Radix itself
+- **Virtualized views** — built-in for table, list, and grid layouts handling large datasets
+- **Fully typed** — strict TypeScript with exported types for every component
+- **Themed out of the box** — dark mode, accent colors, and radius tokens just work via Radix Themes
+- **Accessible** — inherits Radix's WAI-ARIA patterns
+
+---
+
+## Explore
+
+Use the sidebar to browse components by category:
+
+- **Theme** — ThemeProvider configuration and defaults
+- **Layout** — Box, Flex, Grid, Container, Section
+- **Typography** — Text, Heading, Blockquote, Code, and more
+- **Components** — Buttons, forms, data display, overlays, and the Catalog compound browser

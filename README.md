@@ -1,9 +1,11 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".storybook/public/images/full-logo-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset=".storybook/public/images/full-logo-light.svg" />
-    <img alt="Pietra UI" src=".storybook/public/images/full-logo-dark.svg" width="300" />
-  </picture>
+  <a href="https://pietra-ui.vercel.app" target="_blank">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset=".storybook/public/images/full-logo-dark.svg" />
+      <source media="(prefers-color-scheme: light)" srcset=".storybook/public/images/full-logo-light.svg" />
+      <img alt="Pietra UI" src=".storybook/public/images/full-logo-dark.svg" width="300" />
+    </picture>
+  </a>
 </p>
 
 <p align="center">
@@ -22,7 +24,7 @@
 
 ## What is Pietra UI?
 
-Pietra UI extends [Radix Themes](https://www.radix-ui.com/themes) with higher-level, composition-first components that are tedious to build from scratch — compound data browsers, virtualized lists, and more. It keeps Radix's accessibility and theming while adding the patterns you actually need in production apps.
+[Pietra UI](https://pietra-ui.vercel.app) extends [Radix Themes](https://www.radix-ui.com/themes) with higher-level, composition-first components that are tedious to build from scratch — compound data browsers, virtualized lists, and more. It keeps Radix's accessibility and theming while adding the patterns you actually need in production apps.
 
 - Compound components that compose declaratively (like Radix itself)
 - Virtualized views built-in for large datasets

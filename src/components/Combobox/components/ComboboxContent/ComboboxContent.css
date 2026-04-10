@@ -1,0 +1,15 @@
+.pietra-combobox-content {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: var(--pietra-z-dropdown, 50);
+	margin-top: var(--space-1);
+	background-color: var(--color-surface);
+	border: 1px solid var(--gray-a6);
+	border-radius: var(--radius-2);
+	box-shadow:
+		0 4px 6px -1px var(--gray-a3),
+		0 2px 4px -2px var(--gray-a3);
+	overflow: hidden;
+}

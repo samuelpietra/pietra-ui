@@ -16,6 +16,8 @@
 - Nameful iterator variables: `items.map((item) => ...)` not `items.map((i) => ...)`
 - **No nested ternaries** — one level is fine; beyond that, use `if`/`else` or extract to a variable
 - **No nested if-else chains** — flatten with early returns or `switch` statements
+- **No `else if`** — prefer early returns to keep code flat and readable
+- **Every `switch` must have a `default` case** — even if it only contains `break`. Missing `default` is a critical issue.
 - **No long method chains** — flag `data.filter(...).find(...).some(...)` in one expression; break into named intermediate variables
 - **One-liner callbacks stay inline** — flag unnecessary wrapping of simple callbacks into named functions (e.g. `useCallback(() => setOpen(true), [])` when `() => setOpen(true)` suffices)
 - **Too many callbacks in a component** — flag when a component file is bloated with helpers; suggest extracting to a `ComponentName.utils.ts` or a custom hook

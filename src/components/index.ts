@@ -52,6 +52,20 @@ export {
 	type CheckboxGroupRootProps,
 } from "./CheckboxGroup";
 export { Code, type CodeProps } from "./Code";
+export {
+	Combobox,
+	type ComboboxClearProps,
+	type ComboboxContentProps,
+	type ComboboxContextValue,
+	type ComboboxEmptyProps,
+	type ComboboxGroupProps,
+	type ComboboxInputProps,
+	type ComboboxItemProps,
+	type ComboboxRootProps,
+	type ComboboxSeparatorProps,
+	type ComboboxTriggerProps,
+	useComboboxContext,
+} from "./Combobox";
 export { Container, type ContainerProps } from "./Container";
 export {
 	ContextMenu,

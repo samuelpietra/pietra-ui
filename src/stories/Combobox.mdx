@@ -1,0 +1,385 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+
+import * as ComboboxStories from './Combobox.stories';
+
+import { ComboboxRoot } from '@/components/Combobox/components/ComboboxRoot/ComboboxRoot';
+import { ComboboxInput } from '@/components/Combobox/components/ComboboxInput/ComboboxInput';
+import { ComboboxContent } from '@/components/Combobox/components/ComboboxContent/ComboboxContent';
+import { ComboboxItem } from '@/components/Combobox/components/ComboboxItem/ComboboxItem';
+import { ComboboxGroup } from '@/components/Combobox/components/ComboboxGroup/ComboboxGroup';
+
+<Meta of={ComboboxStories} />
+
+<style>{`
+  .docs-collapsible-summary {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .docs-collapsible-summary::before {
+    content: '▶';
+    font-size: 10px;
+    margin-right: 8px;
+  }
+  details[open] > .docs-collapsible-summary::before {
+    content: '▼';
+    margin-right: 7px;
+  }
+  .docs-collapsible-summary h3 {
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+  }
+`}</style>
+
+# Combobox
+
+Searchable, composable select with single and multi-select modes, keyboard navigation, virtualized rendering, and creatable options.
+
+> **Note:** The dropdown list is virtualized for large option sets. Custom content via `Combobox.Item` bypasses virtualization — keep manual option counts reasonable.
+
+<a href="https://github.com/samuelpietra/pietra-ui/tree/main/src/components/Combobox" target="_blank">View source ↗</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/samuelpietra/pietra-ui/issues/new?title=[Combobox]+" target="_blank">Report an issue ↗</a>
+
+<Canvas of={ComboboxStories.Default} />
+
+```tsx
+<Combobox.Root options={fruits}>
+  <Combobox.Input placeholder="Search fruits...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```
+
+## API Reference
+
+### Combobox.Root
+
+The root provider. Manages options, value state (controlled or uncontrolled), filtering, and selection.
+
+<ArgTypes of={ComboboxRoot} />
+
+### Combobox.Input
+
+Text input with built-in ARIA attributes, keyboard handling, and optional tag rendering for multi-select.
+
+<ArgTypes of={ComboboxInput} />
+
+### Combobox.Content
+
+Dropdown container that renders options automatically or accepts custom children. Virtualizes long lists via `react-window`.
+
+<ArgTypes of={ComboboxContent} />
+
+### Combobox.Item
+
+Manual option row for custom content layouts. Use inside `Combobox.Content` when you need grouped or customized option rendering.
+
+<ArgTypes of={ComboboxItem} />
+
+### Combobox.Group
+
+Groups related options under a label. Renders a `role="group"` container with `aria-labelledby` wiring.
+
+<ArgTypes of={ComboboxGroup} />
+
+### Combobox.Trigger
+
+Chevron toggle button that opens/closes the dropdown. Forwards `ref` to the underlying `IconButton`. No meaningful props beyond `className`.
+
+### Combobox.Clear
+
+Icon button that clears all selections. Automatically hidden when no value is set. No meaningful props beyond `className`.
+
+### Combobox.Empty
+
+Fallback content shown when no options match the current filter. Defaults to "No results found". Pass `children` to customize.
+
+### Combobox.Separator
+
+Visual divider between option groups. Thin wrapper around `Separator`.
+
+### useComboboxContext
+
+Hook that returns the full `ComboboxContextValue<T>`. Must be called inside a `<Combobox.Root>` provider.
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>value</code></td>
+      <td><code>{'T | T[] | null'}</code></td>
+      <td>Current selected value (single) or values (multiple).</td>
+    </tr>
+    <tr>
+      <td><code>selectedArray</code></td>
+      <td><code>{'T[]'}</code></td>
+      <td>Selected values as an array. Empty in single mode.</td>
+    </tr>
+    <tr>
+      <td><code>inputValue</code></td>
+      <td><code>string</code></td>
+      <td>Current text in the input field.</td>
+    </tr>
+    <tr>
+      <td><code>isOpen</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether the dropdown is open.</td>
+    </tr>
+    <tr>
+      <td><code>filteredOptions</code></td>
+      <td><code>{'T[]'}</code></td>
+      <td>Options matching the current input filter.</td>
+    </tr>
+    <tr>
+      <td><code>highlightedIndex</code></td>
+      <td><code>number</code></td>
+      <td>Index of the keyboard-highlighted option (-1 when none).</td>
+    </tr>
+    <tr>
+      <td><code>hasValue</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether any option is currently selected.</td>
+    </tr>
+    <tr>
+      <td><code>hasCreateOption</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether a "Create" option is visible for the current input.</td>
+    </tr>
+    <tr>
+      <td><code>selectOption</code></td>
+      <td><code>{'(option: T) => void'}</code></td>
+      <td>Selects (or toggles in multi-select) an option.</td>
+    </tr>
+    <tr>
+      <td><code>removeOption</code></td>
+      <td><code>{'(option: T) => void'}</code></td>
+      <td>Removes a selected option.</td>
+    </tr>
+    <tr>
+      <td><code>clearAll</code></td>
+      <td><code>{'() => void'}</code></td>
+      <td>Clears all selections.</td>
+    </tr>
+    <tr>
+      <td><code>setOpen</code></td>
+      <td><code>{'(open: boolean) => void'}</code></td>
+      <td>Opens or closes the dropdown.</td>
+    </tr>
+    <tr>
+      <td><code>setInputValue</code></td>
+      <td><code>{'(value: string) => void'}</code></td>
+      <td>Updates the input text.</td>
+    </tr>
+    <tr>
+      <td><code>createOption</code></td>
+      <td><code>{'(inputValue: string) => void'}</code></td>
+      <td>Creates and selects a new option from the current input.</td>
+    </tr>
+    <tr>
+      <td><code>isOptionSelected</code></td>
+      <td><code>{'(option: T) => boolean'}</code></td>
+      <td>Checks if an option is currently selected.</td>
+    </tr>
+    <tr>
+      <td><code>getOptionLabel</code></td>
+      <td><code>{'(option: T) => string'}</code></td>
+      <td>Returns the display label for an option.</td>
+    </tr>
+    <tr>
+      <td><code>getOptionValue</code></td>
+      <td><code>{'(option: T) => string'}</code></td>
+      <td>Returns the unique value key for an option.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Examples
+
+### Multi-Select
+
+Pass `multiple` to enable multi-select mode. Selected options appear as dismissible tags above the input. The dropdown stays open between selections.
+
+<Canvas of={ComboboxStories.MultiSelect} />
+
+```tsx
+<Combobox.Root
+  multiple
+  options={fruits}
+>
+  <Combobox.Input placeholder="Select fruits...">
+    <Combobox.Clear />
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```
+
+### Controlled Value
+
+Pass `value` and `onChange` to control the selection externally.
+
+```tsx
+const [value, setValue] = useState<string | null>("Cherry");
+
+<Combobox.Root
+  options={fruits}
+  value={value}
+  onChange={setValue}
+>
+  <Combobox.Input placeholder="Search fruits...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```
+
+### Collapsed Tags
+
+In multi-select, pass `collapseTags` to `Combobox.Input` to keep tags in a single row with a "+N more" overflow indicator.
+
+<Canvas of={ComboboxStories.CollapsedTags} />
+
+```tsx
+<Combobox.Root
+  multiple
+  options={fruits}
+  defaultValue={["Apple", "Banana", "Cherry"]}
+>
+  <Combobox.Input placeholder="Select fruits..." collapseTags>
+    <Combobox.Clear />
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```
+
+### Creatable Options
+
+Pass `allowCreate` and `onCreateOption` to let users add new options on the fly. A "Create" row appears when the input doesn't match any existing option.
+
+<Canvas of={ComboboxStories.Creatable} />
+
+```tsx
+const [options, setOptions] = useState(languages);
+
+<Combobox.Root
+  allowCreate
+  options={options}
+  onCreateOption={(inputValue) => {
+    const newOption = { id: inputValue.toLowerCase(), label: inputValue };
+    setOptions((prev) => [...prev, newOption]);
+    return newOption;
+  }}
+  getOptionLabel={(option) => option.label}
+  getOptionValue={(option) => option.id}
+>
+  <Combobox.Input placeholder="Search or create...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```
+
+### Grouped Options
+
+Use `Combobox.Item`, `Combobox.Group`, and `Combobox.Separator` inside `Combobox.Content` for custom grouped layouts. Each `Combobox.Item` needs an explicit `index` for keyboard navigation.
+
+```tsx
+<Combobox.Root
+  options={languages}
+  getOptionLabel={(option) => option.label}
+  getOptionValue={(option) => option.id}
+>
+  <Combobox.Input placeholder="Search languages...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content>
+    {categories.map((group, groupIndex) => (
+      <Box key={group.category}>
+        {groupIndex > 0 && <Combobox.Separator />}
+        <Combobox.Group label={group.category}>
+          {group.languages.map((language, i) => (
+            <Combobox.Item
+              key={language.id}
+              option={language}
+              index={group.startIndex + i}
+            >
+              {language.label}
+            </Combobox.Item>
+          ))}
+        </Combobox.Group>
+      </Box>
+    ))}
+  </Combobox.Content>
+</Combobox.Root>
+```
+
+### Object Options
+
+For non-string options, provide `getOptionLabel` and `getOptionValue` to tell the combobox how to display and identify each option.
+
+```tsx
+type Language = { id: string; label: string };
+
+<Combobox.Root
+  options={languages}
+  getOptionLabel={(option: Language) => option.label}
+  getOptionValue={(option: Language) => option.id}
+>
+  <Combobox.Input placeholder="Pick a language...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```
+
+### Custom Empty State
+
+Pass `children` to `Combobox.Empty` to customize the message shown when no options match.
+
+<Canvas of={ComboboxStories.Empty} />
+
+```tsx
+<Combobox.Root options={[]}>
+  <Combobox.Input placeholder="Search...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content>
+    <Combobox.Empty>
+      <Flex
+        direction="column"
+        align="center"
+        gap="1"
+        py="3"
+      >
+        <Text size="2" color="gray">Nothing here yet</Text>
+        <Text size="1" color="gray">Try a different search term</Text>
+      </Flex>
+    </Combobox.Empty>
+  </Combobox.Content>
+</Combobox.Root>
+```
+
+### Disabled
+
+Pass `disabled` to `Combobox.Root` to prevent all interaction. In multi-select, existing tags and the clear button are also disabled.
+
+```tsx
+<Combobox.Root options={fruits} disabled>
+  <Combobox.Input placeholder="Search fruits...">
+    <Combobox.Trigger />
+  </Combobox.Input>
+  <Combobox.Content />
+</Combobox.Root>
+```

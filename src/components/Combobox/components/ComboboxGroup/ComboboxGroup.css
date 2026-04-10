@@ -1,0 +1,13 @@
+.pietra-combobox-group {
+	padding: var(--space-1) 0;
+	border: none;
+	margin: 0;
+}
+
+.pietra-combobox-label {
+	padding: var(--space-1) var(--space-3);
+	color: var(--accent-9);
+	font-size: var(--font-size-1);
+	font-weight: 500;
+	user-select: none;
+}

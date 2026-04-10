@@ -1,0 +1,15 @@
+.pietra-badge-closable {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+}
+
+.pietra-badge-close {
+	color: inherit;
+	opacity: 0.7;
+	flex-shrink: 0;
+}
+
+.pietra-badge-close:hover {
+	opacity: 1;
+}

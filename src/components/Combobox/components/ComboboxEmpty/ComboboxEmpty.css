@@ -1,0 +1,6 @@
+.pietra-combobox-empty {
+	padding: var(--space-4) var(--space-3);
+	text-align: center;
+	color: var(--gray-a9);
+	font-size: var(--font-size-2);
+}

@@ -1,0 +1,96 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="General/Skills" />
+
+<style>{`
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .skills-table th,
+  .skills-table td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--gray-a4, #e0e0e0);
+  }
+  .skills-table th {
+    font-weight: 600;
+  }
+  .skills-command {
+    font-family: monospace;
+    background: var(--gray-a3, #f0f0f0);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+`}</style>
+
+# Claude Skills
+
+This project uses [Claude Code](https://claude.ai/claude-code) skills to automate common development workflows. Skills are invoked as slash commands during a Claude Code session.
+
+<a href="https://github.com/samuelpietra/pietra-ui/tree/main/.claude/skills" target="_blank">View source ↗</a>
+
+---
+
+## Available Skills
+
+<table className="skills-table">
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Purpose</th>
+      <th>Modifies code?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span className="skills-command">/new-component</span></td>
+      <td>Scaffolds a new component with folder structure, subcomponents, tests, stories, and barrel exports — then registers it in the library index.</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><span className="skills-command">/code-review</span></td>
+      <td>Reviews component code for accessibility, performance, readability, conventions, and consistency. Reports issues ranked by severity — never auto-fixes.</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><span className="skills-command">/document-component</span></td>
+      <td>Creates an MDX documentation page following the Catalog.mdx format — title, hero example, API reference with prop tables, and feature-focused code examples.</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## How They Work Together
+
+A typical workflow for adding a new component:
+
+1. **`/new-component Combobox`** — scaffolds the full file structure, writes tests and stories, registers the export
+2. **`/code-review Combobox`** — reviews the generated code against all project conventions, reports findings
+3. Fix any issues from the review
+4. **`/document-component Combobox`** — generates the MDX documentation page with API reference and examples
+
+---
+
+## Conventions Enforced
+
+The skills share a common set of reference files that define project standards. These live under `.claude/skills/code-review/references/` and are checked by both `/new-component` (at creation time) and `/code-review` (at review time):
+
+- **`accessibility.md`** — ARIA roles, keyboard navigation, focus management, screen reader support
+- **`patterns-and-conventions.md`** — file organization, CSS tokens, naming, type safety, `forwardRef`/`displayName` patterns
+- **`code-quality.md`** — performance, readability rules (no nested ternaries, no `else if`, `switch` must have `default`), component hygiene
+- **`testing.md`** — `userEvent` over `fireEvent`, `screen` queries over `container`, what to test and what to skip
+
+When a convention is added or updated in these files, both skills pick it up automatically.
+
+---
+
+## Adding a New Skill
+
+1. Create a directory under `.claude/skills/` with a `SKILL.md` file
+2. Define `name`, `description`, and `allowed-tools` in the frontmatter
+3. Write the procedure and expected output format
+4. Add any reference files the skill needs under a `references/` subdirectory

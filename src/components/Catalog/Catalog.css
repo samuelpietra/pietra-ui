@@ -4,10 +4,6 @@
   max-height: 100%;
 }
 
-.pietra-catalog-table-row-selected {
-  background-color: var(--accent-a3);
-}
-
 .pietra-catalog-clickable-cell {
   cursor: pointer;
   background: none;

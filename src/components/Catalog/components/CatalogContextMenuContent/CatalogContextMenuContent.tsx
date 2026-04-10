@@ -1,8 +1,6 @@
-import type { ReactNode } from "react";
-
 import { useCatalogContext } from "../../hooks";
 
-export function CatalogContextMenuContent(): ReactNode {
+export function CatalogContextMenuContent() {
 	const { contextItem, selectedItems, renderContextMenu } = useCatalogContext();
 
 	if (!contextItem || !renderContextMenu) return null;

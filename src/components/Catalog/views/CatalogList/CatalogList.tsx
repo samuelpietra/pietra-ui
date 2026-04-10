@@ -2,6 +2,8 @@ import { type ReactNode, useMemo } from "react";
 import { List, useDynamicRowHeight } from "react-window";
 import { List as ListIcon } from "lucide-react";
 
+import { Box } from "@/components/Box";
+
 import type { AnyFieldMapper } from "../../Catalog.types";
 import { CatalogContextMenuWrapper, CatalogView } from "../../components";
 import {
@@ -81,7 +83,7 @@ export function CatalogList({
 				icon={ListIcon}
 				defaultView={defaultView}
 			>
-				<div className="pietra-catalog-list-empty">{noDataMessage}</div>
+				<Box className="pietra-catalog-list-empty">{noDataMessage}</Box>
 			</CatalogView>
 		);
 	}

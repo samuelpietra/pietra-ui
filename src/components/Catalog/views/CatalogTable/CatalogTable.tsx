@@ -4,6 +4,8 @@ import { Table } from "lucide-react";
 
 import { Checkbox, DataTable, type DataTableColumn } from "@/components";
 
+import "./CatalogTable.css";
+
 import type { CatalogDescriptorField } from "../../Catalog.types";
 import { renderFieldContent } from "../../Catalog.utils";
 import {
@@ -91,11 +93,6 @@ export function CatalogTable({
 		return [checkboxColumn, ...fieldColumns];
 	}, [fields, selectable]);
 
-	const handleRowClick = useCallback(
-		(item: unknown) => toggleItem(item),
-		[toggleItem],
-	);
-
 	const rowClassName = useCallback(
 		(item: unknown) => {
 			if (!selectable) return undefined;
@@ -118,7 +115,7 @@ export function CatalogTable({
 					data={collection}
 					hoverable={hoverable}
 					noDataMessage={noDataMessage}
-					onRowClick={selectable ? handleRowClick : undefined}
+					onRowClick={selectable ? toggleItem : undefined}
 					onRowContextMenu={hasContextMenu ? onContextMenu : undefined}
 					onSortChange={setSort}
 					rowClassName={selectable ? rowClassName : undefined}

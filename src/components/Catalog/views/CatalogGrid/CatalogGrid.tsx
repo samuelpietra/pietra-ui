@@ -2,6 +2,8 @@ import { type ReactNode, useCallback, useMemo, useState } from "react";
 import { Grid } from "react-window";
 import { LayoutGrid } from "lucide-react";
 
+import { Box } from "@/components/Box";
+
 import type { AnyFieldMapper } from "../../Catalog.types";
 import { CatalogContextMenuWrapper, CatalogView } from "../../components";
 import {
@@ -77,7 +79,7 @@ export function CatalogGrid({
 				icon={LayoutGrid}
 				defaultView={defaultView}
 			>
-				<div className="pietra-catalog-grid-empty">{noDataMessage}</div>
+				<Box className="pietra-catalog-grid-empty">{noDataMessage}</Box>
 			</CatalogView>
 		);
 	}

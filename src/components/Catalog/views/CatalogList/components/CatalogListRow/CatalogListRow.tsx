@@ -1,4 +1,5 @@
-import type { CSSProperties, ReactElement } from "react";
+import type { CSSProperties } from "react";
+import clsx from "clsx";
 
 import { Box, Flex, Text } from "@/components";
 
@@ -37,7 +38,7 @@ export function CatalogListRow({
 }: {
 	index: number;
 	style: CSSProperties;
-} & CatalogListRowProps): ReactElement {
+} & CatalogListRowProps) {
 	const item = data[index];
 	const selected = selectable && isSelected(item);
 
@@ -50,12 +51,10 @@ export function CatalogListRow({
 			onContextMenu={
 				onItemContextMenu ? () => onItemContextMenu(item) : undefined
 			}
-			className={[
+			className={clsx(
 				"pietra-catalog-list-row",
 				selected && "pietra-catalog-list-row-selected",
-			]
-				.filter(Boolean)
-				.join(" ")}
+			)}
 			onClick={selectable ? () => toggleItem(item) : undefined}
 			onKeyDown={
 				selectable

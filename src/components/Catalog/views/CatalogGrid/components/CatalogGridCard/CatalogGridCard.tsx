@@ -1,6 +1,7 @@
-import type { CSSProperties, ReactElement } from "react";
+import type { CSSProperties } from "react";
+import clsx from "clsx";
 
-import { Card, Flex, Inset, Text } from "@/components";
+import { Box, Card, Flex, Inset, Text } from "@/components";
 
 import {
 	type ResolvedField,
@@ -38,7 +39,7 @@ export function CatalogGridCard({
 	columnIndex: number;
 	rowIndex: number;
 	style: CSSProperties;
-} & CatalogGridCardProps): ReactElement | null {
+} & CatalogGridCardProps) {
 	const itemIndex = rowIndex * columnCount + columnIndex;
 
 	if (itemIndex >= data.length) return null;
@@ -47,8 +48,7 @@ export function CatalogGridCard({
 	const selected = selectable && isSelected(item);
 
 	return (
-		// biome-ignore lint/a11y/noStaticElementInteractions: onContextMenu tracks right-clicked item for Catalog context menu
-		<div
+		<Box
 			style={style}
 			className="pietra-catalog-grid-cell"
 			onContextMenu={
@@ -59,12 +59,10 @@ export function CatalogGridCard({
 				role={selectable ? "option" : undefined}
 				aria-selected={selectable ? selected : undefined}
 				tabIndex={selectable ? 0 : undefined}
-				className={[
+				className={clsx(
 					"pietra-catalog-grid-card",
 					selected && "pietra-catalog-grid-card-selected",
-				]
-					.filter(Boolean)
-					.join(" ")}
+				)}
 				onClick={selectable ? () => toggleItem(item) : undefined}
 				onKeyDown={
 					selectable
@@ -79,9 +77,9 @@ export function CatalogGridCard({
 			>
 				{preview && (
 					<Inset clip="padding-box" side="top">
-						<div className="pietra-catalog-grid-card-preview">
+						<Box className="pietra-catalog-grid-card-preview">
 							{renderFieldContent(preview, item)}
-						</div>
+						</Box>
 					</Inset>
 				)}
 				{selectable && (
@@ -100,7 +98,7 @@ export function CatalogGridCard({
 					)}
 				</Flex>
 			</Card>
-		</div>
+		</Box>
 	);
 }
 

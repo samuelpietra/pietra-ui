@@ -38,10 +38,7 @@ export function resolveMapper(
 	return field as unknown as ResolvedField;
 }
 
-export function renderFieldContent(
-	field: ResolvedField,
-	item: unknown,
-): ReactNode {
+export function renderFieldContent(field: ResolvedField, item: unknown) {
 	const value = field.value(item);
 	const content = field.render?.(value, item) ?? String(value);
 

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { Box } from "@/components/Box";
+
 import type {
 	CatalogContextMenuRender,
 	MapItemToFields,
@@ -38,7 +40,7 @@ export function Catalog<T>({
 
 	return (
 		<CatalogContext.Provider value={contextValue as CatalogContextValue}>
-			<div className="pietra-catalog">{children}</div>
+			<Box className="pietra-catalog">{children}</Box>
 		</CatalogContext.Provider>
 	);
 }

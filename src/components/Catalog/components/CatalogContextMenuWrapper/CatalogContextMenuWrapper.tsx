@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { Box } from "@/components/Box";
 import { ContextMenu } from "@/components/ContextMenu";
 
 import { useCatalogContextMenu } from "../../hooks";
@@ -11,7 +12,7 @@ type CatalogContextMenuWrapperProps = {
 
 export function CatalogContextMenuWrapper({
 	children,
-}: CatalogContextMenuWrapperProps): ReactNode {
+}: CatalogContextMenuWrapperProps) {
 	const { hasContextMenu, onOpenChange } = useCatalogContextMenu();
 
 	if (!hasContextMenu) return children;
@@ -24,7 +25,7 @@ export function CatalogContextMenuWrapper({
 	return (
 		<ContextMenu.Root onOpenChange={onOpenChange}>
 			<ContextMenu.Trigger>
-				<div>{children}</div>
+				<Box>{children}</Box>
 			</ContextMenu.Trigger>
 			<ContextMenu.Content>
 				<CatalogContextMenuContent />

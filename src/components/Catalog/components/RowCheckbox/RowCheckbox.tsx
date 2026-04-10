@@ -2,8 +2,6 @@ import { Checkbox } from "@/components/Checkbox";
 
 import { useCatalogSelection } from "../../hooks";
 
-RowCheckbox.displayName = "RowCheckbox";
-
 export function RowCheckbox({ item }: { item: unknown }) {
 	const { isSelected, toggleItem } = useCatalogSelection();
 
@@ -17,3 +15,5 @@ export function RowCheckbox({ item }: { item: unknown }) {
 		/>
 	);
 }
+
+RowCheckbox.displayName = "RowCheckbox";

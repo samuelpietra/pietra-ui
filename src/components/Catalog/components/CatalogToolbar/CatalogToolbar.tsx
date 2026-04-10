@@ -1,4 +1,5 @@
 import { type ComponentPropsWithoutRef, forwardRef } from "react";
+import clsx from "clsx";
 
 import "./CatalogToolbar.css";
 
@@ -8,11 +9,7 @@ export const CatalogToolbar = forwardRef<
 >(({ children, className, ...props }, ref) => (
 	<div
 		ref={ref}
-		className={
-			className
-				? `pietra-catalog-toolbar ${className}`
-				: "pietra-catalog-toolbar"
-		}
+		className={clsx("pietra-catalog-toolbar", className)}
 		{...props}
 	>
 		{children}

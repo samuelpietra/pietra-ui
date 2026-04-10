@@ -1,0 +1,26 @@
+import { forwardRef, type ReactNode } from "react";
+import clsx from "clsx";
+
+// If single importing out-of-scope
+import { Box } from "@/components/Box";
+// If multi importing out-of-scope
+import { Box, Button, Callout } from "@/components";
+
+import "./{{ComponentName}}.css";
+
+export interface {{ComponentName}}Props {
+	className?: string;
+	children?: ReactNode;
+}
+
+export const {{ComponentName}} = forwardRef<HTMLDivElement, {{ComponentName}}Props>(
+	({ className, children }, ref) => {
+		return (
+			<Box ref={ref} className={clsx("pietra-{{component-name}}", className)}>
+				{children}
+			</Box>
+		);
+	},
+);
+
+{{ComponentName}}.displayName = "{{ComponentName}}";

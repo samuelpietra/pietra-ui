@@ -1,0 +1,15 @@
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { {{ComponentName}} } from "@/components/{{ComponentName}}";
+
+const meta: Meta<typeof {{ComponentName}}> = {
+	title: "Components/{{ComponentName}}",
+	component: {{ComponentName}},
+};
+
+export default meta;
+type Story = StoryObj<typeof {{ComponentName}}>;
+
+export const Default: Story = {
+	render: () => <{{ComponentName}}>Hello</{{ComponentName}}>,
+};

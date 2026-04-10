@@ -1,0 +1,1 @@
+export { {{ComponentName}}, type {{ComponentName}}Props } from "./{{ComponentName}}";

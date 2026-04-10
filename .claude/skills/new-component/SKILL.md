@@ -8,10 +8,11 @@ Scaffold a new pietra-ui component (a React component library built on Radix The
 
 ## Procedure
 
-1. **Survey the codebase**
+1. **Survey and research**
    - Read `src/components/index.ts` to see existing exports
    - Read an existing composite component (e.g. `src/components/Catalog/`) to see the folder structure in practice
    - If wrapping a Radix Themes component, check what subcomponents it exposes
+   - **Research popular component libraries** (Radix UI, Chakra, Mantine, Ark UI, Shadcn, etc.) to understand common conventions for this type of component — API shape, prop naming, subcomponent composition, a11y patterns. Find the common sense across libraries before designing the API.
 
 2. **Plan the layout**
    - Decide: composite (subparts) or simple (single element)?
@@ -19,6 +20,7 @@ Scaffold a new pietra-ui component (a React component library built on Radix The
 
 3. **Scaffold the files**
    - Read `references/coding-conventions.md` for the general component-writing rules (props destructuring, `forwardRef`, `displayName`, styling, iteration) — these apply throughout the rest of the procedure
+   - Read `code-review/references/accessibility.md` for a11y requirements (ARIA, keyboard nav, focus management) — build these in from the start, don't bolt them on later
    - Use the templates in `assets/templates/` as starting points, replacing `{{ComponentName}}` (PascalCase) and `{{component-name}}` (kebab-case) tokens:
      - `Component.tsx.template` → the component file
      - `Component.test.tsx.template` → the test file (in `__tests__/`)

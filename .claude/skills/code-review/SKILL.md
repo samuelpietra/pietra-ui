@@ -10,7 +10,7 @@ Review pietra-ui component code and report findings ranked by severity. Never au
 
 1. **Read the component(s)** under review — all source files, types, hooks, context, tests, stories, CSS, and barrel exports
 2. **Read a reference component** (e.g. `src/components/Catalog/`) to understand established conventions in practice
-3. **Check against all review checklists** — read each reference file and apply its criteria:
+3. **Check against all review checklists** — the canonical conventions live in `/new-component`'s references; if anything here conflicts, `/new-component` wins. Read each reference file and apply its criteria:
    - `references/accessibility.md` — ARIA, keyboard nav, focus, screen readers
    - `references/patterns-and-conventions.md` — file organization, CSS, Radix alignment, naming, type safety, consistency
    - `references/code-quality.md` — performance, readability, reusable logic, component hygiene

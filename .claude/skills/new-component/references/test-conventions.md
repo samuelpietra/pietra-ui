@@ -6,7 +6,8 @@ Place tests at `src/components/ComponentName/__tests__/ComponentName.test.tsx`.
 
 - `vitest` — `describe`, `it`, `expect`, `vi`
 - `@testing-library/react` — `render`, `screen`
-- `@testing-library/user-event` for realistic interactions when available
+- `@testing-library/user-event` — **always prefer** `userEvent` over `fireEvent` for interactions. `fireEvent` dispatches raw DOM events without simulating the full browser interaction sequence; `userEvent` simulates real user behavior (focus, pointer, keyboard). Use `fireEvent` only as a last resort for events that `userEvent` doesn't support.
+- **Avoid using `container`** from `render()` — query via `screen` (by role, text, label) instead. `container.querySelector` is brittle and bypasses accessibility semantics. Only fall back to `container` when no semantic query can reach the element.
 
 ## What to test
 

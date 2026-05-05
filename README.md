@@ -30,6 +30,7 @@
 - Virtualized views built-in for large datasets
 - Fully typed with TypeScript
 - Themed via Radix Themes — dark mode, accent colors, and radius tokens just work
+- Override built-in aria-labels and button text via per-component props — bring your own i18n stack
 - Documented with Storybook
 
 ## Installation
@@ -53,6 +54,10 @@ function App() {
   );
 }
 ```
+
+## Localization
+
+Pietra UI ships English defaults for the small handful of strings rendered by components themselves (close buttons, select-all checkboxes, etc.). Each is overridable via a prop — see the relevant component's Storybook page. The library does not bundle a translation framework; wire your app's i18n once and pass localized strings down.
 
 ## Development
 

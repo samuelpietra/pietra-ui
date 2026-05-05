@@ -22,6 +22,10 @@ import {
 export type CatalogTableProps = {
 	/** Accessible label for the table element. */
 	ariaLabel?: string;
+	/** Accessible label for the per-row selection checkbox. */
+	selectRowLabel?: string;
+	/** Accessible label for the select-all checkbox in the header. */
+	selectAllLabel?: string;
 	/** Marks this as the initially visible view. */
 	defaultView?: boolean;
 	/** Highlights rows on hover. */
@@ -52,12 +56,16 @@ function fieldToColumn<T>(
 	};
 }
 
-function SelectAllHeader() {
+function SelectAllHeader({
+	ariaLabel = "Select all rows",
+}: {
+	ariaLabel?: string;
+}) {
 	const { allSelected, someSelected, toggleAll } = useCatalogSelection();
 
 	return (
 		<Checkbox
-			aria-label="Select all rows"
+			aria-label={ariaLabel}
 			size="2"
 			checked={someSelected ? "indeterminate" : allSelected}
 			onCheckedChange={toggleAll}
@@ -67,6 +75,8 @@ function SelectAllHeader() {
 
 export function CatalogTable({
 	ariaLabel = "Catalog",
+	selectRowLabel,
+	selectAllLabel,
 	defaultView,
 	hoverable,
 	noDataMessage,
@@ -85,13 +95,13 @@ export function CatalogTable({
 
 		const checkboxColumn: DataTableColumn<unknown> = {
 			id: "__catalog-checkbox",
-			header: <SelectAllHeader />,
+			header: <SelectAllHeader ariaLabel={selectAllLabel} />,
 			width: 20,
-			cell: (item) => <RowCheckbox item={item} />,
+			cell: (item) => <RowCheckbox item={item} ariaLabel={selectRowLabel} />,
 		};
 
 		return [checkboxColumn, ...fieldColumns];
-	}, [fields, selectable]);
+	}, [fields, selectable, selectAllLabel, selectRowLabel]);
 
 	const rowClassName = useCallback(
 		(item: unknown) => {

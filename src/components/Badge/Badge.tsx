@@ -15,10 +15,22 @@ export type BadgeProps = RadixBadgeProps & {
 	onClose?: () => void;
 	/** When true, disables the close button. */
 	disabled?: boolean;
+	/** Accessible label for the close button. */
+	closeLabel?: string;
 };
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-	({ onClose, disabled = false, children, className, ...props }, ref) => {
+	(
+		{
+			onClose,
+			disabled = false,
+			closeLabel = "Remove",
+			children,
+			className,
+			...props
+		},
+		ref,
+	) => {
 		return (
 			<RadixBadge
 				ref={ref}
@@ -36,7 +48,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
 							event.stopPropagation();
 							onClose();
 						}}
-						aria-label="Remove"
+						aria-label={closeLabel}
 						disabled={disabled}
 						tabIndex={-1}
 					>

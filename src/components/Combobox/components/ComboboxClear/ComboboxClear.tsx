@@ -11,10 +11,14 @@ import "./ComboboxClear.css";
 export interface ComboboxClearProps {
 	className?: string;
 	children?: ReactNode;
+	"aria-label"?: string;
 }
 
 export const ComboboxClear = forwardRef<HTMLButtonElement, ComboboxClearProps>(
-	({ className, children }, ref) => {
+	(
+		{ className, children, "aria-label": ariaLabel = "Clear all selections" },
+		ref,
+	) => {
 		const { clearAll, disabled, hasValue } = useComboboxContext();
 
 		if (!hasValue) return null;
@@ -27,7 +31,7 @@ export const ComboboxClear = forwardRef<HTMLButtonElement, ComboboxClearProps>(
 				color="gray"
 				className={clsx("pietra-combobox-clear", className)}
 				onClick={clearAll}
-				aria-label="Clear all selections"
+				aria-label={ariaLabel}
 				disabled={disabled}
 				tabIndex={-1}
 			>

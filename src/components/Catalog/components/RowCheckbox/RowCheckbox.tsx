@@ -2,12 +2,20 @@ import { Checkbox } from "@/components/Checkbox";
 
 import { useCatalogSelection } from "../../hooks";
 
-export function RowCheckbox({ item }: { item: unknown }) {
+export type RowCheckboxProps = {
+	item: unknown;
+	ariaLabel?: string;
+};
+
+export function RowCheckbox({
+	item,
+	ariaLabel = "Select row",
+}: RowCheckboxProps) {
 	const { isSelected, toggleItem } = useCatalogSelection();
 
 	return (
 		<Checkbox
-			aria-label="Select row"
+			aria-label={ariaLabel}
 			size="2"
 			checked={isSelected(item)}
 			onClick={(event) => event.stopPropagation()}

@@ -1,10 +1,30 @@
 {
   "name": "pietra-ui",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Opinionated component layer on Radix Themes",
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "component-library",
+    "design-system",
+    "radix",
+    "radix-themes",
+    "typescript",
+    "accessible"
+  ],
+  "homepage": "https://pietra-ui.vercel.app",
+  "bugs": {
+    "url": "https://github.com/samuelpietra/pietra-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelpietra/pietra-ui.git"
+  },
   "author": {
     "name": "Samuel Pietra",
-    "email": "samuelpietra@outlook.com"
+    "email": "samuelpietra@outlook.com",
+    "url": "https://github.com/samuelpietra"
   },
   "engines": {
     "node": ">=22"
